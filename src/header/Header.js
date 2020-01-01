@@ -2,16 +2,36 @@ import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
 import AppBar from 'react-storefront/AppBar'
 import { withStyles } from '@material-ui/core/styles'
-import Logo from '../assets/react-storefront-logo.svg'
 import HeaderLogo from 'react-storefront/HeaderLogo'
 import Hidden from '@material-ui/core/Hidden'
+import Typography from '@material-ui/core/Typography'
 import Menu from 'react-storefront/Menu'
+import ListItemText from '@material-ui/core/ListItemText'
+import NavTabs from 'react-storefront/NavTabs'
 
 @withStyles(theme => ({
   root: {
     height: '64px',
     position: 'relative'
   },
+  headerLogo: {
+    textDecoration: 'none',
+  },
+  headline: {
+    fontSize: 32,
+    lineHeight: 1,
+    textDecoration: 'underline',
+    textDecorationColor: 'blue',
+  },
+  subtitle: {
+    fontSize: 10,
+  },
+  navTabsRoot: {
+    boxShadow: 'none'
+  },
+  listItem: {
+    padding: '10px 15px !important'
+  }
 }))
 @inject('app')
 @observer
@@ -22,11 +42,26 @@ export default class Header extends Component {
     return (
       <div>
         <AppBar classes={{ root: classes.root }} menuAlign="right" menuIconProps={{ label: false }}>
-          <Menu align="right" useExpanders />
-          <HeaderLogo>
-            <Logo />
+          <Hidden mdUp implementation="css">
+            <Menu
+              align="right"
+              itemContentRenderer={(item, leaf) => {
+                return leaf ? <ListItemText className={classes.listItem} primary={item.text} /> : null
+              }}
+            />
+          </Hidden>
+          <HeaderLogo classes={{ logoWrap: classes.headerLogo }}>
+            <div>
+              <Typography variant="h1" className={classes.headline}>cgbuen</Typography>
+              <Typography className={classes.subtitle}>Concert Photography</Typography>
+            </div>
           </HeaderLogo>
-          <Hidden xsDown implementation="css">
+          <Hidden smDown implementation="css">
+            <NavTabs
+              classes={{
+                root: classes.navTabsRoot
+              }}
+            />
           </Hidden>
           <div style={{ flex: 1 }} />
         </AppBar>

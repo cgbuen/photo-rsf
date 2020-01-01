@@ -1,40 +1,58 @@
 import React, { Component } from 'react'
-import { inject, observer } from 'mobx-react'
+import { observer } from 'mobx-react'
 import Container from 'react-storefront/Container'
-import Typography from '@material-ui/core/Typography'
 import Row from 'react-storefront/Row'
 import { withStyles } from '@material-ui/core'
 import ImageSwitcher from '../components/ImageSwitcher'
 import { createOptimizedSrc } from 'react-storefront/imageService'
-import Hidden from '@material-ui/core/Hidden'
 import photos from '../photos'
 
-const activePhotos = photos.filter(photo => photo.active)
+const activePhotos = photos.filter(photo => photo.active).reverse()
 @withStyles(
   theme => ({
-    imageSwitcher: {
-      height: 500
+    headline: {
+      fontSize: 36,
+      lineHeight: 1
     },
-    link: {
-      textDecoration: 'none'
+    imageSwitcher: {
+      [theme.breakpoints.down('sm')]: {
+        height: 500
+      }
+    },
+    viewerToggle: {
+      background: 'rgba(192, 192, 192, .85)',
+      borderRadius: 3,
+      height: 'auto',
+      padding: 10,
+      right: 10,
+      top: 10,
+      transform: 'none',
+      width: 'auto',
+      zIndex: 1,
+    },
+    viewerActive: {
+      borderRadius: '50%',
+      transform: 'scale(0.4) rotateZ(45deg) translateX(75px)',
     },
     image: {
       width: '100%'
-    }
+    },
   })
 )
-@inject('app')
 @observer
 export default class Home extends Component {
   render() {
-    const { app, classes } = this.props
+    const { classes } = this.props
 
     return (
       <Container>
         <Row>
           <ImageSwitcher
             classes={{
-              root: classes.imageSwitcher
+              root: classes.imageSwitcher,
+              viewerToggle: classes.viewerToggle,
+              viewerActive: classes.viewerActive,
+              zoomText: classes.zoomText
             }}
             images={activePhotos.map(photo => `https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg`)}
             thumbnails={activePhotos.map(photo => createOptimizedSrc(

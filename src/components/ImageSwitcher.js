@@ -22,6 +22,7 @@ import Image from 'react-storefront/Image'
 import Video from 'react-storefront/Video'
 import isEqual from 'lodash/isEqual'
 import Typography from '@material-ui/core/Typography'
+import Hidden from '@material-ui/core/Hidden'
 
 const paletteIconTextColor = '#77726D'
 
@@ -48,6 +49,9 @@ export const styles = theme => ({
     '& img': {
       display: 'block'
     }
+  },
+  rootViewerActive: {
+    display: 'none'
   },
 
   swipeWrap: {
@@ -253,7 +257,6 @@ export const styles = theme => ({
   },
 
   descriptionLine: {
-    fontFamily: 'monospace',
     fontSize: 13,
     lineHeight: 1,
     textAlign: 'center',
@@ -418,10 +421,22 @@ export default class ImageSwitcher extends Component {
           [this.props.classes.viewerActive]: this.state.viewerActive
         })}
       >
-        <svg width="100" height="100" viewBox="0 0 100 100">
-          <line x1="50" y1="25" x2="50" y2="75" strokeWidth="4" stroke="white" />
-          <line x1="25" y1="50" x2="75" y2="50" strokeWidth="4" stroke="white" />
-        </svg>
+      {this.state.viewerActive
+        ?
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <line x1="50" y1="25" x2="50" y2="75" strokeWidth="4" stroke="white" />
+            <line x1="25" y1="50" x2="75" y2="50" strokeWidth="4" stroke="white" />
+          </svg>
+        :
+          <Typography className={this.props.classes.zoomText}>
+            <Hidden smUp>
+              Info
+            </Hidden>
+            <Hidden xsDown>
+              Zoom/Info
+            </Hidden>
+          </Typography>
+      }
       </div>
     )
   }
@@ -556,7 +571,14 @@ export default class ImageSwitcher extends Component {
     const SelectedImageTag = selectedImage.video ? 'video' : 'img'
 
     return (
-      <div className={classnames(className, classes.root)} style={style}>
+      <div
+        className={classnames({
+          [className]: true,
+          [classes.root]: true,
+          [classes.rootViewerActive]: viewerActive
+        })}
+        style={style}
+      >
         {/* Full Size Images */}
         <div className={classes.swipeWrap}>
           <SwipeableViews
@@ -668,7 +690,6 @@ export default class ImageSwitcher extends Component {
                             src={selectedImage.zoomSrc || selectedImage.src}
                             alt={selectedImage.alt}
                             style={{
-                              width: '100%',
                               height: 'auto',
                               transform: `scale(${obj.scale}) translateY(${obj.y}px) translateX(${
                                 obj.x

@@ -3,7 +3,8 @@ import red from '@material-ui/core/colors/red'
 
 const theme = createTheme({
   typography: {
-    useNextVariants: true
+    useNextVariants: true,
+    fontFamily: 'monospace'
   },
   palette: {
     secondary: {

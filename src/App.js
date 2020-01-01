@@ -11,7 +11,8 @@ import Offline from 'react-storefront/Offline'
       margin: '0',
       padding: '0',
       fontFamily: theme.typography.fontFamily,
-      fontSize: theme.typography.fontSize
+      fontSize: theme.typography.fontSize,
+      width: '100%',
     },
     a: {
       textDecoration: 'underline'
