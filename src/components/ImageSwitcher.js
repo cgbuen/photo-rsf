@@ -9,6 +9,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
 import Zoom from '@material-ui/icons/ZoomIn'
+import CompareArrows from '@material-ui/icons/CompareArrows'
 import IconButton from '@material-ui/core/IconButton'
 import Portal from '@material-ui/core/Portal'
 import { fade } from '@material-ui/core/styles/colorManipulator'
@@ -23,6 +24,9 @@ import Image from 'react-storefront/Image'
 import Video from 'react-storefront/Video'
 import isEqual from 'lodash/isEqual'
 import Typography from '@material-ui/core/Typography'
+import Snackbar from '@material-ui/core/Snackbar'
+import Fade from '@material-ui/core/Fade'
+import Hidden from '@material-ui/core/Hidden'
 
 const paletteIconTextColor = '#77726D'
 
@@ -265,6 +269,30 @@ export const styles = theme => ({
     lineHeight: 1,
     textAlign: 'center',
   },
+
+  anchorOriginCenter: {
+    bottom: 'auto',
+    display: 'inline-block',
+    left: '50%',
+    right: 'auto',
+    top: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+
+  snackbarContentRoot: {
+    background: 'rgba(128, 128, 128, .5)',
+    borderRadius: 5,
+    boxShadow: '0 0 3px rgba(64, 64, 64, .5)',
+    color: 'white',
+    display: 'inline-block',
+    minWidth: 0,
+    whiteSpace: 'nowrap'
+  },
+
+  pinchIcon: {
+    transform: 'rotate(-45deg)',
+    verticalAlign: 'middle'
+  }
 })
 
 /**
@@ -382,7 +410,8 @@ export default class ImageSwitcher extends Component {
   state = {
     fullSizeImagesLoaded: true,
     viewerActive: false,
-    playingVideo: false
+    playingVideo: false,
+    shownSnackbar: false,
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -511,6 +540,36 @@ export default class ImageSwitcher extends Component {
     )
   }
 
+  renderSnackbar() {
+    const { classes } = this.props
+    const handleClose = e => {
+      this.setState({ shownSnackbar: true })
+    }
+    return (
+      <Snackbar
+        classes={{
+          anchorOriginTopCenter: classes.anchorOriginCenter
+        }}
+        ContentProps={{
+          classes: {
+            root: classes.snackbarContentRoot
+          }
+        }}
+        open={!this.state.shownSnackbar}
+        onClose={handleClose.bind(this)}
+        message={
+          <div>
+            <CompareArrows className={classes.pinchIcon} />
+            <span>Pinch to zoom/pan</span>
+          </div>
+        }
+        anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
+        autoHideDuration={1800}
+        TransitionComponent={Fade}
+      />
+    )
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState &&
@@ -563,7 +622,7 @@ export default class ImageSwitcher extends Component {
       )
     }
 
-    const { selectedIndex, viewerActive } = this.state
+    const { selectedIndex, viewerActive, shownSnackbar } = this.state
     const selectedImage = images[selectedIndex]
     const selectedDescription = descriptions[selectedIndex]
     const SelectedImageTag = selectedImage.video ? 'video' : 'img'
@@ -648,6 +707,7 @@ export default class ImageSwitcher extends Component {
             >
               <ReactPinchZoomPan
                 {...reactPinchZoomPanOptions}
+                onPinchStart={() => this.setState({shownSnackbar: true})}
                 render={obj => {
                   return (
                     <div
@@ -702,6 +762,9 @@ export default class ImageSwitcher extends Component {
                 }}
               />
               {viewerActive && this.renderViewerToggle()}
+              <Hidden mdUp>
+                {viewerActive && this.renderSnackbar()}
+              </Hidden>
               {viewerActive && this.renderThumbnails()}
             </div>
           </Portal>

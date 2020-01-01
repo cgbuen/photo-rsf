@@ -21,7 +21,7 @@ const activePhotos = photos.filter(photo => photo.active).reverse()
     },
     viewerToggle: {
       background: 'rgba(128, 128, 128, .5)',
-      boxShadow: '0 0 1px rgba(0, 0, 0, .5)',
+      boxShadow: '0 0 1px rgba(64, 64, 64, .5)',
       height: 'auto',
       padding: 10,
       right: 10,
