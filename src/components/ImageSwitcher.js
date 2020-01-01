@@ -8,6 +8,7 @@ import SwipeableViews from 'react-swipeable-views'
 import withStyles from '@material-ui/core/styles/withStyles'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
+import Zoom from '@material-ui/icons/ZoomIn'
 import IconButton from '@material-ui/core/IconButton'
 import Portal from '@material-ui/core/Portal'
 import { fade } from '@material-ui/core/styles/colorManipulator'
@@ -22,7 +23,6 @@ import Image from 'react-storefront/Image'
 import Video from 'react-storefront/Video'
 import isEqual from 'lodash/isEqual'
 import Typography from '@material-ui/core/Typography'
-import Hidden from '@material-ui/core/Hidden'
 
 const paletteIconTextColor = '#77726D'
 
@@ -241,6 +241,10 @@ export const styles = theme => ({
     }
   },
 
+  zoomIcon: {
+    fill: 'white'
+  },
+
   description: {
     position: 'absolute',
     bottom: 100,
@@ -414,11 +418,12 @@ export default class ImageSwitcher extends Component {
   }
 
   renderViewerToggle() {
+    const { classes } = this.props
     return (
       <div
         onClick={() => this.toggleViewer()}
-        className={classnames(this.props.classes.viewerToggle, {
-          [this.props.classes.viewerActive]: this.state.viewerActive
+        className={classnames(classes.viewerToggle, {
+          [classes.viewerActive]: this.state.viewerActive
         })}
       >
       {this.state.viewerActive
@@ -428,14 +433,7 @@ export default class ImageSwitcher extends Component {
             <line x1="25" y1="50" x2="75" y2="50" strokeWidth="4" stroke="white" />
           </svg>
         :
-          <Typography className={this.props.classes.zoomText}>
-            <Hidden smUp>
-              Info
-            </Hidden>
-            <Hidden xsDown>
-              Zoom/Info
-            </Hidden>
-          </Typography>
+          <Zoom className={classes.zoomIcon} />
       }
       </div>
     )

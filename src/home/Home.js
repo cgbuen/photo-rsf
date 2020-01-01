@@ -20,8 +20,8 @@ const activePhotos = photos.filter(photo => photo.active).reverse()
       }
     },
     viewerToggle: {
-      background: 'rgba(192, 192, 192, .85)',
-      borderRadius: 3,
+      background: 'rgba(128, 128, 128, .5)',
+      boxShadow: '0 0 1px rgba(0, 0, 0, .5)',
       height: 'auto',
       padding: 10,
       right: 10,
@@ -52,7 +52,6 @@ export default class Home extends Component {
               root: classes.imageSwitcher,
               viewerToggle: classes.viewerToggle,
               viewerActive: classes.viewerActive,
-              zoomText: classes.zoomText
             }}
             images={activePhotos.map(photo => `https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg`)}
             thumbnails={activePhotos.map(photo => createOptimizedSrc(

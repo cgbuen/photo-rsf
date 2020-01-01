@@ -21,7 +21,7 @@ import NavTabs from 'react-storefront/NavTabs'
     fontSize: 32,
     lineHeight: 1,
     textDecoration: 'underline',
-    textDecorationColor: 'blue',
+    textDecorationColor: '#69c',
   },
   subtitle: {
     fontSize: 10,
