@@ -21,6 +21,7 @@ import Typography from '@material-ui/core/Typography'
     viewerToggle: {
       background: 'rgba(224, 224, 224, .85)',
       boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
+      color: '#222',
       height: 'auto',
       padding: 10,
       right: 10,
@@ -28,6 +29,10 @@ import Typography from '@material-ui/core/Typography'
       transform: 'none',
       width: 'auto',
       zIndex: 1,
+      '@media (prefers-color-scheme: dark)': {
+        background: 'rgba(17, 17, 17, .85)',
+        color: 'white'
+      },
     },
     viewerActive: {
       borderRadius: '50%',

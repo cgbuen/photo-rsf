@@ -107,7 +107,6 @@ export const styles = theme => ({
     width: '100%',
     bottom: 0,
     padding: '10px 0 20px',
-    background: 'rgba(255, 255, 255, .85)'
   },
 
   selected: {
@@ -245,7 +244,17 @@ export const styles = theme => ({
   },
 
   zoomIcon: {
-    fill: '#222'
+    fill: '#222',
+    '@media (prefers-color-scheme: dark)': {
+      fill: 'white'
+    },
+  },
+
+  closeIcon: {
+    stroke: '#222',
+    '@media (prefers-color-scheme: dark)': {
+      stroke: 'white'
+    },
   },
 
   description: {
@@ -261,6 +270,9 @@ export const styles = theme => ({
     textAlign: 'center',
     display: 'inline-block',
     borderRadius: 5,
+    '@media (prefers-color-scheme: dark)': {
+      background: '#222'
+    },
   },
 
   descriptionLine: {
@@ -285,7 +297,11 @@ export const styles = theme => ({
     color: 'black',
     display: 'inline-block',
     minWidth: 0,
-    whiteSpace: 'nowrap'
+    whiteSpace: 'nowrap',
+    '@media (prefers-color-scheme: dark)': {
+      background: 'rgba(34, 34, 34, .85)',
+      color: 'white'
+    },
   },
 
   pinchIcon: {
@@ -438,9 +454,9 @@ export default class ImageSwitcher extends Component {
       >
       {this.state.viewerActive
         ?
-          <svg width="100" height="100" viewBox="0 0 100 100">
-            <line x1="50" y1="25" x2="50" y2="75" strokeWidth="4" stroke="#222" />
-            <line x1="25" y1="50" x2="75" y2="50" strokeWidth="4" stroke="#222" />
+          <svg className={classes.closeIcon} width="100" height="100" viewBox="0 0 100 100">
+            <line x1="50" y1="25" x2="50" y2="75" strokeWidth="4" />
+            <line x1="25" y1="50" x2="75" y2="50" strokeWidth="4" />
           </svg>
         :
           <Zoom className={classes.zoomIcon} />

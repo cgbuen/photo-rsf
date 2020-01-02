@@ -46,14 +46,83 @@ const theme = createTheme({
         }
       }
     },
+    RSFMenuIcon: {
+      root: {
+        '& .rsf-hamburger-inner, & .rsf-hamburger-inner:before, & .rsf-hamburger-inner:after': {
+          '@media (prefers-color-scheme: dark)': {
+            background: 'white'
+          },
+        }
+      }
+    },
+    RSFLoadMask: {
+      root: {
+        '@media (prefers-color-scheme: dark)': {
+          background: '#222'
+        },
+      }
+    },
+    RSFImageSwitcher: {
+      viewerOverlay: {
+        '@media (prefers-color-scheme: dark)': {
+          background: '#222'
+        },
+      },
+      activeThumbs: {
+        background: 'rgba(255, 255, 255, .85)',
+        '@media (prefers-color-scheme: dark)': {
+          background: '#222'
+        },
+      }
+    },
+    RSFNavTabs: {
+      root: {
+        '&:before, &:after': {
+          background: 'none'
+        }
+      }
+    },
+    MuiPaper: {
+      root: {
+        '@media (prefers-color-scheme: dark)': {
+          background: '#222',
+          color: 'white'
+        },
+      }
+    },
     MuiTypography: {
       h1: {
-        fontSize: 24
+        fontSize: 24,
+        '@media (prefers-color-scheme: dark)': {
+          color: 'white',
+        },
+      },
+      body1: {
+        '@media (prefers-color-scheme: dark)': {
+          color: 'white',
+        },
+      },
+      body2: {
+        '@media (prefers-color-scheme: dark)': {
+          color: 'white',
+        },
+      },
+      subtitle1: {
+        '@media (prefers-color-scheme: dark)': {
+          color: 'white',
+        },
       }
     },
     MuiPrivateTabIndicator: {
       colorSecondary: {
         backgroundColor: '#69c'
+      }
+    },
+    MuiIconButton: {
+      root: {
+        '@media (prefers-color-scheme: dark)': {
+          color: 'white'
+        },
       }
     }
   }

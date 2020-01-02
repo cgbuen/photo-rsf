@@ -33,7 +33,15 @@ import classnames from 'classnames'
     height: '100%',
     userSelect: 'none',
     width: '100%',
-  }
+  },
+  '@media (prefers-color-scheme: dark)': {
+    root: {
+      background: '#222',
+    },
+    iconWrapper: {
+      color: 'white',
+    }
+  },
 }))
 @inject(({ app }) => ({ social: app.social }))
 @observer

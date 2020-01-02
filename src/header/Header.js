@@ -12,7 +12,7 @@ import NavTabs from 'react-storefront/NavTabs'
 @withStyles(theme => ({
   root: {
     height: '64px',
-    position: 'relative'
+    position: 'relative',
   },
   headerLogo: {
     textDecoration: 'none',
@@ -31,7 +31,20 @@ import NavTabs from 'react-storefront/NavTabs'
   },
   listItem: {
     padding: '10px 15px !important'
-  }
+  },
+  '@media (prefers-color-scheme: dark)': {
+    wrap: {
+      background: '#222',
+      borderColor: 'rgba(255, 255, 255, .12)',
+      color: 'white'
+    },
+    headline: {
+      color: 'white'
+    },
+    subtitle: {
+      color: 'white'
+    },
+  },
 }))
 @inject('app')
 @observer
@@ -41,7 +54,14 @@ export default class Header extends Component {
 
     return (
       <div>
-        <AppBar classes={{ root: classes.root }} menuAlign="right" menuIconProps={{ label: false }}>
+        <AppBar
+          classes={{
+            root: classes.root,
+            wrap: classes.wrap
+          }}
+          menuAlign="right"
+          menuIconProps={{ label: false }}
+        >
           <Hidden mdUp implementation="css">
             <Menu
               align="right"
