@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Header from './header/Header'
+import Footer from './footer/Footer'
 import Pages from 'react-storefront/Pages'
 import Helmet from 'react-helmet'
 import Offline from 'react-storefront/Offline'
@@ -9,6 +10,7 @@ import Offline from 'react-storefront/Offline'
 @withStyles(theme => ({
   '@global': {
     body: {
+      background: 'white',
       margin: '0',
       padding: '0',
       fontFamily: theme.typography.fontFamily,
@@ -56,6 +58,7 @@ export default class App extends Component {
             Offline
           })}
         />
+        <Footer />
       </div>
     )
   }

@@ -1,16 +1,65 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import withStyles from '@material-ui/core/styles/withStyles'
+import Container from 'react-storefront/Container'
+import Row from 'react-storefront/Row'
+import Link from 'react-storefront/Link'
+import Instagram from '../assets/instagram.svg'
+import LinkedIn from '../assets/linkedin.svg'
+import Mail from '@material-ui/icons/MailOutline'
 
 @withStyles(theme => ({
   root: {
-    padding: 20,
+    background: 'white',
+    bottom: 0,
+    maxWidth: 'none',
     textAlign: 'center',
-    color: theme.palette.text.secondary
+    width: '100%',
+  },
+  iconWrapper: {
+    display: 'inline-block',
+    height: 50,
+    margin: '0 15px',
+    padding: 6,
+    verticalAlign: 'middle',
+    width: 50,
+  },
+  iconWrapperMail: {
+    display: 'inline-block',
+    height: 50,
+    margin: '0 15px',
+    verticalAlign: 'middle',
+    width: 50
+  },
+  icon: {
+    fill: 'currentColor',
+    height: '100%',
+    userSelect: 'none',
+    width: '100%',
   }
 }))
+@inject(({ app }) => ({ contact: app.contact }))
+@observer
 export default class Footer extends Component {
   render() {
-    const { classes } = this.props
-    return <div className={classes.root}>app footer goes here</div>
+    const { classes, contact } = this.props
+    return (
+      <Container className={classes.root}>
+        <Row className={classes.social}>
+          <Link server to={contact.instagram} className={classes.iconWrapper}>
+            <Instagram className={classes.icon} />
+          </Link>
+          <Link server to={contact.linkedin} className={classes.iconWrapper}>
+            <LinkedIn className={classes.icon} />
+          </Link>
+          <Link server to={contact.email} className={classes.iconWrapperMail}>
+            <Mail className={classes.icon} />
+          </Link>
+        </Row>
+        <Row className={classes.copyright}>
+          &copy; {(new Date()).getYear() + 1900} Christopher Buenaventura
+        </Row>
+      </Container>
+    )
   }
 }

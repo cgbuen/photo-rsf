@@ -16,6 +16,7 @@ const activePhotos = photos.filter(photo => photo.active).reverse()
       lineHeight: 1
     },
     imageSwitcher: {
+      marginBottom: 40,
       [theme.breakpoints.down('sm')]: {
         height: 500
       }
