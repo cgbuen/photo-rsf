@@ -45,7 +45,7 @@ export default class App extends Component {
           <link rel="shortcut icon" href="/icons/favicon.ico" />
           <meta
             name="description"
-            content="Build and deploy sub-second e-commerce progressive web apps in record time."
+            content="Bay Area Concert Photography by cgbuen (Christopher Buenaventura)."
           />
         </Helmet>
         <Header />
