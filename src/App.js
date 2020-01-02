@@ -52,6 +52,10 @@ export default class App extends Component {
             name="description"
             content="Bay Area Concert Photography by cgbuen (Christopher Buenaventura)."
           />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+          />
         </Helmet>
         <Header />
         <Pages

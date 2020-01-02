@@ -25,6 +25,11 @@ const theme = createTheme({
   },
   overrides: {
     RSFLoadMask: {
+      root: {
+        '@media (prefers-color-scheme: dark)': {
+          background: '#222'
+        },
+      },
       fullscreen: {
         height: `calc(100vh - 181px)`
       }
@@ -53,13 +58,6 @@ const theme = createTheme({
             background: 'white'
           },
         }
-      }
-    },
-    RSFLoadMask: {
-      root: {
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222'
-        },
       }
     },
     RSFImageSwitcher: {

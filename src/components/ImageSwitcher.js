@@ -10,6 +10,7 @@ import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
 import Zoom from '@material-ui/icons/ZoomIn'
 import CompareArrows from '@material-ui/icons/CompareArrows'
+import Redo from '@material-ui/icons/Redo'
 import IconButton from '@material-ui/core/IconButton'
 import Portal from '@material-ui/core/Portal'
 import { fade } from '@material-ui/core/styles/colorManipulator'
@@ -307,7 +308,11 @@ export const styles = theme => ({
   pinchIcon: {
     transform: 'rotate(-45deg)',
     verticalAlign: 'middle'
-  }
+  },
+
+  slideIcon: {
+    verticalAlign: 'middle'
+  },
 })
 
 /**
@@ -556,12 +561,16 @@ export default class ImageSwitcher extends Component {
         onClose={handleClose.bind(this)}
         message={
           <div>
-            <CompareArrows className={classes.pinchIcon} />
-            <span>Pinch to zoom/pan</span>
+            <div>
+              <CompareArrows className={classes.pinchIcon} /> <span>Pinch to zoom</span>
+            </div>
+            <div>
+              <Redo className={classes.slideIcon} /> <span>Touch and slide to pan while zoomed</span>
+            </div>
           </div>
         }
         anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
-        autoHideDuration={1800}
+        autoHideDuration={2250}
         TransitionComponent={Fade}
       />
     )
