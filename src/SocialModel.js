@@ -1,6 +1,6 @@
 import { types } from 'mobx-state-tree'
 
-const ContactModel = types.model('ContactModel', {
+const SocialModel = types.model('SocialModel', {
   instagram: types.maybeNull(types.string),
   email: types.maybeNull(types.string),
   linkedin: types.maybeNull(types.string),
@@ -10,4 +10,4 @@ const ContactModel = types.model('ContactModel', {
   website: types.maybeNull(types.string),
 })
 
-export default ContactModel 
+export default SocialModel 

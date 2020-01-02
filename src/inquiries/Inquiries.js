@@ -10,11 +10,11 @@ import Link from 'react-storefront/Link'
   theme => ({
   })
 )
-@inject(({ app }) => ({ contact: app.contact }))
+@inject(({ app }) => ({ social: app.social }))
 @observer
-export default class About extends Component {
+export default class Inquiries extends Component {
   render() {
-    const { contact } = this.props
+    const { social } = this.props
 
     return (
       <Container>
@@ -22,7 +22,11 @@ export default class About extends Component {
           <Typography variant="h1">Inquiries</Typography>
         </Row>
         <Row>
-          <Typography>Send me a message for inquiries. Best reached by <Link server to={contact.email}>email</Link> or by <Link server to={contact.instagram}>Instagram</Link> DM.</Typography>
+          <Typography>
+            Send me a message for inquiries. Best reached by{" "}
+            <Link server to={social.instagram}>Instagram</Link> DM or by{" "}
+            <Link server to={`mailto:${social.email}`}>email</Link>.
+          </Typography>
         </Row>
       </Container>
     )

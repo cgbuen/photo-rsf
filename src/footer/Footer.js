@@ -35,18 +35,18 @@ import classnames from 'classnames'
     width: '100%',
   }
 }))
-@inject(({ app }) => ({ contact: app.contact }))
+@inject(({ app }) => ({ social: app.social }))
 @observer
 export default class Footer extends Component {
   render() {
-    const { classes, contact } = this.props
+    const { classes, social } = this.props
     return (
       <Container className={classes.root}>
         <Row className={classes.social}>
-          <Link server to={contact.instagram} className={classes.iconWrapper}>
+          <Link server to={social.instagram} className={classes.iconWrapper}>
             <Instagram className={classes.icon} />
           </Link>
-          <Link server to={contact.email} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
+          <Link server to={social.email} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
             <Mail className={classes.icon} />
           </Link>
         </Row>

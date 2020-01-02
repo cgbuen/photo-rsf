@@ -54,7 +54,7 @@ export default class App extends Component {
           components={universal => ({
             Home: universal(import('./home/Home')),
             About: universal(import('./about/About')),
-            Contact: universal(import('./contact/Contact')),
+            Inquiries: universal(import('./inquiries/Inquiries')),
             Error: universal(import('./ErrorPage')),
             Offline
           })}
