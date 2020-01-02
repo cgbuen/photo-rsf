@@ -213,6 +213,7 @@ export const styles = theme => ({
   },
 
   tabScroller: {
+    marginBottom: '0 !important',
     [theme.breakpoints.down('xs')]: {
       padding: `0 ${theme.margins.container}px`
     }

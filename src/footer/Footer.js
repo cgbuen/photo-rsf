@@ -7,6 +7,7 @@ import Link from 'react-storefront/Link'
 import Instagram from '../assets/instagram.svg'
 import LinkedIn from '../assets/linkedin.svg'
 import Mail from '@material-ui/icons/MailOutline'
+import classnames from 'classnames'
 
 @withStyles(theme => ({
   root: {
@@ -26,12 +27,7 @@ import Mail from '@material-ui/icons/MailOutline'
     width: 50,
   },
   iconWrapperMail: {
-    color: '#aaa',
-    display: 'inline-block',
-    height: 50,
-    margin: '0 15px',
-    verticalAlign: 'middle',
-    width: 50
+    padding: 0
   },
   icon: {
     fill: 'currentColor',
@@ -54,7 +50,7 @@ export default class Footer extends Component {
           <Link server to={contact.linkedin} className={classes.iconWrapper}>
             <LinkedIn className={classes.icon} />
           </Link>
-          <Link server to={contact.email} className={classes.iconWrapperMail}>
+          <Link server to={contact.email} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
             <Mail className={classes.icon} />
           </Link>
         </Row>

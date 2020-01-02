@@ -50,6 +50,11 @@ const theme = createTheme({
       h1: {
         fontSize: 24
       }
+    },
+    MuiPrivateTabIndicator: {
+      colorSecondary: {
+        backgroundColor: '#69c'
+      }
     }
   }
 })
