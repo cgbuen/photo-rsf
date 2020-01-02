@@ -1,4 +1,4 @@
-[
+export default [
   {
     "id": 0,
     "roll": "0019",
