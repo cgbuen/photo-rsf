@@ -1,4 +1,27 @@
-export default [
+const shuffle = function(array) {
+  console.log('@@@ SHUFFLING')
+  var currentIndex = array.length, temporaryValue, randomIndex
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex)
+    currentIndex -= 1
+    temporaryValue = array[currentIndex]
+    array[currentIndex] = array[randomIndex]
+    array[randomIndex] = temporaryValue
+  }
+  return array
+}
+
+const makeUsablePhotoArray = function(array) {
+  return array
+    .filter(photo => photo.active)
+    .map(photo => {
+      photo.src = `https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg?2020010102`
+      photo.alt = `${photo.subject}, ${photo.venue}, ${photo.date}`
+      return photo
+    })
+}
+
+const photos = [
   {
     "id": 0,
     "roll": "0019",
@@ -212,7 +235,7 @@ export default [
   {
     "id": 15,
     "roll": "0208",
-    "number": 25,
+    "number": 16,
     "date": "2019-03-29",
     "subject": "Vince Staples",
     "active": 1,
@@ -266,3 +289,5 @@ export default [
     "comment": ""
   }
 ]
+
+export default shuffle(makeUsablePhotoArray(photos))

@@ -468,7 +468,7 @@ export default class ImageSwitcher extends Component {
   renderThumbnails({ inPortal=false }={}) {
     const { classes, thumbnailsTitle, notFoundSrc, thumbnailImageProps } = this.props
     const thumbnails = this.state.images
-    const modifiedThumbs = thumbnails && thumbnails.map(({ src, alt }) => ({ imageUrl: createOptimizedSrc(src, { quality: 50 }), alt }))
+    const modifiedThumbs = thumbnails && thumbnails.map(({ src, alt }) => ({ imageUrl: createOptimizedSrc(src, { quality: 35 }), alt }))
     const { selectedIndex } = this.state
 
     return (

@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
-import { observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'
 import { withStyles } from '@material-ui/core'
 import ImageSwitcher from '../components/ImageSwitcher'
 import Typography from '@material-ui/core/Typography'
-import photos from '../photos'
 
-const activePhotos = photos
-  .filter(photo => photo.active)
-  .reverse()
-  .map(photo => {
-    photo.src = `https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg`
-    photo.alt = `${photo.subject}, ${photo.venue}, ${photo.date}`
-    return photo
-  })
 @withStyles(
   theme => ({
     headline: {
@@ -47,10 +38,11 @@ const activePhotos = photos
     },
   })
 )
+@inject(({ app }) => ({ photos: app.photos }))
 @observer
 export default class Home extends Component {
   render() {
-    const { classes } = this.props
+    const { classes, photos } = this.props
 
     return (
       <Container>
@@ -64,10 +56,10 @@ export default class Home extends Component {
               viewerToggle: classes.viewerToggle,
               viewerActive: classes.viewerActive,
             }}
-            images={activePhotos}
+            images={photos.toJSON()}
             imageProps={{
               aspectRatio: 50,
-              quality: 50,
+              quality: 99,
               classes: {
                 root: classes.image
               }

@@ -17,6 +17,7 @@ import Mail from '@material-ui/icons/MailOutline'
     width: '100%',
   },
   iconWrapper: {
+    color: '#aaa',
     display: 'inline-block',
     height: 50,
     margin: '0 15px',
@@ -25,6 +26,7 @@ import Mail from '@material-ui/icons/MailOutline'
     width: 50,
   },
   iconWrapperMail: {
+    color: '#aaa',
     display: 'inline-block',
     height: 50,
     margin: '0 15px',

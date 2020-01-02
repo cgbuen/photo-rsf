@@ -1,6 +1,3 @@
-/**
- * Returns data for the main Menu and NavTabs components
- */
 export default () => {
   const menu = {
     root: true,
@@ -29,6 +26,7 @@ export default () => {
     tabs: menu,
     title: '– cgbuen Concert Photography',
     about: {},
-    contact: {}
+    contact: {},
+    photos: []
   }
 }
