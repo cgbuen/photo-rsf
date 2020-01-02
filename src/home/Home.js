@@ -5,6 +5,7 @@ import Row from 'react-storefront/Row'
 import { withStyles } from '@material-ui/core'
 import ImageSwitcher from '../components/ImageSwitcher'
 import { createOptimizedSrc } from 'react-storefront/imageService'
+import Typography from '@material-ui/core/Typography'
 import photos from '../photos'
 
 const activePhotos = photos.filter(photo => photo.active).reverse()
@@ -46,6 +47,9 @@ export default class Home extends Component {
 
     return (
       <Container>
+        <Row>
+          <Typography variant="h1">Gallery</Typography>
+        </Row>
         <Row>
           <ImageSwitcher
             classes={{

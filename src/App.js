@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { inject, observer } from 'mobx-react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Header from './header/Header'
 import Pages from 'react-storefront/Pages'
@@ -19,6 +20,8 @@ import Offline from 'react-storefront/Offline'
     }
   }
 }))
+@inject('app')
+@observer
 export default class App extends Component {
   render() {
     return (
@@ -47,6 +50,8 @@ export default class App extends Component {
         <Pages
           components={universal => ({
             Home: universal(import('./home/Home')),
+            About: universal(import('./about/About')),
+            Contact: universal(import('./contact/Contact')),
             Error: universal(import('./ErrorPage')),
             Offline
           })}

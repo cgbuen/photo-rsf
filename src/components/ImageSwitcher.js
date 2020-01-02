@@ -622,7 +622,7 @@ export default class ImageSwitcher extends Component {
       )
     }
 
-    const { selectedIndex, viewerActive, shownSnackbar } = this.state
+    const { selectedIndex, viewerActive } = this.state
     const selectedImage = images[selectedIndex]
     const selectedDescription = descriptions[selectedIndex]
     const SelectedImageTag = selectedImage.video ? 'video' : 'img'

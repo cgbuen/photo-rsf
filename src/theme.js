@@ -28,6 +28,21 @@ const theme = createTheme({
       fullscreen: {
         height: `calc(100vh - 181px)`
       }
+    },
+    RSFContainer: {
+      root: {
+        maxWidth: 960
+      }
+    },
+    RSFLink: {
+      root: {
+        color: '#69c'
+      }
+    },
+    MuiTypography: {
+      h1: {
+        fontSize: 24
+      }
     }
   }
 })

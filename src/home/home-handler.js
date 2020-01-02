@@ -3,6 +3,6 @@ import { withGlobalState } from 'react-storefront/router'
 
 export default function homeHandler(params, request, response) {
   return withGlobalState(request, globalState, {
-    title: 'cgbuen Concert Photography',
+    title: `Home ${globalState().title}`,
   })
 }

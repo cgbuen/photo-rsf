@@ -14,6 +14,8 @@ export default new Router()
     fromServer('./app-shell/app-shell-handler')
   )
   .get('/', cacheHandler, fromClient({ page: 'Home' }), fromServer('./home/home-handler'))
+  .get('/about', cacheHandler, fromClient({ page: 'About' }), fromServer('./about/about-handler'))
+  .get('/contact', cacheHandler, fromClient({ page: 'Contact' }), fromServer('./contact/contact-handler'))
   .fallback(
     // when no route matches, pull in content from the upstream site
     // for a working example, go to /help/home

@@ -26,6 +26,9 @@ export default () => {
     menu: {
       levels: [menu]
     },
-    tabs: menu
+    tabs: menu,
+    title: '– cgbuen Concert Photography',
+    about: {},
+    contact: {}
   }
 }
