@@ -27,16 +27,14 @@ import Typography from '@material-ui/core/Typography'
 import Snackbar from '@material-ui/core/Snackbar'
 import Fade from '@material-ui/core/Fade'
 import Hidden from '@material-ui/core/Hidden'
+import { createOptimizedSrc } from 'react-storefront/imageService'
 
 const paletteIconTextColor = '#77726D'
 
 const mediaPropType = PropTypes.shape({
   src: PropTypes.string.isRequired,
   alt: PropTypes.string,
-  video: PropTypes.bool
-})
-
-const descriptionPropType = PropTypes.shape({
+  video: PropTypes.bool,
   subject: PropTypes.string.isRequired,
   film: PropTypes.string.isRequired,
   venue: PropTypes.string.isRequired,
@@ -316,20 +314,6 @@ export default class ImageSwitcher extends Component {
     images: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, mediaPropType])).isRequired,
 
     /**
-     * An array of thumbnails to display below the main image.  You can also
-     * specify `false` to hide the thumbnails entirely.
-     */
-    thumbnails: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, mediaPropType]))
-    ]),
-
-    /**
-     * An array of (URL or image object) for the full size images
-     */
-    description: PropTypes.arrayOf(descriptionPropType),
-
-    /**
      * Display left/right arrows for navigating through images
      */
     arrows: PropTypes.bool,
@@ -395,8 +379,6 @@ export default class ImageSwitcher extends Component {
 
   static defaultProps = {
     images: [],
-    thumbnails: [],
-    descriptions: [],
     viewerThumbnailsOnly: false,
     arrows: true,
     indicators: false,
@@ -417,8 +399,6 @@ export default class ImageSwitcher extends Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const nextState = {
       images: normalizeImages(nextProps, 'images'),
-      thumbnails: normalizeImages(nextProps, 'thumbnails'),
-      descriptions: nextProps.descriptions,
       selectedIndex:
         nextProps.selectedIndex != null ? nextProps.selectedIndex : prevState.selectedIndex || 0
     }
@@ -487,8 +467,8 @@ export default class ImageSwitcher extends Component {
 
   renderThumbnails() {
     const { classes, thumbnailsTitle, notFoundSrc, thumbnailImageProps } = this.props
-    const { thumbnails } = this.state
-    const modifiedThumbs = thumbnails && thumbnails.map(({ src, alt }) => ({ imageUrl: src, alt }))
+    const thumbnails = this.state.images
+    const modifiedThumbs = thumbnails && thumbnails.map(({ src, alt }) => ({ imageUrl: createOptimizedSrc(src, { quality: 50 }), alt }))
     const { viewerActive, selectedIndex } = this.state
 
     return (
@@ -507,6 +487,7 @@ export default class ImageSwitcher extends Component {
               className: classes.thumbnail,
               notFoundSrc,
               fill: true,
+              style: { objectFit: 'cover' },
               ...thumbnailImageProps
             }}
             centered
@@ -600,7 +581,7 @@ export default class ImageSwitcher extends Component {
       notFoundSrc
     } = this.props
 
-    const { fullSizeImagesLoaded, images, thumbnails, descriptions } = this.state
+    const { fullSizeImagesLoaded, images } = this.state
 
     if (app.amp) {
       return (
@@ -617,14 +598,13 @@ export default class ImageSwitcher extends Component {
           }}
           arrows={arrows}
           indicators={indicators}
-          thumbnails={viewerThumbnailsOnly ? null : thumbnails}
+          thumbnails={viewerThumbnailsOnly ? null : images}
         />
       )
     }
 
     const { selectedIndex, viewerActive } = this.state
     const selectedImage = images[selectedIndex]
-    const selectedDescription = descriptions[selectedIndex]
     const SelectedImageTag = selectedImage.video ? 'video' : 'img'
 
     return (
@@ -745,7 +725,7 @@ export default class ImageSwitcher extends Component {
                                 this.selectedVideo = el
                               }
                             }}
-                            src={selectedImage.zoomSrc || selectedImage.src}
+                            src={createOptimizedSrc(selectedImage.zoomSrc || selectedImage.src, { quality: 99 })}
                             alt={selectedImage.alt}
                             style={{
                               height: 'auto',
@@ -755,7 +735,7 @@ export default class ImageSwitcher extends Component {
                             }}
                           />
                         )}
-                        {descriptions.length && this.renderDescription(selectedDescription)}
+                        {this.renderDescription(selectedImage)}
                       </div>
                     </div>
                   )

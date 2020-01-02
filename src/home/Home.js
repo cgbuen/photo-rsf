@@ -4,11 +4,16 @@ import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'
 import { withStyles } from '@material-ui/core'
 import ImageSwitcher from '../components/ImageSwitcher'
-import { createOptimizedSrc } from 'react-storefront/imageService'
 import Typography from '@material-ui/core/Typography'
 import photos from '../photos'
 
-const activePhotos = photos.filter(photo => photo.active).reverse()
+const activePhotos = photos
+  .filter(photo => photo.active)
+  .reverse()
+  .map(photo => {
+    photo.src = `https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg`
+    return photo
+  })
 @withStyles(
   theme => ({
     headline: {
@@ -58,12 +63,7 @@ export default class Home extends Component {
               viewerToggle: classes.viewerToggle,
               viewerActive: classes.viewerActive,
             }}
-            images={activePhotos.map(photo => `https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg`)}
-            thumbnails={activePhotos.map(photo => createOptimizedSrc(
-              `https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg`,
-              { width: 50 }
-            ))}
-            descriptions={activePhotos}
+            images={activePhotos}
             imageProps={{
               aspectRatio: 50,
               quality: 50,
