@@ -465,16 +465,16 @@ export default class ImageSwitcher extends Component {
     return <div key={index} className={classes} />
   }
 
-  renderThumbnails() {
+  renderThumbnails({ inPortal=false }={}) {
     const { classes, thumbnailsTitle, notFoundSrc, thumbnailImageProps } = this.props
     const thumbnails = this.state.images
     const modifiedThumbs = thumbnails && thumbnails.map(({ src, alt }) => ({ imageUrl: createOptimizedSrc(src, { quality: 50 }), alt }))
-    const { viewerActive, selectedIndex } = this.state
+    const { selectedIndex } = this.state
 
     return (
       thumbnails &&
       thumbnails.length > 0 && (
-        <div className={classnames(classes.thumbs, { [classes.activeThumbs]: viewerActive })}>
+        <div className={classnames(classes.thumbs, { [classes.activeThumbs]: inPortal })}>
           <div className="field">
             <label className={classes.thumbsTitle}>{thumbnailsTitle}</label>
           </div>
@@ -611,7 +611,6 @@ export default class ImageSwitcher extends Component {
         className={classnames({
           [className]: true,
           [classes.root]: true,
-          [classes.rootViewerActive]: viewerActive
         })}
         style={style}
       >
@@ -744,13 +743,13 @@ export default class ImageSwitcher extends Component {
               <Hidden mdUp>
                 {viewerActive && this.renderSnackbar()}
               </Hidden>
-              {viewerActive && this.renderThumbnails()}
+              {viewerActive && this.renderThumbnails({inPortal: true})}
             </div>
           </Portal>
           {!viewerActive && this.renderViewerToggle()}
         </div>
 
-        {!viewerActive && !viewerThumbnailsOnly && this.renderThumbnails()}
+        {!viewerThumbnailsOnly && this.renderThumbnails()}
       </div>
     )
   }
