@@ -5,7 +5,6 @@ import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'
 import Link from 'react-storefront/Link'
 import Instagram from '../assets/instagram.svg'
-import LinkedIn from '../assets/linkedin.svg'
 import Mail from '@material-ui/icons/MailOutline'
 import classnames from 'classnames'
 
@@ -46,9 +45,6 @@ export default class Footer extends Component {
         <Row className={classes.social}>
           <Link server to={contact.instagram} className={classes.iconWrapper}>
             <Instagram className={classes.icon} />
-          </Link>
-          <Link server to={contact.linkedin} className={classes.iconWrapper}>
-            <LinkedIn className={classes.icon} />
           </Link>
           <Link server to={contact.email} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
             <Mail className={classes.icon} />

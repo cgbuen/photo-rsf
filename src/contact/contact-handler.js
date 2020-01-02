@@ -7,7 +7,11 @@ export default function homeHandler(params, request, response) {
     contact: {
       instagram: 'https://www.instagram.com/cgbuen/',
       email: 'christopherbuenaventura@gmail.com',
-      linkedin: 'https://www.linkedin.com/in/christopherbuenaventura/'
+      linkedin: 'https://www.linkedin.com/in/christopherbuenaventura/',
+      twitch: 'https://www.twitch.tv/cgbuen',
+      twitter: 'https://twitter.com/cgbuen',
+      github: 'https://github.com/cgbuen',
+      website: 'http://www.christopherbuenaventura.com/',
     }
   })
 }

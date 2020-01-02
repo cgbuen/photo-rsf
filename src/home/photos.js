@@ -1,5 +1,5 @@
 const shuffle = function(array) {
-  console.log('@@@ SHUFFLING')
+  console.log('--> Shuffling')
   var currentIndex = array.length, temporaryValue, randomIndex
   while (0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex)
@@ -8,6 +8,7 @@ const shuffle = function(array) {
     array[currentIndex] = array[randomIndex]
     array[randomIndex] = temporaryValue
   }
+  console.log('--> Shuffle results:', array.map(p => p.subject))
   return array
 }
 
