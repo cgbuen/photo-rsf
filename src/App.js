@@ -11,6 +11,7 @@ import Offline from 'react-storefront/Offline'
   '@global': {
     body: {
       background: 'white',
+      color: '#222',
       margin: '0',
       padding: '0',
       fontFamily: theme.typography.fontFamily,

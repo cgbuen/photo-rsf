@@ -244,7 +244,7 @@ export const styles = theme => ({
   },
 
   zoomIcon: {
-    fill: 'white'
+    fill: '#222'
   },
 
   description: {
@@ -278,10 +278,10 @@ export const styles = theme => ({
   },
 
   snackbarContentRoot: {
-    background: 'rgba(128, 128, 128, .5)',
+    background: 'rgba(224, 224, 224, .85)',
     borderRadius: 5,
-    boxShadow: '0 0 3px rgba(64, 64, 64, .5)',
-    color: 'white',
+    boxShadow: '0 0 3px rgba(64, 64, 64, .3)',
+    color: 'black',
     display: 'inline-block',
     minWidth: 0,
     whiteSpace: 'nowrap'
@@ -438,8 +438,8 @@ export default class ImageSwitcher extends Component {
       {this.state.viewerActive
         ?
           <svg width="100" height="100" viewBox="0 0 100 100">
-            <line x1="50" y1="25" x2="50" y2="75" strokeWidth="4" stroke="white" />
-            <line x1="25" y1="50" x2="75" y2="50" strokeWidth="4" stroke="white" />
+            <line x1="50" y1="25" x2="50" y2="75" strokeWidth="4" stroke="#222" />
+            <line x1="25" y1="50" x2="75" y2="50" strokeWidth="4" stroke="#222" />
           </svg>
         :
           <Zoom className={classes.zoomIcon} />

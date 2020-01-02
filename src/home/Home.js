@@ -28,8 +28,8 @@ const activePhotos = photos
       }
     },
     viewerToggle: {
-      background: 'rgba(128, 128, 128, .5)',
-      boxShadow: '0 0 1px rgba(64, 64, 64, .5)',
+      background: 'rgba(224, 224, 224, .85)',
+      boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
       height: 'auto',
       padding: 10,
       right: 10,
