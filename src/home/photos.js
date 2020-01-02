@@ -23,7 +23,7 @@ const makeUsablePhotoArray = function(array) {
 
 const photos = [
   {
-    "id": 0,
+    "id": 2,
     "roll": "0019",
     "number": 20,
     "date": "2017-04-14",
@@ -37,7 +37,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 1,
+    "id": 6,
     "roll": "0054",
     "number": 14,
     "date": "2017-11-27",
@@ -51,8 +51,8 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 2,
-    "roll": "0128",
+    "id": 15,
+    "roll": "0129",
     "number": 23,
     "date": "2018-07-24",
     "subject": "Playboi Carti",
@@ -65,7 +65,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 3,
+    "id": 17,
     "roll": "0135",
     "number": 26,
     "date": "2018-08-11",
@@ -79,7 +79,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 4,
+    "id": 18,
     "roll": "0138",
     "number": 20,
     "date": "2018-08-12",
@@ -93,7 +93,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 5,
+    "id": 20,
     "roll": "0153",
     "number": 14,
     "date": "2018-10-09",
@@ -107,7 +107,7 @@ const photos = [
     "comment": "Night 1"
   },
   {
-    "id": 6,
+    "id": 22,
     "roll": "0164",
     "number": 16,
     "date": "2018-11-24",
@@ -121,7 +121,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 7,
+    "id": 23,
     "roll": "0165",
     "number": 35,
     "date": "2018-11-30",
@@ -135,7 +135,7 @@ const photos = [
     "comment": "Night 2"
   },
   {
-    "id": 8,
+    "id": 24,
     "roll": "0166",
     "number": 28,
     "date": "2018-12-02",
@@ -149,7 +149,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 9,
+    "id": 26,
     "roll": "0171",
     "number": 26,
     "date": "2018-12-16",
@@ -163,7 +163,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 10,
+    "id": 28,
     "roll": "0175",
     "number": 28,
     "date": "2018-12-30",
@@ -177,7 +177,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 11,
+    "id": 30,
     "roll": "0185",
     "number": 24,
     "date": "2019-02-12",
@@ -191,7 +191,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 12,
+    "id": 33,
     "roll": "0199",
     "number": 31,
     "date": "2019-03-19",
@@ -205,7 +205,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 13,
+    "id": 34,
     "roll": "0205",
     "number": "03",
     "date": "2019-03-24",
@@ -219,7 +219,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 14,
+    "id": 35,
     "roll": "0207",
     "number": 33,
     "date": "2019-03-26",
@@ -233,7 +233,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 15,
+    "id": 36,
     "roll": "0208",
     "number": 16,
     "date": "2019-03-29",
@@ -247,7 +247,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 16,
+    "id": 39,
     "roll": "0220",
     "number": 16,
     "date": "2019-04-21",
@@ -261,7 +261,7 @@ const photos = [
     "comment": ""
   },
   {
-    "id": 17,
+    "id": 41,
     "roll": "0225",
     "number": "08",
     "date": "2019-04-28",
@@ -275,7 +275,7 @@ const photos = [
     "comment": "Night 2"
   },
   {
-    "id": 18,
+    "id": 43,
     "roll": "0229",
     "number": 36,
     "date": "2019-05-22",
@@ -283,6 +283,20 @@ const photos = [
     "active": 1,
     "venue": "Regency Ballroom",
     "city": "San Francisco",
+    "format": "35mm",
+    "film": "Cinestill 800T",
+    "camera": "Contax T3",
+    "comment": ""
+  },
+  {
+    "id": 44,
+    "roll": "0234",
+    "number": 36,
+    "date": "2019-06-01",
+    "subject": "Lil B",
+    "active": 1,
+    "venue": "UC Theatre",
+    "city": "Berkeley",
     "format": "35mm",
     "film": "Cinestill 800T",
     "camera": "Contax T3",
