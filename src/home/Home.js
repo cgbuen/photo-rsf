@@ -12,6 +12,7 @@ const activePhotos = photos
   .reverse()
   .map(photo => {
     photo.src = `https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg`
+    photo.alt = `${photo.subject}, ${photo.venue}, ${photo.date}`
     return photo
   })
 @withStyles(

@@ -2,7 +2,6 @@ import globalState from '../globalState'
 import { withGlobalState } from 'react-storefront/router'
 
 export default function homeHandler(params, request, response) {
-  console.log('asdfg')
   return withGlobalState(request, globalState, {
     title: `About ${globalState().title}`,
     about: {

@@ -39,6 +39,13 @@ const theme = createTheme({
         color: '#69c'
       }
     },
+    RSFImage: {
+      fill: {
+        '& > img': {
+          objectFit: 'cover'
+        }
+      }
+    },
     MuiTypography: {
       h1: {
         fontSize: 24

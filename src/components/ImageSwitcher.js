@@ -487,7 +487,6 @@ export default class ImageSwitcher extends Component {
               className: classes.thumbnail,
               notFoundSrc,
               fill: true,
-              style: { objectFit: 'cover' },
               ...thumbnailImageProps
             }}
             centered
