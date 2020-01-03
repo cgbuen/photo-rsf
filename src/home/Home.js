@@ -14,9 +14,6 @@ import Typography from '@material-ui/core/Typography'
     },
     imageSwitcher: {
       marginBottom: 40,
-      [theme.breakpoints.down('sm')]: {
-        height: 500
-      }
     },
     viewerToggle: {
       background: 'rgba(224, 224, 224, .85)',
@@ -46,8 +43,29 @@ import Typography from '@material-ui/core/Typography'
 @inject(({ app }) => ({ photos: app.photos }))
 @observer
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isLandscape: true };
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
+  }
+
+  updateWindowDimensions() {
+    console.log('asdf')
+    this.setState({ isLandscape: window.innerWidth > window.innerHeight });
+  }
+
   render() {
     const { classes, photos } = this.props
+    const { isLandscape } = this.state
 
     return (
       <Container>
@@ -63,7 +81,7 @@ export default class Home extends Component {
             }}
             images={photos.toJSON()}
             imageProps={{
-              aspectRatio: 50,
+              aspectRatio: isLandscape ? 66.67 : 125,
               quality: 99,
               classes: {
                 root: classes.image

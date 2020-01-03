@@ -313,6 +313,43 @@ export const styles = theme => ({
   slideIcon: {
     verticalAlign: 'middle'
   },
+
+  itemWrapper: {
+    display: 'flex',
+    width: '100%'
+  },
+
+  itemBackground: {
+    position: 'absolute',
+    height: '100%',
+    width: '100%',
+    overflow: 'hidden',
+    zIndex: -1,
+  },
+
+  itemBackgroundImage: {
+    height: '100%',
+    '& img': {
+      opacity: .5,
+      objectFit: 'none',
+      width: '120%',
+      height: '120%',
+      maxWidth: '120%',
+      maxHeight: '120%',
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      transform: 'translate(-50%, -50%)',
+    }
+  },
+
+  backdropFilter: {
+    backdropFilter: 'blur(5px)',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+    zIndex: 1
+  }
 })
 
 /**
@@ -651,14 +688,29 @@ export default class ImageSwitcher extends Component {
                 {video ? (
                   <Video src={src} alt={alt} />
                 ) : (
-                  <Image
-                    key={src}
-                    notFoundSrc={notFoundSrc}
-                    src={src}
-                    alt={alt}
-                    onLoad={i === 0 ? this.onFullSizeImagesLoaded : null}
-                    {...imageProps}
-                  />
+                  <div className={classes.itemWrapper}>
+                    <div className={classes.itemBackground}>
+                      <div className={classes.backdropFilter}></div>
+                      <Image
+                        key={src}
+                        notFoundSrc={notFoundSrc}
+                        src={src}
+                        alt={alt}
+                        {...imageProps}
+                        classes={{
+                          root: classes.itemBackgroundImage
+                        }}
+                      />
+                    </div>
+                    <Image
+                      key={src}
+                      notFoundSrc={notFoundSrc}
+                      src={src}
+                      alt={alt}
+                      onLoad={i === 0 ? this.onFullSizeImagesLoaded : null}
+                      {...imageProps}
+                    />
+                  </div>
                 )}
               </div>
             ))}
