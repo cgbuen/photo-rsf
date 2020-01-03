@@ -614,10 +614,10 @@ export default class ImageSwitcher extends Component {
         message={
           <div>
             <div>
-              <CompareArrows className={classes.pinchIcon} /> <span>Pinch to zoom</span>
+              <CompareArrows className={classes.pinchIcon} /> <span>Pinch to zoom, then</span>
             </div>
             <div>
-              <Redo className={classes.slideIcon} /> <span>Touch and slide to pan while zoomed</span>
+              <Redo className={classes.slideIcon} /> <span>Touch and slide to pan</span>
             </div>
           </div>
         }
