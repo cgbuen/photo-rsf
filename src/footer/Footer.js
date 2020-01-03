@@ -53,7 +53,7 @@ export default class Footer extends Component {
           <Link server to={social.instagram} className={classes.iconWrapper}>
             <Instagram className={classes.icon} />
           </Link>
-          <Link server to={social.email} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
+          <Link server to={`mailto:${social.email}`} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
             <Mail className={classes.icon} />
           </Link>
         </Row>
