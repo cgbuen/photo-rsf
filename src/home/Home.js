@@ -46,20 +46,20 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = { isLandscape: true };
-    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
   }
 
   componentDidMount() {
     this.updateWindowDimensions();
-    window.addEventListener('resize', this.updateWindowDimensions);
+    window.addEventListener('resize', this.updateWindowDimensions)
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions);
+    window.removeEventListener('resize', this.updateWindowDimensions)
   }
 
   updateWindowDimensions() {
-    this.setState({ isLandscape: window.innerWidth > window.innerHeight });
+    this.setState({ isLandscape: window.innerWidth > window.innerHeight })
   }
 
   render() {

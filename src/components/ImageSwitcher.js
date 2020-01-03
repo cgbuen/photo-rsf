@@ -493,8 +493,20 @@ export default class ImageSwitcher extends Component {
       return null
     }
   }
-
+  constructor(props) {
+    super(props)
+    this.escFunction = this.escFunction.bind(this);
+  }
+  escFunction(event) {
+    if (event.keyCode === 27 && this.state.viewerActive) {
+      this.setState({ viewerActive: false })
+    }
+  }
+  componentDidMount() {
+    document.addEventListener('keydown', this.escFunction, false)
+  }
   componentWillUnmount() {
+    document.removeEventListener('keydown', this.escFunction, false)
     if (this.disposeReaction) {
       this.disposeReaction()
     }
