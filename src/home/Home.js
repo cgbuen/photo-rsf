@@ -21,13 +21,13 @@ import Typography from '@material-ui/core/Typography'
       color: '#222',
       height: 'auto',
       padding: 10,
-      right: 10,
-      top: 10,
+      right: 25,
+      top: 25,
       transform: 'none',
       width: 'auto',
       zIndex: 1,
       '@media (prefers-color-scheme: dark)': {
-        background: 'rgba(17, 17, 17, .85)',
+        background: 'rgba(17, 17, 17, .5)',
         color: 'white'
       },
     },
@@ -59,7 +59,6 @@ export default class Home extends Component {
   }
 
   updateWindowDimensions() {
-    console.log('asdf')
     this.setState({ isLandscape: window.innerWidth > window.innerHeight });
   }
 
@@ -81,7 +80,7 @@ export default class Home extends Component {
             }}
             images={photos.toJSON()}
             imageProps={{
-              aspectRatio: isLandscape ? 66.67 : 125,
+              aspectRatio: isLandscape ? 66.66 : 125,
               quality: 99,
               classes: {
                 root: classes.image

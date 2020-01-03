@@ -121,17 +121,28 @@ export const styles = theme => ({
   },
 
   arrow: {
+    padding: 7,
     position: 'absolute',
     top: '50%',
-    marginTop: '-24px'
+    marginTop: '-24px',
+    '&, &:hover': {
+      background: 'rgba(224, 224, 224, .85)',
+      boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
+    },
+    '@media (prefers-color-scheme: dark)': {
+      '&, &:hover': {
+        background: 'rgba(17, 17, 17, .5)',
+        boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
+      }
+    }
   },
 
   leftArrow: {
-    left: 0
+    left: 25
   },
 
   rightArrow: {
-    right: 0
+    right: 25
   },
 
   icon: {
@@ -320,34 +331,38 @@ export const styles = theme => ({
   },
 
   itemBackground: {
-    position: 'absolute',
     height: '100%',
-    width: '100%',
     overflow: 'hidden',
+    position: 'absolute',
+    width: '100%',
     zIndex: -1,
   },
 
   itemBackgroundImage: {
     height: '100%',
     '& img': {
-      opacity: .5,
-      objectFit: 'none',
-      width: '120%',
+      background: '#222',
       height: '120%',
-      maxWidth: '120%',
-      maxHeight: '120%',
-      position: 'absolute',
       left: '50%',
+      maxHeight: '120%',
+      maxWidth: '120%',
+      objectFit: 'none',
+      opacity: .25,
+      position: 'absolute',
       top: '50%',
       transform: 'translate(-50%, -50%)',
+      width: '120%',
+      '@media (prefers-color-scheme: dark)': {
+        opacity: .5,
+      }
     }
   },
 
   backdropFilter: {
     backdropFilter: 'blur(5px)',
-    width: '100%',
     height: '100%',
     position: 'absolute',
+    width: '100%',
     zIndex: 1
   }
 })

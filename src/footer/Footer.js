@@ -17,7 +17,6 @@ import classnames from 'classnames'
     width: '100%',
   },
   iconWrapper: {
-    color: '#aaa',
     display: 'inline-block',
     height: 50,
     margin: '0 15px',
