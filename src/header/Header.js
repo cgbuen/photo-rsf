@@ -65,6 +65,7 @@ export default class Header extends Component {
           <Hidden mdUp implementation="css">
             <Menu
               align="right"
+              trackSelected
               itemContentRenderer={(item, leaf) => {
                 return leaf ? <ListItemText className={classes.listItem} primary={item.text} /> : null
               }}

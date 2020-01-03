@@ -80,6 +80,11 @@ const theme = createTheme({
         }
       }
     },
+    RSFNavTab: {
+      root: {
+        opacity: 1
+      }
+    },
     MuiPaper: {
       root: {
         '@media (prefers-color-scheme: dark)': {
@@ -122,7 +127,14 @@ const theme = createTheme({
           color: 'white'
         },
       }
-    }
+    },
+    MuiListItem: {
+      selected: {
+        '&$root': {
+          backgroundColor: '#69c',
+        }
+      }
+    },
   }
 })
 
