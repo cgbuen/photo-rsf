@@ -145,6 +145,9 @@
             "^moov-pwa-analytics/(.*)$": "moov-pwa-analytics/src/$1"
         }
     },
+    "engines": {
+      "node": "8.16.0"
+    },
     "description": "",
     "homepage": ""
 }
