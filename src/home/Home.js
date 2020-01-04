@@ -5,6 +5,7 @@ import Row from 'react-storefront/Row'
 import { withStyles } from '@material-ui/core'
 import ImageSwitcher from '../components/ImageSwitcher'
 import Typography from '@material-ui/core/Typography'
+import classnames from 'classnames'
 
 @withStyles(
   theme => ({
@@ -38,6 +39,9 @@ import Typography from '@material-ui/core/Typography'
     image: {
       width: '100%'
     },
+    maxHeight: {
+      maxHeight: 620
+    },
   })
 )
 @inject(({ app }) => ({ photos: app.photos }))
@@ -45,12 +49,16 @@ import Typography from '@material-ui/core/Typography'
 export default class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { isLandscape: true };
+    this.state = {
+      isLandscape: false,
+      loaded: false
+    };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
   }
 
   componentDidMount() {
     this.updateWindowDimensions();
+    this.setState({ loaded: true })
     window.addEventListener('resize', this.updateWindowDimensions)
   }
 
@@ -64,7 +72,7 @@ export default class Home extends Component {
 
   render() {
     const { classes, photos } = this.props
-    const { isLandscape } = this.state
+    const { isLandscape, loaded } = this.state
 
     return (
       <Container>
@@ -83,7 +91,10 @@ export default class Home extends Component {
               aspectRatio: isLandscape ? 66.66 : 125,
               quality: 99,
               classes: {
-                root: classes.image
+                root: classnames({
+                  [classes.image]: true,
+                  [classes.maxHeight]: !loaded
+                }),
               }
             }}
           />

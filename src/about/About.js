@@ -35,8 +35,8 @@ export default class About extends Component {
             Christopher Buenaventura (Chris, cgbuen, cg) shoots film from the
             pit at live Bay Area events. He also works as a{" "}
             <Link server to={social.website}>software engineer</Link> in the
-            daytime, and streams Splatoon on{" "}
-            <Link server to={social.twitch}>Twitch</Link> on off nights.
+            daytime and streams Splatoon on{" "}
+            <Link server to={social.twitch}>Twitch</Link> during off nights.
           </Typography>
         </Row>
       </Container>

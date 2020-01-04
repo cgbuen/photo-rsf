@@ -8,7 +8,7 @@ const shuffle = function(array) {
     array[currentIndex] = array[randomIndex]
     array[randomIndex] = temporaryValue
   }
-  console.log('--> Shuffle results:', array.map(p => p.subject))
+  // console.log('--> Shuffle results:', array.map(p => p.subject))
   return array
 }
 

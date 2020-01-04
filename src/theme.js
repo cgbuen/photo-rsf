@@ -129,8 +129,8 @@ const theme = createTheme({
       }
     },
     MuiListItem: {
-      selected: {
-        '&$root': {
+      root: {
+        '&$selected': {
           backgroundColor: '#69c',
         }
       }
