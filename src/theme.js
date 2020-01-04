@@ -100,6 +100,11 @@ const theme = createTheme({
         },
       }
     },
+    RSFAppBar: {
+      withAmp: {
+        zIndex: 1310
+      }
+    },
     MuiTypography: {
       h1: {
         fontSize: 24,

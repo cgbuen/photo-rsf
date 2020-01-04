@@ -230,14 +230,21 @@ export default class AmpImageSwitcher extends Component {
         />
         <div className={classes.carouselWrap}>
           <Carousel>
-            {images.map(({ src, alt, video }) =>
+            {images.map(({ src, alt, video, roll, number }) =>
               video ? (
                 <Video src={src} alt={alt} key={src} />
               ) : (
-                <amp-img key={src} src={src} layout="fill" alt={alt} />
+                  <amp-img key={src} src={src} layout="fill" alt={alt} aria-describedby={`photo-${roll}-${number}`} />
               )
             )}
           </Carousel>
+          {images.map(({ roll, number, subject, film, venue, city, date }) =>
+            <div id={`photo-${roll}-${number}`} className={classes.hidden}>
+              {subject}, {film}{"\n"}
+              {venue}, {city}{"\n"}
+              {date}
+            </div>
+          )}
         </div>
         <div className={classes.thumbnails}>
           <div className={classes.thumbnailsWrap}>
