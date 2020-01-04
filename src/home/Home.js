@@ -6,7 +6,9 @@ import { withStyles } from '@material-ui/core'
 import ImageSwitcher from '../components/ImageSwitcher'
 import Typography from '@material-ui/core/Typography'
 import classnames from 'classnames'
+import withAmp from 'react-storefront-extensions/amp/withAmp'
 
+@withAmp
 @withStyles(
   theme => ({
     headline: {

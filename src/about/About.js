@@ -7,7 +7,9 @@ import Image from 'react-storefront/Image'
 import Typography from '@material-ui/core/Typography'
 import Link from 'react-storefront/Link'
 import { createOptimizedSrc } from 'react-storefront/imageService'
+import withAmp from 'react-storefront-extensions/amp/withAmp'
 
+@withAmp
 @withStyles(
   theme => ({
     bioPhoto: {

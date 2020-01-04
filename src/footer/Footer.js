@@ -7,7 +7,9 @@ import Link from 'react-storefront/Link'
 import Instagram from '../assets/instagram.svg'
 import Mail from '@material-ui/icons/MailOutline'
 import classnames from 'classnames'
+import withAmp from 'react-storefront-extensions/amp/withAmp'
 
+@withAmp
 @withStyles(theme => ({
   root: {
     background: 'white',

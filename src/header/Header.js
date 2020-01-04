@@ -8,7 +8,9 @@ import Typography from '@material-ui/core/Typography'
 import Menu from 'react-storefront/Menu'
 import ListItemText from '@material-ui/core/ListItemText'
 import NavTabs from 'react-storefront/NavTabs'
+import withAmp from 'react-storefront-extensions/amp/withAmp'
 
+@withAmp
 @withStyles(theme => ({
   root: {
     height: '64px',

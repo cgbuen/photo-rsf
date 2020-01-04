@@ -6,8 +6,8 @@ import PhotoModel from './home/PhotoModel'
 const AppModel = types.compose(
   AppModelBase,
   types.model('AppModel', {
-    social: types.maybeNull(SocialModel),
-    photos: types.array(PhotoModel)
+    social: types.optional(SocialModel, {}),
+    photos: types.optional(types.array(PhotoModel), [])
   })
 )
 
