@@ -36,6 +36,8 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     },
     viewerActive: {
       borderRadius: '50%',
+      right: 0,
+      top: -40,
       transform: 'scale(0.4) rotateZ(45deg) translateX(75px)',
     },
     image: {
