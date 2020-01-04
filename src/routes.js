@@ -13,7 +13,7 @@ export default new Router()
     cacheHandler,
     fromServer('./app-shell/app-shell-handler')
   )
-  .get('/', cacheHandler, fromClient({ page: 'Home' }), fromServer('./home/home-handler'))
+  .get('/', fromClient({ page: 'Home' }), fromServer('./home/home-handler'))
   .get('/about', cacheHandler, fromClient({ page: 'About' }), fromServer('./about/about-handler'))
   .get('/inquiries', cacheHandler, fromClient({ page: 'Inquiries' }), fromServer('./inquiries/inquiries-handler'))
   .fallback(
