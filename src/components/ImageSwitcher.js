@@ -19,7 +19,7 @@ import { ReactPinchZoomPan } from 'react-pinch-zoom-pan'
 import TabsRow from 'react-storefront/TabsRow'
 import analytics from 'react-storefront/analytics'
 import { inject, observer } from 'mobx-react'
-import AmpImageSwitcher from 'react-storefront/amp/AmpImageSwitcher'
+import AmpImageSwitcher from './AmpImageSwitcher'
 import LoadMask from 'react-storefront/LoadMask'
 import Image from 'react-storefront/Image'
 import Video from 'react-storefront/Video'
@@ -667,16 +667,25 @@ export default class ImageSwitcher extends Component {
       loadingThumbnailProps,
       imageProps,
       viewerThumbnailsOnly,
-      notFoundSrc
+      notFoundSrc,
+      id
     } = this.props
 
     const { fullSizeImagesLoaded, images } = this.state
 
     if (app.amp) {
+      const optImages = images.map(image => ({
+        ...image,
+        src: createOptimizedSrc(image.src, { quality: 99 }),
+      }))
+      const thumbnails = images.map(image => ({
+        ...image,
+        src: createOptimizedSrc(image.src, { quality: 35 }),
+      }))
       return (
         <AmpImageSwitcher
-          product={product}
-          images={images}
+          ampStateId={id}
+          images={optImages}
           className={className}
           classes={{
             root: classes.root,
@@ -687,7 +696,7 @@ export default class ImageSwitcher extends Component {
           }}
           arrows={arrows}
           indicators={indicators}
-          thumbnails={viewerThumbnailsOnly ? null : images}
+          thumbnails={thumbnails}
         />
       )
     }

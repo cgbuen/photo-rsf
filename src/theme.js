@@ -51,6 +51,13 @@ const theme = createTheme({
         }
       }
     },
+    RSFAmpMenu: {
+      root: {
+        '@media (prefers-color-scheme: dark)': {
+          background: '#222',
+        },
+      }
+    },
     RSFMenuIcon: {
       root: {
         '& .rsf-hamburger-inner, & .rsf-hamburger-inner:before, & .rsf-hamburger-inner:after': {
@@ -132,6 +139,13 @@ const theme = createTheme({
       root: {
         '&$selected': {
           backgroundColor: '#69c',
+        }
+      }
+    },
+    MuiListItemText: {
+      root: {
+        '&:first-child': {
+          paddingLeft: 15
         }
       }
     },

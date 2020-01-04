@@ -83,6 +83,7 @@ export default class Home extends Component {
         </Row>
         <Row>
           <ImageSwitcher
+            id="homeSwitcher"
             classes={{
               root: classes.imageSwitcher,
               viewerToggle: classes.viewerToggle,

@@ -7,6 +7,7 @@ import Image from 'react-storefront/Image'
 import Typography from '@material-ui/core/Typography'
 import Link from 'react-storefront/Link'
 import { createOptimizedSrc } from 'react-storefront/imageService'
+import classnames from 'classnames'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
 
 @withAmp
@@ -14,6 +15,9 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
   theme => ({
     bioPhoto: {
       width: '100%'
+    },
+    ampBioPhoto: {
+      height: 300
     }
   })
 )
@@ -21,7 +25,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 @observer
 export default class About extends Component {
   render() {
-    const { classes, social } = this.props
+    const { classes, app, social } = this.props
     const bioPhoto = "https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/0245+04+bio.jpg?2020010102"
 
     return (
@@ -30,7 +34,14 @@ export default class About extends Component {
           <Typography variant="h1">About</Typography>
         </Row>
         <Row>
-          <Image contain className={classes.bioPhoto} src={createOptimizedSrc(bioPhoto, {quality: 85})} />
+          <Image
+            contain
+            className={classnames({
+              [classes.bioPhoto]: true,
+              [classes.ampBioPhoto]: app.amp
+            })}
+            src={createOptimizedSrc(bioPhoto, {quality: 85})}
+          />
         </Row>
         <Row>
           <Typography>

@@ -32,7 +32,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     boxShadow: 'none'
   },
   listItem: {
-    padding: '10px 15px !important'
+    padding: '10px 15px'
   },
   '@media (prefers-color-scheme: dark)': {
     wrap: {
