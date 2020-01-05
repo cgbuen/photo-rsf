@@ -1,3 +1,5 @@
+import Config from 'react-storefront/Config'
+
 export default () => {
   const menu = {
     root: true,
@@ -25,6 +27,7 @@ export default () => {
     },
     tabs: menu,
     title: '– cgbuen Concert Photography',
+    config: Config.values,
     social: {
       instagram: 'https://www.instagram.com/cgbuen/',
       email: 'christopherbuenaventura@gmail.com',
