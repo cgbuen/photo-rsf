@@ -7,10 +7,12 @@ import GoogleAnalyticsTarget from './GoogleAnalyticsTarget';
 
 export default function targets(analyticsKeys) {
   return () => {
+    const ga = new GoogleAnalyticsTarget({
+      trackingID: analyticsKeys.gaApiKey
+    })
+    ga.sendForAllEvents()
     return [
-      new GoogleAnalyticsTarget({
-        trackingID: analyticsKeys.gaApiKey
-      })
+      ga
     ]
   }
 }

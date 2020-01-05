@@ -77,7 +77,7 @@ export default class GoogleAnalyticsTarget extends CommerceAnalyticsTarget {
       const { ga, sendTimingAsHits } = this
 
       if (event === 'pageview') {
-        ga('set', 'page', location.pathname + location.search)
+        ga('set', 'page', window.location.pathname + window.location.search)
       }
 
       if (timing) {

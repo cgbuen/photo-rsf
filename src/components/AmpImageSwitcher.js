@@ -239,7 +239,7 @@ export default class AmpImageSwitcher extends Component {
             )}
           </Carousel>
           {images.map(({ roll, number, subject, film, venue, city, date }) =>
-            <div id={`photo-${roll}-${number}`} className={classes.hidden}>
+            <div key={`photo-${roll}-${number}`} id={`photo-${roll}-${number}`} className={classes.hidden}>
               {subject}, {film}{"\n"}
               {venue}, {city}{"\n"}
               {date}
