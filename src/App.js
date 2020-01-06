@@ -36,7 +36,7 @@ export default class App extends Component {
   render() {
     const { app } = this.props
     return (
-      <AnalyticsProvider targets={targets(app.config)} delayUntilInteractive>
+      <AnalyticsProvider targets={targets(app.config)}>
         <TrackPageViews>
           <div>
             <Helmet>
