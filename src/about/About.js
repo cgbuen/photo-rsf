@@ -26,7 +26,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 export default class About extends Component {
   render() {
     const { classes, app, social } = this.props
-    const bioPhoto = "https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/0245+04+bio.jpg?2020010102"
+    const bioPhoto = "https://ph-1080.cgbuen.com/0245+04+bio.jpg?2020010102"
 
     return (
       <Container>
@@ -40,7 +40,7 @@ export default class About extends Component {
               [classes.bioPhoto]: true,
               [classes.ampBioPhoto]: app.amp
             })}
-            src={createOptimizedSrc(bioPhoto, {quality: 85})}
+            src={createOptimizedSrc(bioPhoto, {quality: 82})}
           />
         </Row>
         <Row>

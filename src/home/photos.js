@@ -1,5 +1,5 @@
 const shuffle = function(array) {
-  console.log('--> Shuffling')
+  console.log('--> Shuffling photos')
   var currentIndex = array.length, temporaryValue, randomIndex
   while (0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex)
@@ -8,7 +8,6 @@ const shuffle = function(array) {
     array[currentIndex] = array[randomIndex]
     array[randomIndex] = temporaryValue
   }
-  // console.log('--> Shuffle results:', array.map(p => p.subject))
   return array
 }
 
@@ -16,7 +15,7 @@ const makeUsablePhotoArray = function(array) {
   return array
     .filter(photo => photo.active)
     .map(photo => {
-      photo.src = `https://s3-us-west-1.amazonaws.com/ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg?2020010102`
+      photo.src = `https://ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg?2020010102`
       photo.alt = `${photo.subject}, ${photo.venue}, ${photo.date}`
       return photo
     })

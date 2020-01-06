@@ -676,7 +676,7 @@ export default class ImageSwitcher extends Component {
     if (app.amp) {
       const optImages = images.map(image => ({
         ...image,
-        src: createOptimizedSrc(image.src, { quality: 99 }),
+        src: createOptimizedSrc(image.src, { quality: 82 }),
       }))
       const thumbnails = images.map(image => ({
         ...image,
@@ -837,7 +837,7 @@ export default class ImageSwitcher extends Component {
                                 this.selectedVideo = el
                               }
                             }}
-                            src={createOptimizedSrc(selectedImage.zoomSrc || selectedImage.src, { quality: 99 })}
+                            src={createOptimizedSrc(selectedImage.zoomSrc || selectedImage.src, { quality: 82 })}
                             alt={selectedImage.alt}
                             style={{
                               height: 'auto',

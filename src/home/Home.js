@@ -94,7 +94,7 @@ export default class Home extends Component {
             images={photos.toJSON()}
             imageProps={{
               aspectRatio: isLandscape ? 66.66 : 125,
-              quality: 99,
+              quality: 82,
               classes: {
                 root: classnames({
                   [classes.image]: true,
