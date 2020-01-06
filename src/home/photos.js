@@ -11,11 +11,11 @@ const shuffle = function(array) {
   return array
 }
 
-const makeUsablePhotoArray = function(array) {
+const makeUsablePhotoArray = function(array, assetHost) {
   return array
     .filter(photo => photo.active)
     .map(photo => {
-      photo.src = `https://ph-1080.cgbuen.com/${photo.roll}+${photo.number}.jpg?2020010102`
+      photo.src = `${assetHost}/${photo.roll}+${photo.number}.jpg?2020010102`
       photo.alt = `${photo.subject}, ${photo.venue}, ${photo.date}`
       return photo
     })
@@ -304,4 +304,6 @@ const photos = [
   }
 ]
 
-export default shuffle(makeUsablePhotoArray(photos))
+export default function photoGenerator(assetHost) {
+  return shuffle(makeUsablePhotoArray(photos, assetHost))
+}

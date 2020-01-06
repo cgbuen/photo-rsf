@@ -48,7 +48,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     },
   })
 )
-@inject(({ app }) => ({ photos: app.photos }))
+@inject(({ app }) => ({ app, photos: app.photos }))
 @observer
 export default class Home extends Component {
   constructor(props) {
@@ -75,7 +75,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { classes, photos } = this.props
+    const { classes, app, photos } = this.props
     const { isLandscape, loaded } = this.state
 
     return (
@@ -94,7 +94,7 @@ export default class Home extends Component {
             images={photos.toJSON()}
             imageProps={{
               aspectRatio: isLandscape ? 66.66 : 125,
-              quality: 82,
+              quality: app.config.imageQuality,
               classes: {
                 root: classnames({
                   [classes.image]: true,

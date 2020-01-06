@@ -21,27 +21,17 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     }
   })
 )
-@inject(({ app }) => ({ social: app.social }))
+@inject(({ app }) => ({ app, social: app.social }))
 @observer
 export default class About extends Component {
   render() {
     const { classes, app, social } = this.props
-    const bioPhoto = "https://ph-1080.cgbuen.com/0245+04+bio.jpg?2020010102"
+    const bioPhoto = `${app.config.assetHost}/0245+04+bio.jpg?2020010102`
 
     return (
       <Container>
         <Row>
           <Typography variant="h1">About</Typography>
-        </Row>
-        <Row>
-          <Image
-            contain
-            className={classnames({
-              [classes.bioPhoto]: true,
-              [classes.ampBioPhoto]: app.amp
-            })}
-            src={createOptimizedSrc(bioPhoto, {quality: 82})}
-          />
         </Row>
         <Row>
           <Typography>
@@ -51,6 +41,16 @@ export default class About extends Component {
             daytime and streams Splatoon on{" "}
             <Link server to={social.twitch}>Twitch</Link> during off nights.
           </Typography>
+        </Row>
+        <Row>
+          <Image
+            contain
+            className={classnames({
+              [classes.bioPhoto]: true,
+              [classes.ampBioPhoto]: app.amp
+            })}
+            src={createOptimizedSrc(bioPhoto, {quality: app.amp ? app.config.imageQualityAmp : app.config.imageQuality})}
+          />
         </Row>
       </Container>
     )
