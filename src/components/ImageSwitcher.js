@@ -347,14 +347,11 @@ export const styles = theme => ({
       maxHeight: '120%',
       maxWidth: '120%',
       objectFit: 'none',
-      opacity: .25,
+      opacity: .5,
       position: 'absolute',
       top: '50%',
       transform: 'translate(-50%, -50%)',
       width: '120%',
-      '@media (prefers-color-scheme: dark)': {
-        opacity: .5,
-      }
     }
   },
 
