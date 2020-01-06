@@ -346,7 +346,7 @@ export const styles = theme => ({
       left: '50%',
       maxHeight: '120%',
       maxWidth: '120%',
-      objectFit: 'none',
+      objectFit: 'none !important',
       opacity: .5,
       position: 'absolute',
       top: '50%',
@@ -700,7 +700,7 @@ export default class ImageSwitcher extends Component {
 
     const { selectedIndex, viewerActive } = this.state
     const selectedImage = images[selectedIndex]
-    const SelectedImageTag = selectedImage.video ? 'video' : 'img'
+    const SelectedImageTag = (selectedImage && selectedImage.video) ? 'video' : 'img'
 
     return (
       <div
@@ -812,7 +812,7 @@ export default class ImageSwitcher extends Component {
                           height: '100%'
                         }}
                         className={classnames({
-                          [classes.playButton]: selectedImage.video,
+                          [classes.playButton]: selectedImage && selectedImage.video,
                           [classes.playing]: this.state.playingVideo
                         })}
                         onClick={() => {
