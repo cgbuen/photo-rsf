@@ -1,1 +1,2 @@
-public/robots-local.txt
+User-agent: *
+Disallow: /
