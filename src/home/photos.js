@@ -17,7 +17,7 @@ const makeUsablePhotoArray = function(array, assetHost) {
   return array
     .filter(photo => photo.active)
     .map(photo => {
-      photo.src = `${assetHost}/${photo.roll}+${photo.number}.jpg?2020010600`
+      photo.src = `${assetHost}/${photo.roll}+${photo.number}.jpg?${photo.cacheBuster}`
       photo.alt = `${photo.subject}, ${photo.venue}, ${photo.date}`
       return photo
     })
@@ -25,7 +25,7 @@ const makeUsablePhotoArray = function(array, assetHost) {
 
 export default async function photoGenerator(assetHost) {
   try {
-    const photosResponse = await fetch(`${assetHost}/photos.json`)
+    const photosResponse = await fetch(`${assetHost}/photos.json?${Date.now()}`)
     const photosResponseJson = await photosResponse.json()
     return shuffle(makeUsablePhotoArray(photosResponseJson, assetHost))
   } catch (e) {

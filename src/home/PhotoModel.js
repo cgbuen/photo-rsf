@@ -14,6 +14,7 @@ const PhotoModel = types.model('PhotoModel', {
   format: types.maybeNull(types.string),
   film: types.maybeNull(types.string),
   camera: types.maybeNull(types.string),
+  cacheBuster: types.maybeNull(types.number),
   comment: types.maybeNull(types.string),
 })
 
