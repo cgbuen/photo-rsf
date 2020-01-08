@@ -5,6 +5,6 @@
 ```
 npm install
 npm start
-npm start:express
+npm run deploy dev
 npm run deploy prod
 ```
