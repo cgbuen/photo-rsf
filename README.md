@@ -1,9 +1,11 @@
 # cgbuen Photo Portfolio
 
-## Setup
+Personal photo portfolio using MoovSDK 7 and RSF6.
+
+## Usage
 
 ```
-npm install
+npm ci
 npm start
 npm run deploy dev
 npm run deploy prod
