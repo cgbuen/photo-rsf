@@ -4,7 +4,7 @@ import red from '@material-ui/core/colors/red'
 const theme = createTheme({
   typography: {
     useNextVariants: true,
-    fontFamily: 'monospace'
+    fontFamily: 'ff-meta-web-pro'
   },
   palette: {
     secondary: {

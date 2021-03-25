@@ -76,7 +76,6 @@ export default class Header extends Component {
           <HeaderLogo classes={{ logoWrap: classes.headerLogo }}>
             <div>
               <Typography variant="h1" className={classes.headline}>cgbuen</Typography>
-              <Typography className={classes.subtitle}>Concert Photography</Typography>
             </div>
           </HeaderLogo>
           <Hidden smDown implementation="css">

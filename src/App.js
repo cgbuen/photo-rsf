@@ -53,6 +53,7 @@ export default class App extends Component {
                * tag can be removed.
                */}
               <link href="https://opt.moovweb.net" rel="preconnect" crossorigin />
+              <link rel="stylesheet" href="https://use.typekit.net/kgo8rkq.css" />
               <link rel="shortcut icon" href="/icons/favicon.ico" />
               <meta
                 name="description"
