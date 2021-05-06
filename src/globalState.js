@@ -3,10 +3,21 @@ import Config from 'react-storefront/Config'
 export default () => {
   const menu = {
     root: true,
-    items: [{
-        text: 'Gallery',
+    items: [
+      {
+        text: 'Projects',
         prefetch: 'visible',
-        url: '/'
+        url: '/projects'
+      },
+      {
+        text: 'Photography',
+        prefetch: 'visible',
+        url: '/photography'
+      },
+      {
+        text: 'Builds',
+        prefetch: 'visible',
+        url: '/builds'
       },
       {
         text: 'About',
@@ -14,10 +25,10 @@ export default () => {
         url: '/about'
       },
       {
-        text: 'Inquiries',
+        text: 'Miscellaneous',
         prefetch: 'visible',
-        url: '/inquiries'
-      }
+        url: '/misc'
+      },
     ]
   }
 
@@ -26,7 +37,7 @@ export default () => {
       levels: [menu]
     },
     tabs: menu,
-    title: '– cgbuen Concert Photography',
+    title: '– cgbuen',
     config: Config.values,
     social: {
       instagram: 'https://www.instagram.com/cgbuen/',
@@ -35,8 +46,12 @@ export default () => {
       twitch: 'https://www.twitch.tv/cgbuen',
       twitter: 'https://twitter.com/cgbuen',
       github: 'https://github.com/cgbuen',
-      website: 'http://www.christopherbuenaventura.com/',
+      youtube: 'https://www.youtube.com/cgbuen',
+      discordP: 'cgbuen#5518',
+      discordS: 'https://discord.gg/EayZKHK',
     },
-    photos: []
+    projects: [],
+    photos: [],
+    builds: [],
   }
 }

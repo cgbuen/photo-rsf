@@ -4,7 +4,8 @@ import red from '@material-ui/core/colors/red'
 const theme = createTheme({
   typography: {
     useNextVariants: true,
-    fontFamily: 'ff-meta-web-pro'
+    fontFamily: 'ff-meta-web-pro',
+    fontSize: 16
   },
   palette: {
     secondary: {
@@ -80,6 +81,11 @@ const theme = createTheme({
         },
       }
     },
+    MuiTabs: {
+      scroller: {
+        marginBottom: '0 !important',
+      }
+    },
     RSFNavTabs: {
       root: {
         '&:before, &:after': {
@@ -90,6 +96,9 @@ const theme = createTheme({
     RSFNavTab: {
       root: {
         opacity: 1
+      },
+      selected: {
+        backgroundColor: 'rgba(102, 153, 204, .3)'
       }
     },
     MuiPaper: {
@@ -108,6 +117,7 @@ const theme = createTheme({
     MuiTypography: {
       h1: {
         fontSize: 24,
+        fontWeight: 'bold',
         '@media (prefers-color-scheme: dark)': {
           color: 'white',
         },
@@ -133,6 +143,11 @@ const theme = createTheme({
         backgroundColor: '#69c'
       }
     },
+    MuiPrivateTabScrollButton: {
+      root: {
+        width: 0
+      }
+    },
     MuiIconButton: {
       root: {
         '@media (prefers-color-scheme: dark)': {
@@ -152,6 +167,15 @@ const theme = createTheme({
         '&:first-child': {
           paddingLeft: 15
         }
+      }
+    },
+    RSFTabsRow: {
+      tab: {
+        fontWeight: 'bold',
+        textTransform: 'none'
+      },
+      indicator: {
+        height: 0
       }
     },
   }

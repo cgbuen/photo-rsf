@@ -31,6 +31,9 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
   navTabsRoot: {
     boxShadow: 'none'
   },
+  navTabsScroller: {
+    marginBottom: '0 !important'
+  },
   listItem: {
     padding: '10px 15px'
   },
@@ -81,7 +84,8 @@ export default class Header extends Component {
           <Hidden smDown implementation="css">
             <NavTabs
               classes={{
-                root: classes.navTabsRoot
+                root: classes.navTabsRoot,
+                scroller: classes.navTabsScroller
               }}
             />
           </Hidden>

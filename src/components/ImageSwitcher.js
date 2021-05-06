@@ -224,14 +224,13 @@ export const styles = theme => ({
   },
 
   tabScroller: {
-    marginBottom: '0 !important',
     [theme.breakpoints.down('xs')]: {
       padding: `0 ${theme.margins.container}px`
     }
   },
 
   indicator: {
-    display: 'none'
+    height: 3
   },
 
   mask: {
@@ -563,6 +562,7 @@ export default class ImageSwitcher extends Component {
           </div>
           <TabsRow
             classes={{
+              indicator: classes.indicator,
               scroller: classes.tabScroller,
               root: classes.tabsRowRoot
             }}

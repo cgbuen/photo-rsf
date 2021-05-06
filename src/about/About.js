@@ -34,14 +34,25 @@ export default class About extends Component {
           <Typography variant="h1">About</Typography>
         </Row>
         <Row>
-          <Typography>
-            Christopher Buenaventura (Chris, cgbuen, cg) shoots film from the
-            pit at live events, primarily around the San Francisco Bay Area. He
-            also works as a{" "}
-            <Link server to={social.website}>software engineer</Link> in the
-            daytime and streams Splatoon on{" "}
-            <Link server to={social.twitch}>Twitch</Link> during off nights.
-          </Typography>
+          <p>
+            Hey there! I'm Chris, a software engineer and content creator based
+            in the San Francisco, California. This serves as a portfolio of
+            works completed both professionally and for leisure.
+          </p>
+          <p>
+            I stream a few different types of content on Twitch, including:
+          </p>
+          <ul>
+            <li>Personal software projects</li>
+            <li>Film photography shooting, development, and scanning</li>
+            <li>Mechanical keyboard builds</li>
+            <li>Splatoon 2 gameplay</li>
+          </ul>
+          <p>
+            Send me a message for inquiries. Best reached by Discord
+            ({social.discordP}), <Link server to={social.instagram}>Instagram</Link>{" "}
+            DM, or <Link server to={`mailto:${social.email}`}>email</Link>.
+          </p>
         </Row>
         <Row>
           <Image

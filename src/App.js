@@ -68,8 +68,11 @@ export default class App extends Component {
             <Pages
               components={universal => ({
                 Home: universal(import('./home/Home')),
+                Software: universal(import('./software/Software')),
+                Photography: universal(import('./photography/Photography')),
+                Assembly: universal(import('./assembly/Assembly')),
                 About: universal(import('./about/About')),
-                Inquiries: universal(import('./inquiries/Inquiries')),
+                Miscellaneous: universal(import('./misc/Misc')),
                 Error: universal(import('./ErrorPage')),
                 Offline
               })}

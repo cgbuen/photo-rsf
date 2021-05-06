@@ -2,14 +2,18 @@ import { types } from 'mobx-state-tree'
 import AppModelBase from 'react-storefront/model/AppModelBase'
 import SocialModel from './SocialModel'
 import ConfigModel from './config/ConfigModel'
-import PhotoModel from './home/PhotoModel'
+import ProjectModel from './software/ProjectModel'
+import PhotoModel from './photography/PhotoModel'
+import BuildModel from './assembly/BuildModel'
 
 const AppModel = types.compose(
   AppModelBase,
   types.model('AppModel', {
     config: types.optional(ConfigModel, {}),
     social: types.optional(SocialModel, {}),
-    photos: types.optional(types.array(PhotoModel), [])
+    projects: types.optional(types.array(ProjectModel), []),
+    photos: types.optional(types.array(PhotoModel), []),
+    builds: types.optional(types.array(BuildModel), []),
   })
 )
 
