@@ -17,7 +17,7 @@ export default new Router()
     fromClient({ page: 'Home' }),
     fromServer('./home/home-handler')
   )
-  .get('/projects',
+  .get('/software-design',
     fromClient({ page: 'Software' }),
     fromServer('./software/software-handler')
   )

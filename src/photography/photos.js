@@ -12,7 +12,7 @@ const makeUsablePhotoArray = function(array, assetHost) {
 
 export default async function photoGenerator(assetHost) {
   try {
-    const photosResponse = await fetch(`${assetHost}/photos.json?${Date.now()}`)
+    const photosResponse = await fetch(`${assetHost}/concerts/concerts.json?${Date.now()}`)
     const photosResponseJson = await photosResponse.json()
     return makeUsablePhotoArray(photosResponseJson, assetHost)
   } catch (e) {

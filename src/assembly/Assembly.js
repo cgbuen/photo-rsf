@@ -19,22 +19,41 @@ export default class Assembly extends Component {
     window.removeEventListener('resize', this.updateWindowDimensions)
   }
 
+  descriptionize(x) {
+    return (
+      <div>
+        <div>Purchased: {x.date_bought}</div>
+        <div>Built: {x.date_built}</div>
+        <div>Color: {x.color}</div>
+        <div>PCB: {x.pcb.replace('[prop]', '(proprietary)')}</div>
+        <div>Plate: {x.plate}</div>
+        <div>Switches: {x.switches}</div>
+        <div>Keycaps: {x.keycaps}</div>
+        {x.notes && (<div>Notes: {x.notes}</div>)}
+      </div>
+    )
+  }
+
   render() {
     const { builds } = this.props
 
     return (
       <Container>
         <Row>
-          <Typography variant="h1">Builds</Typography>
+          <Typography variant="h1">Completed Builds</Typography>
         </Row>
-        {builds.map(x => (
-          <Card
-            key={x.id}
-            name={x.name}
-            src={x.src}
-            description={x.description}
-          />
-        ))}
+        {builds
+          .filter(x => x.build_status === 'Built' && x.assembly_variant.includes('A'))
+          .reverse()
+          .map(x => (
+            <Card
+              key={x.id}
+              name={x.name}
+              src={x.src}
+              description={this.descriptionize(x)}
+            />
+          ))
+        }
       </Container>
     )
   }

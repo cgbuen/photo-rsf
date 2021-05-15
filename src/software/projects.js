@@ -10,7 +10,7 @@ const makeUsableProjectArray = function(array, assetHost) {
 
 export default async function projectGenerator(assetHost) {
   try {
-    const projectsResponse = await fetch(`${assetHost}/software.json?${Date.now()}`)
+    const projectsResponse = await fetch(`${assetHost}/projects/software.json?${Date.now()}`)
     const projectsResponseJson = await projectsResponse.json()
     return makeUsableProjectArray(projectsResponseJson, assetHost)
   } catch (e) {

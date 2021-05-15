@@ -10,7 +10,7 @@ const makeUsableBuildArray = function(array, assetHost) {
 
 export default async function buildGenerator(assetHost) {
   try {
-    const buildsResponse = await fetch(`${assetHost}/software.json?${Date.now()}`)
+    const buildsResponse = await fetch(`${assetHost}/keyboards/keyboards.json?${Date.now()}`)
     const buildsResponseJson = await buildsResponse.json()
     return makeUsableBuildArray(buildsResponseJson, assetHost)
   } catch (e) {

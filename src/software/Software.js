@@ -25,7 +25,7 @@ export default class Software extends Component {
     return (
       <Container>
         <Row>
-          <Typography variant="h1">Software & Design Projects</Typography>
+          <Typography variant="h1">Software & Design</Typography>
         </Row>
         {projects.map(x => (
           <Card
