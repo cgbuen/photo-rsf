@@ -19,7 +19,8 @@ import { inject, observer } from 'mobx-react'
       alignItems: 'center'
     },
     cardFigure: {
-      marginRight: 10
+      marginRight: 15,
+      width: 250
     },
   })
 )
@@ -27,12 +28,12 @@ import { inject, observer } from 'mobx-react'
 @observer
 export default class Card extends Component {
   render() {
-    const { classes, /*src,*/ name, description } = this.props
+    const { classes, src, name, description } = this.props
     return (
       <Row className={classes.card}>
         <div className={classes.cardTitle}>{name}</div>
         <div className={classes.cardBody}>
-          <img className={classes.cardFigure} src="https://via.placeholder.com/150" alt={name} />
+          <img className={classes.cardFigure} src={src} alt={name} />
           <div className={classes.cardDescription}>{description}</div>
         </div>
       </Row>

@@ -9,7 +9,7 @@ import Card from '../components/Card'
 @withAmp
 @inject(({ app }) => ({ app, builds: app.builds }))
 @observer
-export default class Assembly extends Component {
+export default class Collection extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -43,7 +43,7 @@ export default class Assembly extends Component {
           <Typography variant="h1">Completed Builds</Typography>
         </Row>
         {builds
-          .filter(x => x.build_status === 'Built' && x.assembly_variant.includes('A'))
+          .filter(x => x.build_status !== 'On the way' && x.assembly_variant.includes('A'))
           .reverse()
           .map(x => (
             <Card

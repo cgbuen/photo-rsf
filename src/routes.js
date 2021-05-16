@@ -17,17 +17,17 @@ export default new Router()
     fromClient({ page: 'Home' }),
     fromServer('./home/home-handler')
   )
-  .get('/software-design',
-    fromClient({ page: 'Software' }),
-    fromServer('./software/software-handler')
+  .get('/works',
+    fromClient({ page: 'Works' }),
+    fromServer('./works/works-handler')
   )
   .get('/photography',
     fromClient({ page: 'Photography' }),
     fromServer('./photography/photography-handler')
   )
-  .get('/builds',
-    fromClient({ page: 'Assembly' }),
-    fromServer('./assembly/assembly-handler')
+  .get('/collection',
+    fromClient({ page: 'Collection' }),
+    fromServer('./collection/collection-handler')
   )
   .get('/about',
     cacheHandler,

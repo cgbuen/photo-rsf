@@ -5,9 +5,9 @@ export default () => {
     root: true,
     items: [
       {
-        text: 'Software & Design',
+        text: 'Works',
         prefetch: 'visible',
-        url: '/software-design'
+        url: '/works'
       },
       {
         text: 'Photography',
@@ -15,9 +15,9 @@ export default () => {
         url: '/photography'
       },
       {
-        text: 'Keyboard Collection',
+        text: 'Collection',
         prefetch: 'visible',
-        url: '/builds'
+        url: '/collection'
       },
       {
         text: 'About',
