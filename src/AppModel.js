@@ -2,7 +2,7 @@ import { types } from 'mobx-state-tree'
 import AppModelBase from 'react-storefront/model/AppModelBase'
 import SocialModel from './SocialModel'
 import ConfigModel from './config/ConfigModel'
-import ProjectModel from './software/ProjectModel'
+import ProjectModel from './works/ProjectModel'
 import PhotoModel from './photography/PhotoModel'
 import BuildModel from './collection/BuildModel'
 
