@@ -27,7 +27,7 @@ export default class Software extends Component {
         <Row>
           <Typography variant="h1">Software & Design Works</Typography>
         </Row>
-        <p>By day I work as a software engineer / architect, having had a modest background in design.</p>
+        <p>By day I work as a software engineer and architect solving fun problems on the web.</p>
         {projects.map(x => (
           <Card
             key={x.id}
