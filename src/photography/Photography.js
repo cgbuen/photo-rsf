@@ -77,8 +77,9 @@ export default class Photography extends Component {
     return (
       <Container>
         <Row>
-          <Typography variant="h1">Photography</Typography>
+          <Typography variant="h1">Concert Photography</Typography>
         </Row>
+        <p>I shoot film from the pit at live events, primarily around the San Francisco Bay Area.</p>
         <Row>
           <ImageSwitcher
             id="gallerySwitcher"

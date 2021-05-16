@@ -25,8 +25,9 @@ export default class Software extends Component {
     return (
       <Container>
         <Row>
-          <Typography variant="h1">Software & Design</Typography>
+          <Typography variant="h1">Software & Design Works</Typography>
         </Row>
+        <p>By day I work as a software engineer / architect, having had a modest background in design.</p>
         {projects.map(x => (
           <Card
             key={x.id}
