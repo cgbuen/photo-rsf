@@ -5,9 +5,9 @@ export default () => {
     root: true,
     items: [
       {
-        text: 'Works',
+        text: 'Projects',
         prefetch: 'visible',
-        url: '/works'
+        url: '/projects'
       },
       {
         text: 'Photography',

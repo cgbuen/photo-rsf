@@ -35,17 +35,17 @@ export default class About extends Component {
         </Row>
         <Row>
           <p>
-            Hey there! I'm Chris, a software engineer and content creator based
-            in the San Francisco, California. This serves as a portfolio of
-            works completed both professionally and for leisure.
+            Hi! I'm Chris, a software engineer and content creator based in San
+            Francisco, California. This serves as a portfolio of works completed
+            both professionally and for leisure.
           </p>
           <p>
             I stream a few different types of content on Twitch, including:
           </p>
           <ul>
             <li>Personal software projects</li>
-            <li>Film photography shooting, development, and scanning</li>
-            <li>Custom / higher-end computer keyboard builds</li>
+            <li>Film photography, development, and scanning</li>
+            <li>Custom / higher-end "mechanical" (computer) keyboard builds</li>
             <li>Splatoon 2 gameplay</li>
           </ul>
           <p>

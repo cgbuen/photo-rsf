@@ -25,7 +25,7 @@ export default class Software extends Component {
     return (
       <Container>
         <Row>
-          <Typography variant="h1">Software & Design Works</Typography>
+          <Typography variant="h1">Software & Design Projects</Typography>
         </Row>
         <p>By day I work as a software engineer and architect solving fun problems on the web.</p>
         {projects.map(x => (

@@ -42,7 +42,7 @@ export default class Collection extends Component {
         <Row>
           <Typography variant="h1">Keyboard Collection</Typography>
         </Row>
-        <p>As a hobby I collect, build, and modify custom / higher-end computer keyboards.</p>
+        <p>As a hobby I collect, build, and modify custom / higher-end "mechanical" (computer) keyboards.</p>
         {builds
           .filter(x => x.build_status !== 'On the way' && x.assembly_variant.includes('A'))
           .reverse()
