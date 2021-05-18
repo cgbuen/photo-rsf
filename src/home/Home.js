@@ -15,11 +15,16 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
-      height: 918,
+      height: 1228,
       position: 'relative',
+      '@media (max-width:1920px)': {
+        height: 'auto',
+        padding: '32%',
+      },
       '@media (max-width:1080px)': {
         height: 689,
-      }
+        padding: 0,
+      },
     },
     heroImage: {
       width: '100%'
@@ -27,12 +32,16 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
     heroTextContainer: {
       borderRadius: 3,
       fontWeight: 'bold',
-      left: '60%',
+      left: '53%',
       lineHeight: 2,
       overflow: 'hidden',
       position: 'absolute',
       top: '50%',
       transform: 'translateY(-60%)',
+      '@media (max-width:768px)': {
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+      }
     },
     headline: {
       color: 'white',
@@ -57,6 +66,9 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
     itemContainer: {
       alignItems: 'center',
       display: 'flex',
+      '@media (max-width:568px)': {
+        display: 'block',
+      }
     },
     itemWrapper: {
       flex: 1,
@@ -72,11 +84,18 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       transition: 'opacity .2s linear',
       '&:hover': {
         opacity: .8,
+      },
+      '@media (max-width:568px)': {
+        height: 240,
       }
     },
     projects: {
       backgroundImage: `url(${ASSET_DOMAIN}/projects/moovweb-geico-01.jpg)`,
       backgroundPosition: '-21px 70%',
+      '@media (max-width:568px)': {
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }
     },
     photos: {
       backgroundImage: `url(https://opt.moovweb.net/img?quality=90&img=https%3A%2F%2Fph-1080.cgbuen.com%2F0135%2B26.jpg%3F2020010600)`,

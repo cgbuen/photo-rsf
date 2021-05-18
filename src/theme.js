@@ -167,7 +167,10 @@ const theme = createTheme({
         '&:first-child': {
           paddingLeft: 15
         }
-      }
+      },
+      primary: {
+        fontWeight: 'bold',
+      },
     },
     RSFTabsRow: {
       tab: {

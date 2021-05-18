@@ -16,11 +16,19 @@ import { inject, observer } from 'mobx-react'
     },
     cardBody: {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
+      '@media (max-width:568px)': {
+        display: 'block'
+      },
     },
     cardFigure: {
       marginRight: 15,
-      width: 250
+      width: 250,
+      '@media (max-width:568px)': {
+        display: 'block',
+        marginBottom: 15,
+        width: '100%',
+      },
     },
   })
 )

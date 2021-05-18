@@ -20,14 +20,19 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
   },
   iconWrapper: {
     display: 'inline-block',
-    height: 50,
-    margin: '0 15px',
-    padding: 6,
+    height: 32,
+    margin: '0 5px',
+    padding: 5,
     verticalAlign: 'middle',
-    width: 50,
+    width: 32,
+    '@media (max-width:568px)': {
+      height: 48,
+      margin: '0 8px',
+      width: 48,
+    }
   },
   iconWrapperMail: {
-    padding: 0
+    padding: 1
   },
   icon: {
     fill: 'currentColor',
