@@ -4,7 +4,6 @@ import AppBar from 'react-storefront/AppBar'
 import { withStyles } from '@material-ui/core/styles'
 import HeaderLogo from 'react-storefront/HeaderLogo'
 import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
 import Menu from 'react-storefront/Menu'
 import ListItemText from '@material-ui/core/ListItemText'
 import NavTabs from 'react-storefront/NavTabs'
@@ -21,6 +20,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
   },
   headline: {
     fontSize: 32,
+    fontWeight: 'bold',
     lineHeight: 1,
     textDecoration: 'underline',
     textDecorationColor: '#69c',
@@ -78,7 +78,7 @@ export default class Header extends Component {
           </Hidden>
           <HeaderLogo classes={{ logoWrap: classes.headerLogo }}>
             <div>
-              <Typography variant="h1" className={classes.headline}>cgbuen</Typography>
+              <div className={classes.headline}>cgbuen</div>
             </div>
           </HeaderLogo>
           <Hidden smDown implementation="css">
