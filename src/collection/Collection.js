@@ -87,7 +87,7 @@ export default class Collection extends Component {
   }
 
   showable(x) {
-    return !x.includes('TBD') && !x.includes('?') && !x.includes('[planned]') && !x.includes('[prop]') && !x.includes('[stock]') && !x.includes('N/A')
+    return !x.includes('TBD') && !x.includes('?') && !x.includes('[planned]') && !x.includes('[prop]') && !x.includes('[stock]') && !x.includes('Stock') && !x.includes('N/A')
   }
 
   descriptionize(x) {
