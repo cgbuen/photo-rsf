@@ -9,6 +9,8 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import classnames from 'classnames'
 import { createOptimizedSrc } from 'react-storefront/imageService'
 import LinkBlank from '../components/LinkBlank'
+import CheckBoxOutlineBlankSharpIcon from '@material-ui/icons/CheckBoxOutlineBlankSharp';
+import CheckBoxSharpIcon from '@material-ui/icons/CheckBoxSharp';
 
 @withStyles(
   theme => ({
@@ -41,10 +43,31 @@ import LinkBlank from '../components/LinkBlank'
       flex: 1,
       fontWeight: 'bold',
       margin: '0 15px 10px 0',
-      padding: '5px 15px',
+      padding: '5px 10px',
+    },
+    'icon': {
+      display: 'inline-block',
+      marginRight: 3,
+      verticalAlign: 'middle',
+    },
+    'iconUnchecked': {
+      display: 'block',
+    },
+    'iconChecked': {
+      display: 'none',
+    },
+    filterText: {
+      display: 'inline-block',
+      verticalAlign: 'middle',
     },
     filterActive: {
       background: '#69c',
+      '& $iconUnchecked': {
+        display: 'none'
+      },
+      '& $iconChecked': {
+        display: 'block;'
+      }
     },
     cardContainer: {
       marginTop: -15,
@@ -85,8 +108,11 @@ export default class Collection extends Component {
     const { app, classes, builds, buildFiltersActive } = this.props
     return (
       <div className={classnames(classes.filter, buildFiltersActive[id] && classes.filterActive)} onClick={() => app.toggleFilteredBuilds(id)}>
-        <div></div>
-        <div>{name} ({builds.filter(x => x.assembly_variant.includes('A') && x.build_status === id).length})</div>
+        <div className={classes.icon}>
+          <CheckBoxOutlineBlankSharpIcon className={classes.iconUnchecked} />
+          <CheckBoxSharpIcon className={classes.iconChecked} />
+        </div>
+        <div className={classes.filterText}>{name} ({builds.filter(x => x.assembly_variant.includes('A') && x.build_status === id).length})</div>
       </div>
     )
   }
