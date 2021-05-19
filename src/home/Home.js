@@ -12,7 +12,6 @@ import Twitter from '../assets/twitter.svg'
 import Twitch from '../assets/twitch.svg'
 import GitHub from '../assets/github.svg'
 import Discord from '../assets/discord.svg'
-import Mail from '@material-ui/icons/MailOutline'
 import { createOptimizedSrc } from 'react-storefront/imageService'
 
 const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'

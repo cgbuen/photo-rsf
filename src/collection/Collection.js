@@ -8,6 +8,7 @@ import Card from '../components/Card'
 import withStyles from '@material-ui/core/styles/withStyles'
 import classnames from 'classnames'
 import { createOptimizedSrc } from 'react-storefront/imageService'
+import LinkBlank from '../components/LinkBlank'
 
 @withStyles(
   theme => ({
@@ -55,7 +56,7 @@ import { createOptimizedSrc } from 'react-storefront/imageService'
   })
 )
 @withAmp
-@inject(({ app }) => ({ app, builds: app.builds, buildFiltersActive: app.buildFiltersActive }))
+@inject(({ app }) => ({ app, social: app.social, builds: app.builds, buildFiltersActive: app.buildFiltersActive }))
 @observer
 export default class Collection extends Component {
   componentWillUnmount() {
@@ -91,14 +92,14 @@ export default class Collection extends Component {
   }
 
   render() {
-    const { app, classes, builds } = this.props
+    const { app, social, classes, builds } = this.props
 
     return (
       <Container>
         <Row>
           <Typography variant="h1">Keyboard Collection</Typography>
         </Row>
-        <p>I collect, build, and modify enthusiast "mechanical" (computer) keyboards.</p>
+        <p>I collect, build, and modify enthusiast "mechanical" (computer) keyboards. Builds (among other types of content) are streamed to <LinkBlank to={social.twitch}>Twitch</LinkBlank>, with proceeds going to the <LinkBlank to={social.sffb}>San Francisco-Marin Food Bank</LinkBlank>.</p>
         <div className={classes.topSection}>
           <div>
             <div className={classes.filtersLabel}>Filters: </div>

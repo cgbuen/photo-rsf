@@ -11,6 +11,7 @@ const SocialModel = types.model('SocialModel', {
   youtubeV: types.maybeNull(types.string),
   discordP: types.maybeNull(types.string),
   discordS: types.maybeNull(types.string),
+  sffb: types.maybeNull(types.string),
 })
 
 export default SocialModel 

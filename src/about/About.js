@@ -37,8 +37,8 @@ export default class About extends Component {
         <Row>
           <p>
             Hi! I'm Chris, a software engineer and content creator based in San
-            Francisco, California. This serves as a portfolio of works completed
-            both professionally and for leisure.
+            Francisco, California. This website serves as a portfolio of work
+            completed both professionally and for leisure.
           </p>
           <p>
             I stream a few different types of content on <LinkBlank to={social.twitch}>Twitch</LinkBlank>,

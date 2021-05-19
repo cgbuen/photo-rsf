@@ -50,6 +50,7 @@ export default () => {
       youtubeV: 'https://www.youtube.com/channel/UC5TYwKPKxwWl4IY9We5U0OQ',
       discordP: 'cgbuen#5518',
       discordS: 'https://discord.gg/EayZKHK',
+      sffb: 'https://us-p2p.netdonor.net/1803/general/61375/cgbuen',
     },
     projects: [],
     photos: [],
