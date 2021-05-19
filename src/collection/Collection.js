@@ -16,9 +16,14 @@ import classnames from 'classnames'
     topSection: {
       display: 'flex',
       justifyContent: 'space-between',
+      '@media (max-width:568px)': {
+        alignItems: 'flex-end',
+      },
     },
     results: {
       fontWeight: 'bold',
+      padding: '5px 0 15px',
+      whiteSpace: 'nowrap',
     },
     filtersLabel: {
       display: 'inline-block',
@@ -38,6 +43,13 @@ import classnames from 'classnames'
     },
     filterActive: {
       background: '#69c',
+    },
+    cardContainer: {
+      marginTop: -15,
+    },
+    noResultsMessage: {
+      fontStyle: 'italic',
+      marginTop: 30,
     },
   })
 )
@@ -97,7 +109,7 @@ export default class Collection extends Component {
           </div>
           <div className={classes.results}>{builds.filter(x => x.active).length} Results</div>
         </div>
-        <div>
+        <div className={classes.cardContainer}>
           {builds
             .map(x => (
               x.loaded &&
@@ -110,7 +122,7 @@ export default class Collection extends Component {
               />
             ))
           }
-          {builds.filter(x => x.active).length === 0 && <div>Select a filter above to see results.</div>}
+          {builds.filter(x => x.active).length === 0 && <div className={classes.noResultsMessage}>Select a filter above to see results.</div>}
         </div>
       </Container>
     )
