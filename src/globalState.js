@@ -57,5 +57,6 @@ export default () => {
     builds: [],
     buildFiltersActive: {},
     openBuild: {},
+    openProject: {},
   }
 }
