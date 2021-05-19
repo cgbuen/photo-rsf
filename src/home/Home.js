@@ -6,6 +6,13 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Link from 'react-storefront/Link'
 import classnames from 'classnames'
+import Instagram from '../assets/instagram.svg'
+import YouTube from '../assets/youtube.svg'
+import Twitter from '../assets/twitter.svg'
+import Twitch from '../assets/twitch.svg'
+import GitHub from '../assets/github.svg'
+import Discord from '../assets/discord.svg'
+import Mail from '@material-ui/icons/MailOutline'
 import { createOptimizedSrc } from 'react-storefront/imageService'
 
 const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
@@ -45,6 +52,44 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
         left: '50%',
         transform: 'translate(-50%, -50%)',
       }
+    },
+    iconRow: {
+      bottom: '15%',
+      position: 'absolute',
+      right: '15%',
+      '@media (max-width:1080px)': {
+        display: 'none',
+      },
+    },
+    heroBox: {
+      display: 'none',
+      marginTop: 15,
+      position: 'static',
+      textAlign: 'center',
+      '@media (max-width:1080px)': {
+        display: 'block',
+      },
+    },
+    line: {
+      display: 'inline-block',
+      '@media (max-width:1080px)': {
+        display: 'block',
+      },
+    },
+    iconWrapper: {
+      color: 'white',
+      display: 'inline-block',
+      height: 48,
+      margin: '0 8px',
+      padding: 5,
+      verticalAlign: 'middle',
+      width: 48,
+    },
+    icon: {
+      fill: 'currentColor',
+      height: '100%',
+      userSelect: 'none',
+      width: '100%',
     },
     headline: {
       color: 'white',
@@ -126,9 +171,39 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
   })
 )
 @withAmp
-@inject(({ app }) => ({ app }))
+@inject(({ app }) => ({ app, social: app.social }))
 @observer
 export default class Home extends Component {
+  renderIconRow(val) {
+    const { classes, social } = this.props
+    return (
+      <div className={classnames(classes.iconRow, val)}>
+        <div className={classes.line}>
+          <Link server to={social.twitch} className={classes.iconWrapper}>
+            <Twitch className={classes.icon} />
+          </Link>
+          <Link server to={social.instagram} className={classes.iconWrapper}>
+            <Instagram className={classes.icon} />
+          </Link>
+          <Link server to={social.youtubeV} className={classes.iconWrapper}>
+            <YouTube className={classes.icon} />
+          </Link>
+        </div>
+        <div className={classes.line}>
+          <Link server to={social.github} className={classes.iconWrapper}>
+            <GitHub className={classes.icon} />
+          </Link>
+          <Link server to={social.discordS} className={classes.iconWrapper}>
+            <Discord className={classes.icon} />
+          </Link>
+          <Link server to={social.twitter} className={classes.iconWrapper}>
+            <Twitter className={classes.icon} />
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
   render() {
     const { classes } = this.props
     return (
@@ -142,7 +217,9 @@ export default class Home extends Component {
               <Link to="/photography" className={classes.heroLink}>Concert Photography.</Link>
               <Link to="/collection" className={classes.heroLink}>Content Creation.</Link>
             </div>
+            {this.renderIconRow(classes.heroBox)}
           </div>
+          {this.renderIconRow(classes.asdfg)}
         </div>
         <Container>
           <Row className={classes.itemContainer}>

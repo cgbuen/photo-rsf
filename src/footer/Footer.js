@@ -5,6 +5,11 @@ import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'
 import Link from 'react-storefront/Link'
 import Instagram from '../assets/instagram.svg'
+import YouTube from '../assets/youtube.svg'
+import Twitter from '../assets/twitter.svg'
+import Twitch from '../assets/twitch.svg'
+import GitHub from '../assets/github.svg'
+import Discord from '../assets/discord.svg'
 import Mail from '@material-ui/icons/MailOutline'
 import classnames from 'classnames'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
@@ -17,6 +22,9 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     maxWidth: 'none',
     textAlign: 'center',
     width: '100%',
+  },
+  line: {
+    display: 'inline-block',
   },
   iconWrapper: {
     display: 'inline-block',
@@ -32,7 +40,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     }
   },
   iconWrapperMail: {
-    padding: 1
+    padding: 3
   },
   icon: {
     fill: 'currentColor',
@@ -57,12 +65,31 @@ export default class Footer extends Component {
     return (
       <Container className={classes.root}>
         <Row className={classes.social}>
-          <Link server to={social.instagram} className={classes.iconWrapper}>
-            <Instagram className={classes.icon} />
-          </Link>
-          <Link server to={`mailto:${social.email}`} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
-            <Mail className={classes.icon} />
-          </Link>
+          <div className={classes.line}>
+            <Link server to={social.twitch} className={classes.iconWrapper}>
+              <Twitch className={classes.icon} />
+            </Link>
+            <Link server to={social.instagram} className={classes.iconWrapper}>
+              <Instagram className={classes.icon} />
+            </Link>
+            <Link server to={social.youtubeV} className={classes.iconWrapper}>
+              <YouTube className={classes.icon} />
+            </Link>
+            <Link server to={social.github} className={classes.iconWrapper}>
+              <GitHub className={classes.icon} />
+            </Link>
+          </div>
+          <div className={classes.line}>
+            <Link server to={social.discordS} className={classes.iconWrapper}>
+              <Discord className={classes.icon} />
+            </Link>
+            <Link server to={social.twitter} className={classes.iconWrapper}>
+              <Twitter className={classes.icon} />
+            </Link>
+            <Link server to={`mailto:${social.email}`} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
+              <Mail className={classes.icon} />
+            </Link>
+          </div>
         </Row>
         <Row className={classes.copyright}>
           &copy; {(new Date()).getYear() + 1900} Christopher Buenaventura
