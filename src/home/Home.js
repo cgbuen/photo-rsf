@@ -6,12 +6,13 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Link from 'react-storefront/Link'
 import classnames from 'classnames'
+import { createOptimizedSrc } from 'react-storefront/imageService'
 
 const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
 @withStyles(
   theme => ({
     heroContainer: {
-      background: `url(${ASSET_DOMAIN}/hero-1.jpg)`,
+      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/hero-1.jpg?2021051900', { quality: 90 })})`,
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
@@ -90,7 +91,7 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       }
     },
     projects: {
-      backgroundImage: `url(${ASSET_DOMAIN}/projects/moovweb-geico-01.jpg)`,
+      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/projects/moovweb-geico-01.jpg?2021051900', { quality: 80 })})`,
       backgroundPosition: '-21px 70%',
       '@media (max-width:568px)': {
         backgroundSize: 'cover',
@@ -98,10 +99,10 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       }
     },
     photos: {
-      backgroundImage: `url(https://opt.moovweb.net/img?quality=90&img=https%3A%2F%2Fph-1080.cgbuen.com%2F0135%2B26.jpg%3F2020010600)`,
+      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/concerts/0135%2026.jpg?2021051900', { quality: 80 })})`,
     },
     keyboards: {
-      backgroundImage: `url(${ASSET_DOMAIN}/keyboards/ai03-polaris.jpg)`,
+      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/keyboards/ai03-polaris.jpg?2021051900', { quality: 80 })})`,
     },
     itemText: {
       background: 'rgba(102, 153, 204, .75)',

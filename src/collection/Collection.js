@@ -7,6 +7,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 import Card from '../components/Card'
 import withStyles from '@material-ui/core/styles/withStyles'
 import classnames from 'classnames'
+import { createOptimizedSrc } from 'react-storefront/imageService'
 
 @withStyles(
   theme => ({
@@ -90,7 +91,7 @@ export default class Collection extends Component {
   }
 
   render() {
-    const { classes, builds } = this.props
+    const { app, classes, builds } = this.props
 
     return (
       <Container>
@@ -117,7 +118,7 @@ export default class Collection extends Component {
                 className={!x.active && classes.hide}
                 key={x.id}
                 name={x.name}
-                src={x.src}
+                src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp })}
                 description={this.descriptionize(x)}
               />
             ))

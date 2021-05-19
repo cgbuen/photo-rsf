@@ -5,6 +5,7 @@ import Row from 'react-storefront/Row'
 import Typography from '@material-ui/core/Typography'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
 import Card from '../components/Card'
+import { createOptimizedSrc } from 'react-storefront/imageService'
 
 @withAmp
 @inject(({ app }) => ({ app, projects: app.projects }))
@@ -20,7 +21,7 @@ export default class Software extends Component {
   }
 
   render() {
-    const { projects } = this.props
+    const { app, projects } = this.props
 
     return (
       <Container>
@@ -32,7 +33,7 @@ export default class Software extends Component {
           <Card
             key={x.id}
             name={x.name}
-            src={x.src}
+            src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp })}
             description={x.description}
           />
         ))}
