@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core'
 import Image from 'react-storefront/Image'
 import Typography from '@material-ui/core/Typography'
 import Link from 'react-storefront/Link'
+import LinkBlank from '../components/LinkBlank'
 import { createOptimizedSrc } from 'react-storefront/imageService'
 import classnames from 'classnames'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
@@ -40,7 +41,8 @@ export default class About extends Component {
             both professionally and for leisure.
           </p>
           <p>
-            I stream a few different types of content on Twitch, including:
+            I stream a few different types of content on <LinkBlank to={social.twitch}>Twitch</LinkBlank>,
+            including:
           </p>
           <ul>
             <li>Personal software projects</li>
@@ -49,8 +51,11 @@ export default class About extends Component {
             <li>Splatoon 2 gameplay</li>
           </ul>
           <p>
-            Send me a message for inquiries. Best reached by Discord
-            ({social.discordP}), <Link server to={social.instagram}>Instagram</Link>{" "}
+            (Past broadcasts can be found <LinkBlank to={social.youtubeV}>here</LinkBlank>.)
+          </p>
+          <p>
+            Send me a message for any inquiries. I'm best reached by Discord
+            ({social.discordP}), <LinkBlank to={social.instagram}>Instagram</LinkBlank>{" "}
             DM, or <Link server to={`mailto:${social.email}`}>email</Link>.
           </p>
         </Row>
