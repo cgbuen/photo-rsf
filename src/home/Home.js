@@ -31,11 +31,13 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       width: '100%'
     },
     heroTextContainer: {
+      background: 'rgba(128, 128, 128, .5)',
       borderRadius: 3,
       fontWeight: 'bold',
       left: '53%',
       lineHeight: 2,
       overflow: 'hidden',
+      padding: 20,
       position: 'absolute',
       top: '50%',
       transform: 'translateY(-60%)',
@@ -56,13 +58,16 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       position: 'absolute',
       textDecoration: 'none',
       textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
-      top: 0,
+      top: 20,
     },
     heroSubTextContainer: {
-      background: 'rgba(128, 128, 128, .5)',
-      borderRadius: '0 0 3px 3px',
       fontSize: 20,
-      padding: 15,
+      paddingTop: 15,
+    },
+    heroLink: {
+      color: 'white',
+      display: 'block',
+      textDecoration: 'none',
     },
     itemContainer: {
       alignItems: 'center',
@@ -133,9 +138,9 @@ export default class Home extends Component {
             <h1 className={classes.headline}>cgbuen</h1>
             <div className={classnames(classes.headline, classes.headlineCheat)}>cgbuen</div>
             <div className={classes.heroSubTextContainer}>
-              <div>Software Engineering.</div>
-              <div>Concert Photography.</div>
-              <div>Content Creation.</div>
+              <Link to="/projects" className={classes.heroLink}>Software Engineering.</Link>
+              <Link to="/photography" className={classes.heroLink}>Concert Photography.</Link>
+              <Link to="/collection" className={classes.heroLink}>Content Creation.</Link>
             </div>
           </div>
         </div>
