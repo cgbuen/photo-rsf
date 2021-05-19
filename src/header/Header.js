@@ -19,6 +19,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     textDecoration: 'none',
   },
   headline: {
+    color: 'black',
     fontSize: 32,
     fontWeight: 'bold',
     lineHeight: 1,
