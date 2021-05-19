@@ -31,6 +31,7 @@ export default async function collectionHandler(params, request, response) {
   return withGlobalState(request, globalState, {
     title: `Collection ${globalState().title}`,
     builds: await buildGenerator(Config.get('assetHost')),
-    buildFiltersActive: {'Built': true}
+    buildFiltersActive: {'Built': true},
+    openBuild: {},
   })
 }

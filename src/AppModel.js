@@ -17,6 +17,7 @@ const AppModel = types.compose(
       photos: types.optional(types.array(PhotoModel), []),
       builds: types.optional(types.array(BuildModel), []),
       buildFiltersActive: types.optional(BuildFilterModel, {}),
+      openBuild: types.optional(BuildModel, {}),
     })
     .actions(self => ({
       toggleFilteredBuilds(val) {
@@ -28,7 +29,10 @@ const AppModel = types.compose(
           return x
         })
         self.buildFiltersActive.toggle(val)
-      }
+      },
+      setOpenBuild(val) {
+        self.openBuild = {...val}
+      },
     }))
 )
 

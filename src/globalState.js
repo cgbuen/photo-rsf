@@ -56,5 +56,6 @@ export default () => {
     photos: [],
     builds: [],
     buildFiltersActive: {},
+    openBuild: {},
   }
 }

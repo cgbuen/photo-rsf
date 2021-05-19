@@ -12,7 +12,8 @@ import classnames from 'classnames'
       padding: 20,
     },
     cardTitle: {
-      fontSize: 20,
+      fontSize: 18,
+      fontWeight: 'bold',
       marginBottom: 10
     },
     cardBody: {
@@ -31,18 +32,21 @@ import classnames from 'classnames'
         width: '100%',
       },
     },
+    cardImg: {
+      display: 'block',
+    },
   })
 )
 @inject('app')
 @observer
 export default class Card extends Component {
   render() {
-    const { classes, className, src, name, description } = this.props
+    const { classes, className, src, name, description, onClick } = this.props
     return (
       <Row className={classnames(classes.card, className)}>
         <div className={classes.cardTitle}>{name}</div>
         <div className={classes.cardBody}>
-          <img className={classes.cardFigure} src={src} alt={name} />
+          <img className={classnames(classes.cardFigure, classes.cardImg)} src={src} alt={name} onClick={onClick} />
           <div className={classes.cardDescription}>{description}</div>
         </div>
       </Row>

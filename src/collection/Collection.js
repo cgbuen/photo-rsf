@@ -11,6 +11,10 @@ import { createOptimizedSrc } from 'react-storefront/imageService'
 import LinkBlank from '../components/LinkBlank'
 import CheckBoxOutlineBlankSharpIcon from '@material-ui/icons/CheckBoxOutlineBlankSharp';
 import CheckBoxSharpIcon from '@material-ui/icons/CheckBoxSharp';
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogClose from 'react-storefront/DialogClose'
 
 @withStyles(
   theme => ({
@@ -72,14 +76,20 @@ import CheckBoxSharpIcon from '@material-ui/icons/CheckBoxSharp';
     cardContainer: {
       marginTop: -15,
     },
+    clickable: {
+      cursor: 'pointer',
+    },
     noResultsMessage: {
       fontStyle: 'italic',
       marginTop: 30,
     },
+    modalImg: {
+      width: '100%',
+    },
   })
 )
 @withAmp
-@inject(({ app }) => ({ app, social: app.social, builds: app.builds, buildFiltersActive: app.buildFiltersActive }))
+@inject(({ app }) => ({ app, social: app.social, builds: app.builds, buildFiltersActive: app.buildFiltersActive, openBuild: app.openBuild }))
 @observer
 export default class Collection extends Component {
   componentWillUnmount() {
@@ -117,8 +127,18 @@ export default class Collection extends Component {
     )
   }
 
+  openDialog(build) {
+    if (!build.src.includes('unavailable')) {
+      this.props.app.setOpenBuild(build)
+    }
+  }
+
+  closeDialog() {
+    this.props.app.setOpenBuild({})
+  }
+
   render() {
-    const { app, social, classes, builds } = this.props
+    const { app, social, classes, builds, openBuild } = this.props
 
     return (
       <Container>
@@ -143,15 +163,28 @@ export default class Collection extends Component {
               x.loaded &&
               <Card
                 className={!x.active && classes.hide}
+                classes={{ cardImg: !x.src.includes('unavailable') && classes.clickable }}
                 key={x.id}
                 name={x.name}
                 src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp })}
                 description={this.descriptionize(x)}
+                onClick={() => this.openDialog(x)}
               />
             ))
           }
           {builds.filter(x => x.active).length === 0 && <div className={classes.noResultsMessage}>Select a filter above to see results.</div>}
         </div>
+        <Dialog maxWidth="md" open={!!openBuild.name}>
+          <DialogTitle disableTypography classes={{ root: classes.dialogTitle }}>
+            <Typography variant="h1" component="h6" className={classes.title}>
+              {openBuild && openBuild.name}
+            </Typography>
+            <DialogClose onClick={() => this.closeDialog()} />
+          </DialogTitle>
+          <DialogContent classes={{ root: classes.dialogContent }}>
+            <img className={classes.modalImg} alt={classes.name} src={createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} />
+          </DialogContent>
+        </Dialog>
       </Container>
     )
   }

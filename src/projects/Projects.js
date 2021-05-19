@@ -20,6 +20,9 @@ export default class Software extends Component {
     window.removeEventListener('resize', this.updateWindowDimensions)
   }
 
+  openDialog() {
+  }
+
   render() {
     const { app, projects } = this.props
 
@@ -35,6 +38,7 @@ export default class Software extends Component {
             name={x.name}
             src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp })}
             description={x.description}
+            onClick={this.openDialog}
           />
         ))}
       </Container>
