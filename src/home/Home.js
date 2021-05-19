@@ -86,6 +86,7 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
     },
     icon: {
       fill: 'currentColor',
+      filter: 'drop-shadow( 1px 1px 1px rgba(0, 0, 0, .5))',
       height: '100%',
       userSelect: 'none',
       width: '100%',
