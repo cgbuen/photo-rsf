@@ -71,7 +71,7 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
     },
     line: {
       display: 'inline-block',
-      '@media (max-width:1080px)': {
+      '@media (max-width:1080px), (min-width:1920px)': {
         display: 'block',
       },
     },
@@ -83,6 +83,10 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       padding: 5,
       verticalAlign: 'middle',
       width: 48,
+      '@media (min-width:1920px)': {
+        display: 'block',
+        margin: 8,
+      },
     },
     icon: {
       fill: 'currentColor',
