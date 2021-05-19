@@ -345,7 +345,7 @@ export const styles = theme => ({
       left: '50%',
       maxHeight: '120%',
       maxWidth: '120%',
-      objectFit: 'none !important',
+      objectFit: 'cover !important',
       opacity: .5,
       position: 'absolute',
       top: '50%',
