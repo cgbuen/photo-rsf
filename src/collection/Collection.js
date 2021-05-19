@@ -78,6 +78,9 @@ import DialogClose from 'react-storefront/DialogClose'
     },
     clickable: {
       cursor: 'pointer',
+      '@media (max-width:568px)': {
+        pointerEvents: 'none',
+      },
     },
     noResultsMessage: {
       fontStyle: 'italic',
