@@ -98,7 +98,7 @@ export default class Collection extends Component {
         <Row>
           <Typography variant="h1">Keyboard Collection</Typography>
         </Row>
-        <p>As a hobby I collect, build, and modify custom / higher-end "mechanical" (computer) keyboards.</p>
+        <p>I collect, build, and modify enthusiast "mechanical" (computer) keyboards.</p>
         <div className={classes.topSection}>
           <div>
             <div className={classes.filtersLabel}>Filters: </div>
