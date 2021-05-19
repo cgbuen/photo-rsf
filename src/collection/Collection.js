@@ -169,7 +169,7 @@ export default class Collection extends Component {
                 classes={{ cardImg: !x.src.includes('unavailable') && classes.clickable }}
                 key={x.id}
                 name={x.name}
-                src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp })}
+                src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 250 })}
                 description={this.descriptionize(x)}
                 onClick={() => this.openDialog(x)}
               />

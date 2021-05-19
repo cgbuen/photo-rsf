@@ -56,7 +56,7 @@ export default class Software extends Component {
               key={x.id}
               name={x.name}
               classes={{ cardImg: classes.clickable }}
-              src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp })}
+              src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 250 })}
               description={x.description}
               onClick={() => this.openDialog(x)}
             />
