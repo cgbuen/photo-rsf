@@ -24,7 +24,7 @@ const projectGenerator = async function (assetHost) {
 
 export default async function softwareHandler(params, request, response) {
   return withGlobalState(request, globalState, {
-    title: `Software ${globalState().title}`,
+    title: `Projects ${globalState().title}`,
     projects: await projectGenerator(Config.get('assetHost'))
   })
 }

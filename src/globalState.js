@@ -53,5 +53,6 @@ export default () => {
     projects: [],
     photos: [],
     builds: [],
+    buildFiltersActive: {},
   }
 }

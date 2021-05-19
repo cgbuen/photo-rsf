@@ -7,8 +7,13 @@ const makeUsableBuildArray = function(array, assetHost) {
   return array
     .map(build => {
       build.src = `${assetHost}/keyboards/${build.src}.jpg`
+      if (build.assembly_variant.includes('A') && build.build_status === 'Built') {
+        build.loaded = true
+        build.active = true
+      }
       return build
     })
+    .reverse()
 }
 
 const buildGenerator = async function (assetHost) {
@@ -24,7 +29,8 @@ const buildGenerator = async function (assetHost) {
 
 export default async function collectionHandler(params, request, response) {
   return withGlobalState(request, globalState, {
-    title: `Software ${globalState().title}`,
-    builds: await buildGenerator(Config.get('assetHost'))
+    title: `Collection ${globalState().title}`,
+    builds: await buildGenerator(Config.get('assetHost')),
+    buildFiltersActive: {'Built': true}
   })
 }
