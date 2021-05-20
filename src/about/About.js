@@ -5,7 +5,6 @@ import Row from 'react-storefront/Row'
 import { withStyles } from '@material-ui/core'
 import Image from 'react-storefront/Image'
 import Typography from '@material-ui/core/Typography'
-import Link from 'react-storefront/Link'
 import LinkBlank from '../components/LinkBlank'
 import { createOptimizedSrc } from 'react-storefront/imageService'
 import classnames from 'classnames'
@@ -56,7 +55,7 @@ export default class About extends Component {
           <p>
             Send me a message for any inquiries. I'm best reached by Discord
             ({social.discordP}), <LinkBlank to={social.instagram}>Instagram</LinkBlank>{" "}
-            DM, or <Link server to={`mailto:${social.email}`}>email</Link>.
+            DM, or <LinkBlank to={`mailto:${social.email}`}>email</LinkBlank>.
           </p>
         </Row>
         <Row>

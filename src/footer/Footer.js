@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'
-import Link from 'react-storefront/Link'
+import LinkBlank from '../components/LinkBlank'
 import Instagram from '../assets/instagram.svg'
 import YouTube from '../assets/youtube.svg'
 import Twitter from '../assets/twitter.svg'
@@ -59,29 +59,29 @@ export default class Footer extends Component {
       <Container className={classes.root}>
         <Row className={classes.social}>
           <div className={classes.line}>
-            <Link server to={social.twitch} className={classes.iconWrapper}>
+            <LinkBlank to={social.twitch} className={classes.iconWrapper}>
               <Twitch className={classes.icon} />
-            </Link>
-            <Link server to={social.instagram} className={classes.iconWrapper}>
+            </LinkBlank>
+            <LinkBlank to={social.instagram} className={classes.iconWrapper}>
               <Instagram className={classes.icon} />
-            </Link>
-            <Link server to={social.youtubeV} className={classes.iconWrapper}>
+            </LinkBlank>
+            <LinkBlank to={social.youtubeV} className={classes.iconWrapper}>
               <YouTube className={classes.icon} />
-            </Link>
-            <Link server to={social.github} className={classes.iconWrapper}>
+            </LinkBlank>
+            <LinkBlank to={social.github} className={classes.iconWrapper}>
               <GitHub className={classes.icon} />
-            </Link>
+            </LinkBlank>
           </div>
           <div className={classes.line}>
-            <Link server to={social.discordS} className={classes.iconWrapper}>
+            <LinkBlank to={social.discordS} className={classes.iconWrapper}>
               <Discord className={classes.icon} />
-            </Link>
-            <Link server to={social.twitter} className={classes.iconWrapper}>
+            </LinkBlank>
+            <LinkBlank to={social.twitter} className={classes.iconWrapper}>
               <Twitter className={classes.icon} />
-            </Link>
-            <Link server to={`mailto:${social.email}`} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
+            </LinkBlank>
+            <LinkBlank to={`mailto:${social.email}`} className={classnames(classes.iconWrapperMail, classes.iconWrapper)}>
               <Mail className={classes.icon} />
-            </Link>
+            </LinkBlank>
           </div>
         </Row>
         <Row className={classes.copyright}>
