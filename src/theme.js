@@ -86,6 +86,10 @@ const theme = createTheme({
       root: {
         opacity: 1
       },
+      label: {
+        position: 'relative',
+        top: -1,
+      },
       selected: {
         backgroundColor: 'rgba(102, 153, 204, .3)'
       }

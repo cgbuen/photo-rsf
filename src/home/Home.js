@@ -159,6 +159,7 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
     },
     photos: {
       backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/concerts/0135%2026.jpg?2021051900', { quality: 80 })})`,
+        backgroundPosition: 'center 75%',
     },
     keyboards: {
       backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/keyboards/ai03-polaris.jpg?2021051900', { quality: 80 })})`,

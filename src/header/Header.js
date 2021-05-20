@@ -24,8 +24,10 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     fontSize: 32,
     fontWeight: 'bold',
     lineHeight: 1,
+    position: 'relative',
     textDecoration: 'underline',
     textDecorationColor: '#69c',
+    top: -4,
   },
   subtitle: {
     color: 'white',
