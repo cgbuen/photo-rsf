@@ -3,12 +3,12 @@
   "name": "cgbuen Concert Photography",
   "icons": [
     {
-      "src": "/icons/icon-300.png",
+      "src": "/icons/icon-300.png?v=2021052000",
       "type": "image/png",
       "sizes": "300x300"
     },
     {
-      "src": "/icons/icon-634.png",
+      "src": "/icons/icon-634.png?v=2021052000",
       "type": "image/png",
       "sizes": "634x634"
     }

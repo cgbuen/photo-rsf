@@ -50,7 +50,7 @@ export default class App extends Component {
                */}
               <link href="https://opt.moovweb.net" rel="preconnect" crossorigin />
               <link rel="stylesheet" href="https://use.typekit.net/kgo8rkq.css" />
-              <link rel="shortcut icon" href="/icons/favicon.ico" />
+              <link rel="shortcut icon" href="/icons/favicon.ico?v=2021052000" />
               <meta
                 name="description"
                 content="cgbuen - Software Engineer, Photographer, Builder, Content Creator."

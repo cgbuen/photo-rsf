@@ -166,7 +166,7 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       }
     },
     keyboards: {
-      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/keyboards/ai03-polaris.jpg?2021051901', { quality: 80 })})`,
+      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/keyboards/ai03-polaris.jpg?2021052000', { quality: 80 })})`,
     },
     itemText: {
       background: 'rgba(102, 153, 204, .75)',
