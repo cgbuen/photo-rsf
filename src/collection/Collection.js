@@ -25,18 +25,24 @@ import DialogClose from 'react-storefront/DialogClose'
       display: 'flex',
       justifyContent: 'space-between',
       '@media (max-width:568px)': {
-        alignItems: 'flex-end',
+        display: 'block',
       },
     },
     results: {
       fontWeight: 'bold',
       padding: '5px 0 15px',
       whiteSpace: 'nowrap',
+      '@media (max-width:568px)': {
+        textAlign: 'right',
+      },
+    },
+    filtersWhole: {
+      display: 'flex',
     },
     filtersLabel: {
       display: 'inline-block',
       fontWeight: 'bold',
-      marginRight: 15,
+      margin: '6px 15px 0 0',
     },
     filter: {
       background: '#333',
@@ -78,7 +84,7 @@ import DialogClose from 'react-storefront/DialogClose'
       flexWrap: 'wrap',
       justifyContent: 'space-between',
       margin: '0 -10px',
-      '@media (max-width:890px)': {
+      '@media (max-width:925px)': {
       justifyContent: 'center',
       },
     },
@@ -115,7 +121,7 @@ import DialogClose from 'react-storefront/DialogClose'
         left: 39,
         right: 'auto',
       },
-      '@media (max-width:890px)': {
+      '@media (max-width:925px)': {
         background: 'none',
         maxWidth: 'none',
         position: 'static',
@@ -123,7 +129,7 @@ import DialogClose from 'react-storefront/DialogClose'
     },
     descriptionColumnWrapper: {
       width: 'auto',
-      '@media (max-width:890px)': {
+      '@media (max-width:925px)': {
         display: 'flex',
       },
       '@media (max-width:630px)': {
@@ -132,7 +138,7 @@ import DialogClose from 'react-storefront/DialogClose'
     },
     descriptionColumn: {
       width: 'auto',
-      '@media (max-width:890px)': {
+      '@media (max-width:925px)': {
         width: '50%',
       },
       '@media (max-width:630px)': {
@@ -205,13 +211,15 @@ export default class Collection extends Component {
         </Row>
         <p>I collect, build, and modify enthusiast "mechanical" (computer) keyboards. Builds (among other types of content) are streamed to <LinkBlank to={social.twitch}>Twitch</LinkBlank>, with proceeds going to the <LinkBlank to={social.sffb}>San Francisco-Marin Food Bank</LinkBlank>.</p>
         <div className={classes.topSection}>
-          <div>
+          <div className={classes.filtersWhole}>
             <div className={classes.filtersLabel}>Filters: </div>
-            {this.renderFilter({ id: 'Built', name: 'Built'})}
-            {this.renderFilter({ id: 'Prebuilt', name: 'Prebuilt'})}
-            {this.renderFilter({ id: 'Vintage prebuilt', name: 'Vintage'})}
-            {this.renderFilter({ id: 'Unbuilt', name: 'Unbuilt'})}
-            {this.renderFilter({ id: 'On the way', name: 'On the way'})}
+            <div className={classes.filtersOnlyContiner}>
+              {this.renderFilter({ id: 'Built', name: 'Built'})}
+              {this.renderFilter({ id: 'Prebuilt', name: 'Prebuilt'})}
+              {this.renderFilter({ id: 'Vintage prebuilt', name: 'Vintage'})}
+              {this.renderFilter({ id: 'Unbuilt', name: 'Unbuilt'})}
+              {this.renderFilter({ id: 'On the way', name: 'On the way'})}
+            </div>
           </div>
           <div className={classes.results}>{builds.filter(x => x.active).length} Results</div>
         </div>
