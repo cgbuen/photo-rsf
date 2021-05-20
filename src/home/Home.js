@@ -19,7 +19,7 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
 @withStyles(
   theme => ({
     heroContainer: {
-      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/hero-1.jpg?2021051900', { quality: 90 })})`,
+      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/hero-1.jpg?2021052006', { quality: 90 })})`,
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover',
@@ -41,15 +41,19 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       background: 'rgba(128, 128, 128, .5)',
       borderRadius: 3,
       fontWeight: 'bold',
-      left: '53%',
+      left: '57%',
       lineHeight: 2,
       overflow: 'hidden',
       padding: 20,
       position: 'absolute',
-      top: '50%',
+      top: '45%',
       transform: 'translateY(-60%)',
+      '@media (max-width:1080px)': {
+        top: '58%',
+      },
       '@media (max-width:768px)': {
         left: '50%',
+        top: '50%',
         transform: 'translate(-50%, -50%)',
       }
     },

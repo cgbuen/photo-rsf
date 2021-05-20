@@ -17,7 +17,6 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 @withAmp
 @withStyles(theme => ({
   root: {
-    background: '#222',
     bottom: 0,
     maxWidth: 'none',
     textAlign: 'center',

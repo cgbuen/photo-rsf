@@ -13,7 +13,7 @@ import targets from './analytics'
 @withStyles(theme => ({
   '@global': {
     body: {
-      backgroundColor: '#222 !important',
+      backgroundColor: '#151515 !important',
       color: 'white',
       margin: '0',
       padding: '0',

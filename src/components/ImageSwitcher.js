@@ -258,13 +258,13 @@ export const styles = theme => ({
 
   description: {
     position: 'absolute',
-    bottom: 100,
+    bottom: 110,
     width: '100%',
     textAlign: 'center'
   },
 
   descriptionInner: {
-    background: '#222',
+    background: 'rgba(21, 21, 21, .5)',
     padding: 10,
     textAlign: 'center',
     display: 'inline-block',
@@ -272,8 +272,8 @@ export const styles = theme => ({
   },
 
   descriptionLine: {
-    fontSize: 13,
-    lineHeight: 1,
+    fontSize: 16,
+    lineHeight: 1.2,
     textAlign: 'center',
   },
 
@@ -321,7 +321,6 @@ export const styles = theme => ({
   itemBackgroundImage: {
     height: '100%',
     '& img': {
-      background: '#222',
       height: '120%',
       left: '50%',
       maxHeight: '120%',

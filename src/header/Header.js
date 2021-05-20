@@ -41,7 +41,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     padding: '10px 15px'
   },
   wrap: {
-    background: '#222',
+    background: 'none',
     borderColor: 'rgba(255, 255, 255, .12)',
     color: 'white',
   },

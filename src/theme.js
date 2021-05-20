@@ -27,7 +27,7 @@ const theme = createTheme({
   overrides: {
     RSFLoadMask: {
       root: {
-        background: '#222'
+        background: '#151515'
       },
       fullscreen: {
         height: `calc(100vh - 181px)`
@@ -52,7 +52,7 @@ const theme = createTheme({
     },
     RSFAmpMenu: {
       root: {
-        background: '#222',
+        background: '#151515',
       }
     },
     RSFMenuIcon: {
@@ -64,11 +64,11 @@ const theme = createTheme({
     },
     RSFImageSwitcher: {
       viewerOverlay: {
-        background: '#222'
+        background: '#151515'
       },
       activeThumbs: {
-        background: '#222'
-      }
+        background: '#151515'
+      },
     },
     MuiTabs: {
       scroller: {
@@ -92,8 +92,7 @@ const theme = createTheme({
     },
     MuiPaper: {
       root: {
-        backgroundColor: '#222',
-        color: 'white'
+        backgroundColor: 'transparent',
       }
     },
     RSFAppBar: {
@@ -156,6 +155,11 @@ const theme = createTheme({
       },
       indicator: {
         height: 0
+      }
+    },
+    MuiCircularProgress: {
+      colorSecondary: {
+        color: '#69c'
       }
     },
   }
