@@ -4,7 +4,7 @@ import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'
 import Typography from '@material-ui/core/Typography'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
-import Card from '../components/Card'
+import GridSquare from '../components/GridSquare'
 import withStyles from '@material-ui/core/styles/withStyles'
 import classnames from 'classnames'
 import { createOptimizedSrc } from 'react-storefront/imageService'
@@ -74,21 +74,71 @@ import DialogClose from 'react-storefront/DialogClose'
       }
     },
     cardContainer: {
-      marginTop: -15,
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      margin: '0 -10px',
+      '@media (max-width:890px)': {
+      justifyContent: 'center',
+      },
     },
     clickable: {
       cursor: 'pointer',
-      '@media (max-width:568px)': {
-        pointerEvents: 'none',
-      },
     },
     noResultsMessage: {
       fontStyle: 'italic',
       marginTop: 30,
     },
     modalImg: {
+      display: 'block',
       width: '100%',
     },
+    descriptionBox: {
+      background: 'rgba(128, 128, 128, 0.5)',
+      bottom: 39,
+      padding: 10,
+      maxWidth: 250,
+      position: 'absolute',
+      right: 39,
+      textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
+      '&.topLeft': {
+        bottom: 'auto',
+        left: 39,
+        right: 'auto',
+        top: 83,
+      },
+      '&.topRight': {
+        bottom: 'auto',
+        top: 83,
+      },
+      '&.bottomLeft': {
+        left: 39,
+        right: 'auto',
+      },
+      '@media (max-width:890px)': {
+        background: 'none',
+        maxWidth: 'none',
+        position: 'static',
+      },
+    },
+    descriptionColumnWrapper: {
+      width: 'auto',
+      '@media (max-width:890px)': {
+        display: 'flex',
+      },
+      '@media (max-width:630px)': {
+        display: 'block',
+      },
+    },
+    descriptionColumn: {
+      width: 'auto',
+      '@media (max-width:890px)': {
+        width: '50%',
+      },
+      '@media (max-width:630px)': {
+        width: 'auto',
+      },
+    }
   })
 )
 @withAmp
@@ -100,19 +150,24 @@ export default class Collection extends Component {
   }
 
   showable(x) {
-    return !x.includes('TBD') && !x.includes('?') && !x.includes('[planned]') && !x.includes('[prop]') && !x.includes('[stock]') && !x.includes('Stock') && !x.includes('N/A')
+    return x && !x.includes('TBD') && !x.includes('?') && !x.includes('[planned]') && !x.includes('[prop]') && !x.includes('[stock]') && !x.includes('Stock') && !x.includes('N/A')
   }
 
   descriptionize(x) {
+    const { classes } = this.props
     return (
-      <div>
-        <div>Purchased: {x.date_bought}</div>
-        {this.showable(x.date_built) && <div>Built: {x.date_built}</div>}
-        <div>Color: {x.color}</div>
-        {this.showable(x.plate) && <div>Plate: {x.plate}</div>}
-        {this.showable(x.switches) && <div>Switches: {x.switches}</div>}
-        {this.showable(x.keycaps) && <div>Keycaps: {x.keycaps}</div>}
-        {x.notes && (<div>Notes: {x.notes}</div>)}
+      <div className={classes.descriptionColumnWrapper}>
+        <div className={classes.descriptionColumn}>
+          <div>Purchased: {x.date_bought}</div>
+          {this.showable(x.date_built) && <div>Built: {x.date_built}</div>}
+          <div>Color: {x.color}</div>
+          {this.showable(x.plate) && <div>Plate: {x.plate}</div>}
+        </div>
+        <div className={classes.descriptionColumn}>
+          {this.showable(x.switches) && <div>Switches: {x.switches}</div>}
+          {this.showable(x.keycaps) && <div>Keycaps: {x.keycaps}</div>}
+          {x.notes && (<div>Notes: {x.notes}</div>)}
+        </div>
       </div>
     )
   }
@@ -164,20 +219,19 @@ export default class Collection extends Component {
           {builds
             .map(x => (
               x.loaded &&
-              <Card
-                className={!x.active && classes.hide}
-                classes={{ cardImg: !x.src.includes('unavailable') && classes.clickable }}
+              <GridSquare
+                className={classnames(!x.active && classes.hide, !x.src.includes('unavailable') && classes.clickable)}
                 key={x.id}
                 name={x.name}
-                src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 250 })}
-                description={this.descriptionize(x)}
+                description={x.date_bought}
+                src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 555 })}
                 onClick={() => this.openDialog(x)}
               />
             ))
           }
           {builds.filter(x => x.active).length === 0 && <div className={classes.noResultsMessage}>Select a filter above to see results.</div>}
         </div>
-        <Dialog maxWidth="md" open={!!openBuild.name}>
+        <Dialog maxWidth="xl" open={!!openBuild.name}>
           <DialogTitle disableTypography classes={{ root: classes.dialogTitle }}>
             <Typography variant="h1" component="h6" className={classes.title}>
               {openBuild && openBuild.name}
@@ -185,7 +239,11 @@ export default class Collection extends Component {
             <DialogClose onClick={() => this.closeDialog()} />
           </DialogTitle>
           <DialogContent classes={{ root: classes.dialogContent }}>
-            <img className={classes.modalImg} alt={classes.name} src={createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} />
+            <img className={classes.modalImg} alt={classes.name} src={createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
+            <div className={classnames(classes.descriptionBox, openBuild.blank_space || 'bottomRight')}>
+              <strong>{openBuild.name}.</strong>{" "}
+              {this.descriptionize(openBuild)}
+            </div>
           </DialogContent>
         </Dialog>
       </Container>

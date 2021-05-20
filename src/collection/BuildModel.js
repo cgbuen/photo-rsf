@@ -5,6 +5,7 @@ const BuildModel = types
     id: types.maybeNull(types.number),
     name: types.maybeNull(types.string),
     src: types.maybeNull(types.string),
+    blank_space: types.maybeNull(types.string),
     build_status: types.maybeNull(types.string),
     date_bought: types.maybeNull(types.string),
     date_built: types.maybeNull(types.string),
