@@ -91,6 +91,9 @@ import DialogClose from 'react-storefront/DialogClose'
     clickable: {
       cursor: 'pointer',
     },
+    stubBox: {
+      width: 300,
+    },
     noResultsMessage: {
       fontStyle: 'italic',
       margin: 10,
@@ -144,7 +147,12 @@ import DialogClose from 'react-storefront/DialogClose'
       '@media (max-width:630px)': {
         width: 'auto',
       },
-    }
+    },
+    descriptionLink: {
+      color: 'white',
+      fontWeight: 'bold',
+      textDecorationColor: '#69c',
+    },
   })
 )
 @withAmp
@@ -157,6 +165,36 @@ export default class Collection extends Component {
 
   showable(x) {
     return x && !x.includes('TBD') && !x.includes('?') && !x.includes('[planned]') && !x.includes('[prop]') && !x.includes('[stock]') && !x.includes('Stock') && !x.includes('N/A')
+  }
+
+  buildLinks(x) {
+    const { classes } = this.props
+    const links = []
+    console.log(x, x.build_video, x.type_test, x.type_test && x.build_video && x.type_test.includes(x.build_video))
+    if (x.build_video && !x.type_test) {
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}>Build video</LinkBlank>))
+    } else if (x.build_video && x.type_test && x.type_test.includes(x.build_video)) {
+      links.push((
+        <span>
+          <LinkBlank className={classes.descriptionLink} to={x.build_video}>Build video</LinkBlank>{" "}
+          (<LinkBlank className={classes.descriptionLink} to={x.type_test}>type test timestamp</LinkBlank>)
+        </span>
+      ))
+    } else if (x.build_video && x.type_test && !x.type_test.includes(x.build_video)) {
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}>Build video</LinkBlank>))
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}>type test</LinkBlank>))
+    } else if (!x.build_video && x.type_test) {
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}>Type test</LinkBlank>))
+    }
+    if (this.showable(x.instagram)) {
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.instagram}>Instagram post</LinkBlank>))
+    }
+    console.log(links)
+    return (
+      <div>
+        {links.reduce((acc, cv) => (<>{acc}{acc ? ', ' : ''}{cv}</>), '')}
+      </div>
+    )
   }
 
   descriptionize(x) {
@@ -172,6 +210,7 @@ export default class Collection extends Component {
         <div className={classes.descriptionColumn}>
           {this.showable(x.switches) && <div>Switches: {x.switches}</div>}
           {this.showable(x.keycaps) && <div>Keycaps: {x.keycaps}</div>}
+          {this.buildLinks(x)}
           {x.notes && (<div>Notes: {x.notes}</div>)}
         </div>
       </div>
@@ -237,6 +276,7 @@ export default class Collection extends Component {
               />
             ))
           }
+          {builds.filter(x => x.active).length % 3 === 2 && (<div className={classes.stubBox}></div>)}
           {builds.filter(x => x.active).length === 0 && <div className={classes.noResultsMessage}>Select a filter above to see results.</div>}
         </div>
         <Dialog maxWidth="xl" open={!!openBuild.name}>
@@ -249,7 +289,7 @@ export default class Collection extends Component {
           <DialogContent classes={{ root: classes.dialogContent }}>
             <img className={classes.modalImg} alt={classes.name} src={openBuild && openBuild.src && createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
             <div className={classnames(classes.descriptionBox, openBuild.blank_space || 'bottomRight')}>
-              <strong>{openBuild.name}.</strong>{" "}
+              <strong>{openBuild.name}</strong>{" "}
               {this.descriptionize(openBuild)}
             </div>
           </DialogContent>

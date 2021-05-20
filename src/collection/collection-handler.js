@@ -11,6 +11,9 @@ const makeUsableBuildArray = function(array, assetHost) {
         build.loaded = true
         build.active = true
       }
+      if (!build.cache_buster) {
+        build.cache_buster = null
+      }
       return build
     })
     .reverse()

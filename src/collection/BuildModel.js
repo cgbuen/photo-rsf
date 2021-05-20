@@ -6,7 +6,7 @@ const BuildModel = types
     name: types.maybeNull(types.string),
     src: types.maybeNull(types.string),
     blank_space: types.maybeNull(types.string),
-    cache_buster: types.maybeNull(types.string),
+    cache_buster: types.maybeNull(types.number),
     build_status: types.maybeNull(types.string),
     date_bought: types.maybeNull(types.string),
     date_built: types.maybeNull(types.string),
@@ -18,6 +18,9 @@ const BuildModel = types
     plate: types.maybeNull(types.string),
     switches: types.maybeNull(types.string),
     keycaps: types.maybeNull(types.string),
+    build_video: types.maybeNull(types.string),
+    type_test: types.maybeNull(types.string),
+    instagram: types.maybeNull(types.string),
     active: types.maybeNull(types.boolean),
     loaded: types.maybeNull(types.boolean),
   })
