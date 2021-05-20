@@ -15,9 +15,9 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
       marginBottom: 40,
     },
     viewerToggle: {
-      background: 'rgba(224, 224, 224, .85)',
+      background: 'rgba(17, 17, 17, .5)',
       boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
-      color: '#222',
+      color: 'white',
       height: 'auto',
       padding: 10,
       right: 25,
@@ -25,10 +25,6 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
       transform: 'none',
       width: 'auto',
       zIndex: 1,
-      '@media (prefers-color-scheme: dark)': {
-        background: 'rgba(17, 17, 17, .5)',
-        color: 'white'
-      },
     },
     viewerActive: {
       borderRadius: '50%',

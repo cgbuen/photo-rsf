@@ -20,7 +20,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     textDecoration: 'none',
   },
   headline: {
-    color: 'black',
+    color: 'white',
     fontSize: 32,
     fontWeight: 'bold',
     lineHeight: 1,
@@ -28,6 +28,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     textDecorationColor: '#69c',
   },
   subtitle: {
+    color: 'white',
     fontSize: 10,
   },
   navTabsRoot: {
@@ -39,18 +40,10 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
   listItem: {
     padding: '10px 15px'
   },
-  '@media (prefers-color-scheme: dark)': {
-    wrap: {
-      background: '#222',
-      borderColor: 'rgba(255, 255, 255, .12)',
-      color: 'white'
-    },
-    headline: {
-      color: 'white'
-    },
-    subtitle: {
-      color: 'white'
-    },
+  wrap: {
+    background: '#222',
+    borderColor: 'rgba(255, 255, 255, .12)',
+    color: 'white',
   },
 }))
 @inject('app')

@@ -126,15 +126,9 @@ export const styles = theme => ({
     top: '50%',
     marginTop: '-24px',
     '&, &:hover': {
-      background: 'rgba(224, 224, 224, .85)',
+      background: 'rgba(17, 17, 17, .5)',
       boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
     },
-    '@media (prefers-color-scheme: dark)': {
-      '&, &:hover': {
-        background: 'rgba(17, 17, 17, .5)',
-        boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
-      }
-    }
   },
 
   leftArrow: {
@@ -255,17 +249,11 @@ export const styles = theme => ({
   },
 
   zoomIcon: {
-    fill: '#222',
-    '@media (prefers-color-scheme: dark)': {
-      fill: 'white'
-    },
+    fill: 'white'
   },
 
   closeIcon: {
-    stroke: '#222',
-    '@media (prefers-color-scheme: dark)': {
-      stroke: 'white'
-    },
+    stroke: 'white'
   },
 
   description: {
@@ -276,14 +264,11 @@ export const styles = theme => ({
   },
 
   descriptionInner: {
-    background: 'white',
+    background: '#222',
     padding: 10,
     textAlign: 'center',
     display: 'inline-block',
     borderRadius: 5,
-    '@media (prefers-color-scheme: dark)': {
-      background: '#222'
-    },
   },
 
   descriptionLine: {
@@ -302,17 +287,13 @@ export const styles = theme => ({
   },
 
   snackbarContentRoot: {
-    background: 'rgba(224, 224, 224, .85)',
+    background: 'rgba(34, 34, 34, .85)',
     borderRadius: 5,
     boxShadow: '0 0 3px rgba(64, 64, 64, .3)',
-    color: 'black',
+    color: 'white',
     display: 'inline-block',
     minWidth: 0,
     whiteSpace: 'nowrap',
-    '@media (prefers-color-scheme: dark)': {
-      background: 'rgba(34, 34, 34, .85)',
-      color: 'white'
-    },
   },
 
   pinchIcon: {

@@ -27,9 +27,7 @@ const theme = createTheme({
   overrides: {
     RSFLoadMask: {
       root: {
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222'
-        },
+        background: '#222'
       },
       fullscreen: {
         height: `calc(100vh - 181px)`
@@ -54,31 +52,22 @@ const theme = createTheme({
     },
     RSFAmpMenu: {
       root: {
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222',
-        },
+        background: '#222',
       }
     },
     RSFMenuIcon: {
       root: {
         '& .rsf-hamburger-inner, & .rsf-hamburger-inner:before, & .rsf-hamburger-inner:after': {
-          '@media (prefers-color-scheme: dark)': {
-            background: 'white'
-          },
+          background: 'white'
         }
       }
     },
     RSFImageSwitcher: {
       viewerOverlay: {
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222'
-        },
+        background: '#222'
       },
       activeThumbs: {
-        background: 'rgba(255, 255, 255, .85)',
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222'
-        },
+        background: '#222'
       }
     },
     MuiTabs: {
@@ -103,10 +92,8 @@ const theme = createTheme({
     },
     MuiPaper: {
       root: {
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222',
-          color: 'white'
-        },
+        backgroundColor: '#222',
+        color: 'white'
       }
     },
     RSFAppBar: {
@@ -116,26 +103,18 @@ const theme = createTheme({
     },
     MuiTypography: {
       h1: {
+        color: 'white',
         fontSize: 24,
         fontWeight: 'bold',
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white',
-        },
       },
       body1: {
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white',
-        },
+        color: 'white',
       },
       body2: {
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white',
-        },
+        color: 'white',
       },
       subtitle1: {
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white',
-        },
+        color: 'white',
       }
     },
     MuiPrivateTabIndicator: {
@@ -150,9 +129,7 @@ const theme = createTheme({
     },
     MuiIconButton: {
       root: {
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white'
-        },
+        color: 'white'
       }
     },
     MuiListItem: {

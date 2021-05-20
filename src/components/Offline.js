@@ -10,32 +10,22 @@ import PropTypes from 'prop-types'
 
 @withStyles(theme => ({
   root: {
+    color: 'white',
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
     alignItems: 'center',
     margin: '40px 0 15px',
-    color: '#999',
-    '@media (prefers-color-scheme: dark)': {
-      color: 'white'
-    }
   },
   icon: {
+    color: 'white',
     fontSize: 60,
-    color: '#999',
-    '@media (prefers-color-scheme: dark)': {
-      color: 'white'
-    }
   },
   heading: {
-    '@media (prefers-color-scheme: dark)': {
-      color: 'white'
-    }
+    color: 'white'
   },
   message: {
-    '@media (prefers-color-scheme: dark)': {
-      color: 'white'
-    }
+    color: 'white'
   }
 }), { name: 'RSFOffline' })
 export default class Offline extends Component {

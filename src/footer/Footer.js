@@ -17,7 +17,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 @withAmp
 @withStyles(theme => ({
   root: {
-    background: 'white',
+    background: '#222',
     bottom: 0,
     maxWidth: 'none',
     textAlign: 'center',
@@ -27,6 +27,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     display: 'inline-block',
   },
   iconWrapper: {
+    color: 'white',
     display: 'inline-block',
     height: 32,
     margin: '0 5px',
@@ -47,14 +48,6 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     height: '100%',
     userSelect: 'none',
     width: '100%',
-  },
-  '@media (prefers-color-scheme: dark)': {
-    root: {
-      background: '#222',
-    },
-    iconWrapper: {
-      color: 'white',
-    }
   },
 }))
 @inject(({ app }) => ({ social: app.social }))

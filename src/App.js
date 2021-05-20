@@ -13,17 +13,13 @@ import targets from './analytics'
 @withStyles(theme => ({
   '@global': {
     body: {
-      background: 'white',
-      color: '#222',
+      background: '#222',
+      color: 'white',
       margin: '0',
       padding: '0',
       fontFamily: theme.typography.fontFamily,
       fontSize: theme.typography.fontSize,
       width: '100%',
-      '@media (prefers-color-scheme: dark)': {
-        background: '#222',
-        color: 'white'
-      },
     },
     a: {
       textDecoration: 'underline'
