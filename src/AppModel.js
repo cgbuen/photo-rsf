@@ -1,5 +1,6 @@
 import { types } from 'mobx-state-tree'
 import AppModelBase from 'react-storefront/model/AppModelBase'
+import { TabsModel } from './components/NavTabs'
 import SocialModel from './SocialModel'
 import ConfigModel from './config/ConfigModel'
 import ProjectModel from './projects/ProjectModel'
@@ -12,6 +13,7 @@ const AppModel = types.compose(
   AppModelBase,
   types
     .model('AppModel', {
+      tabs: types.optional(TabsModel, {}),
       config: types.optional(ConfigModel, {}),
       social: types.optional(SocialModel, {}),
       projects: types.optional(types.array(ProjectModel), []),

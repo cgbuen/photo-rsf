@@ -10,7 +10,7 @@ export default () => {
         url: '/projects'
       },
       {
-        text: 'Photography',
+        text: 'Photos',
         prefetch: 'visible',
         url: '/photography'
       },
@@ -25,7 +25,12 @@ export default () => {
         url: '/about'
       },
       {
-        text: 'Miscellaneous',
+        text: 'Commissions',
+        url: 'https://forms.gle/tefHXyEh9WsAJjBs9',
+        blank: true,
+      },
+      {
+        text: 'Misc.',
         prefetch: 'visible',
         url: '/misc'
       },

@@ -6,7 +6,7 @@ import HeaderLogo from 'react-storefront/HeaderLogo'
 import Hidden from '@material-ui/core/Hidden'
 import Menu from 'react-storefront/Menu'
 import ListItemText from '@material-ui/core/ListItemText'
-import NavTabs from 'react-storefront/NavTabs'
+import NavTabs from '../components/NavTabs'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
 
 @withAmp
