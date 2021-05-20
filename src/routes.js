@@ -36,7 +36,7 @@ export default new Router()
   )
   .get('/misc',
     cacheHandler,
-    fromClient({ page: 'Miscellaneous' }),
+    fromClient({ page: 'Misc' }),
     fromServer('./misc/misc-handler')
   )
   .fallback(
