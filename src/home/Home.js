@@ -126,6 +126,7 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
     itemContainer: {
       alignItems: 'center',
       display: 'flex',
+      margin: '0 -15px',
       '@media (max-width:568px)': {
         display: 'block',
       }
@@ -159,10 +160,13 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
     },
     photos: {
       backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/concerts/0135%2026.jpg?2021051900', { quality: 80 })})`,
-        backgroundPosition: 'center 75%',
+      backgroundPosition: 'center 75%',
+      '@media (max-width:568px)': {
+        backgroundPosition: 'center 60%',
+      }
     },
     keyboards: {
-      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/keyboards/ai03-polaris.jpg?2021051900', { quality: 80 })})`,
+      backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/keyboards/ai03-polaris.jpg?2021051901', { quality: 80 })})`,
     },
     itemText: {
       background: 'rgba(102, 153, 204, .75)',
