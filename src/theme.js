@@ -96,7 +96,7 @@ const theme = createTheme({
     },
     MuiPaper: {
       root: {
-        backgroundColor: 'transparent',
+        backgroundColor: '#151515',
       }
     },
     RSFAppBar: {
@@ -165,6 +165,11 @@ const theme = createTheme({
       colorSecondary: {
         color: '#69c'
       }
+    },
+    MuiModal: {
+      root: {
+        zIndex: 1311,
+      },
     },
   }
 })

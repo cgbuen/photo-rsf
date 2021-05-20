@@ -13,8 +13,6 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 @withStyles(theme => ({
   root: {
     height: '64px',
-    position: 'relative',
-    zIndex: 0,
   },
   headerLogo: {
     textDecoration: 'none',
@@ -43,7 +41,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     padding: '10px 15px'
   },
   wrap: {
-    background: 'none',
+    background: '#151515',
     borderColor: 'rgba(255, 255, 255, .12)',
     color: 'white',
   },
@@ -55,38 +53,38 @@ export default class Header extends Component {
     const { classes } = this.props
 
     return (
-        <AppBar
-          classes={{
-            root: classes.root,
-            wrap: classes.wrap
-          }}
-          menuAlign="right"
-          menuIconProps={{ label: false }}
-        >
-          <Hidden mdUp implementation="css">
-            <Menu
-              align="right"
-              trackSelected
-              itemContentRenderer={(item, leaf) => {
-                return leaf ? <ListItemText className={classes.listItem} primary={item.text} /> : null
-              }}
-            />
-          </Hidden>
-          <HeaderLogo classes={{ logoWrap: classes.headerLogo }}>
-            <div>
-              <div className={classes.headline}>cgbuen</div>
-            </div>
-          </HeaderLogo>
-          <Hidden smDown implementation="css">
-            <NavTabs
-              classes={{
-                root: classes.navTabsRoot,
-                scroller: classes.navTabsScroller
-              }}
-            />
-          </Hidden>
-          <div style={{ flex: 1 }} />
-        </AppBar>
+      <AppBar
+        classes={{
+          root: classes.root,
+          wrap: classes.wrap
+        }}
+        menuAlign="right"
+        menuIconProps={{ label: false }}
+      >
+        <Hidden mdUp implementation="css">
+          <Menu
+            align="right"
+            trackSelected
+            itemContentRenderer={(item, leaf) => {
+              return leaf ? <ListItemText className={classes.listItem} primary={item.text} /> : null
+            }}
+          />
+        </Hidden>
+        <HeaderLogo classes={{ logoWrap: classes.headerLogo }}>
+          <div>
+            <div className={classes.headline}>cgbuen</div>
+          </div>
+        </HeaderLogo>
+        <Hidden smDown implementation="css">
+          <NavTabs
+            classes={{
+              root: classes.navTabsRoot,
+              scroller: classes.navTabsScroller
+            }}
+          />
+        </Hidden>
+        <div style={{ flex: 1 }} />
+      </AppBar>
     )
   }
 }
