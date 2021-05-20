@@ -239,7 +239,7 @@ export default class Collection extends Component {
             <DialogClose onClick={() => this.closeDialog()} />
           </DialogTitle>
           <DialogContent classes={{ root: classes.dialogContent }}>
-            <img className={classes.modalImg} alt={classes.name} src={createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
+            <img className={classes.modalImg} alt={classes.name} src={openBuild && openBuild.src && createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
             <div className={classnames(classes.descriptionBox, openBuild.blank_space || 'bottomRight')}>
               <strong>{openBuild.name}.</strong>{" "}
               {this.descriptionize(openBuild)}

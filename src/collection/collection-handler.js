@@ -6,7 +6,7 @@ import globalState from '../globalState'
 const makeUsableBuildArray = function(array, assetHost) {
   return array
     .map(build => {
-      build.src = `${assetHost}/keyboards/${build.src}.jpg`
+      build.src = `${assetHost}/keyboards/${build.src}.jpg?${build.cache_buster}`
       if (build.assembly_variant.includes('A') && build.build_status === 'Built') {
         build.loaded = true
         build.active = true
