@@ -46,7 +46,7 @@ export default () => {
     config: Config.values,
     social: {
       instagram: 'https://www.instagram.com/cgbuen/',
-      email: 'chris@cgbuen.com',
+      email: 'chris@cgbuen.io',
       linkedin: 'https://www.linkedin.com/in/christopherbuenaventura/',
       twitch: 'https://www.twitch.tv/cgbuen',
       twitter: 'https://twitter.com/cgbuen',
