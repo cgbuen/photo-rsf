@@ -98,30 +98,33 @@ import DialogClose from 'react-storefront/DialogClose'
       fontStyle: 'italic',
       margin: 10,
     },
+    dialogImgWrapper: {
+      position: 'relative',
+    },
     modalImg: {
       display: 'block',
       width: '100%',
     },
     descriptionBox: {
       background: 'rgba(128, 128, 128, 0.5)',
-      bottom: 39,
+      bottom: 15,
       padding: 10,
       maxWidth: 250,
       position: 'absolute',
-      right: 39,
+      right: 15,
       textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
       '&.topLeft': {
         bottom: 'auto',
-        left: 39,
+        left: 15,
         right: 'auto',
-        top: 83,
+        top: 15,
       },
       '&.topRight': {
         bottom: 'auto',
-        top: 83,
+        top: 15,
       },
       '&.bottomLeft': {
-        left: 39,
+        left: 15,
         right: 'auto',
       },
       '@media (max-width:925px)': {
@@ -206,12 +209,12 @@ export default class Collection extends Component {
           {this.showable(x.date_built) && <div>Built: {x.date_built}</div>}
           <div>Color: {x.color}</div>
           {this.showable(x.plate) && <div>Plate: {x.plate}</div>}
+          {this.showable(x.switches) && <div>Switches: {x.switches}</div>}
         </div>
         <div className={classes.descriptionColumn}>
-          {this.showable(x.switches) && <div>Switches: {x.switches}</div>}
           {this.showable(x.keycaps) && <div>Keycaps: {x.keycaps}</div>}
-          {this.buildLinks(x)}
           {x.notes && (<div>Notes: {x.notes}</div>)}
+          {this.buildLinks(x)}
         </div>
       </div>
     )
@@ -286,11 +289,13 @@ export default class Collection extends Component {
             </Typography>
             <DialogClose onClick={() => this.closeDialog()} />
           </DialogTitle>
-          <DialogContent classes={{ root: classes.dialogContent }}>
-            <img className={classes.modalImg} alt={classes.name} src={openBuild && openBuild.src && createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
-            <div className={classnames(classes.descriptionBox, openBuild.blank_space || 'bottomRight')}>
-              <strong>{openBuild.name}</strong>{" "}
-              {this.descriptionize(openBuild)}
+          <DialogContent>
+            <div className={classes.dialogImgWrapper}>
+              <img className={classes.modalImg} alt={classes.name} src={openBuild && openBuild.src && createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
+              <div className={classnames(classes.descriptionBox, openBuild.blank_space || 'bottomRight')}>
+                <div><strong>{openBuild.name}</strong></div>
+                {this.descriptionize(openBuild)}
+              </div>
             </div>
           </DialogContent>
         </Dialog>
