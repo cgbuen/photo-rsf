@@ -93,7 +93,7 @@ import DialogClose from 'react-storefront/DialogClose'
     },
     noResultsMessage: {
       fontStyle: 'italic',
-      marginTop: 30,
+      margin: 10,
     },
     modalImg: {
       display: 'block',
