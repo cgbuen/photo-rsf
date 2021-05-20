@@ -30,7 +30,7 @@ export default () => {
         blank: true,
       },
       {
-        text: 'Misc.',
+        text: 'Miscellaneous',
         prefetch: 'visible',
         url: '/misc'
       },

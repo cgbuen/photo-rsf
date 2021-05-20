@@ -20,20 +20,59 @@ import { createOptimizedSrc } from 'react-storefront/imageService'
     text: {
       color: 'white',
     },
+    cardDescription: {
+      visibility: 'visible',
+    },
+    cardImg: {
+      visibility: 'visible',
+    },
+    cardDupeContainer: {
+      position: 'relative',
+      '& $cardDescription': {
+        visibility: 'hidden',
+      },
+      '& $cardImg': {
+        visibility: 'hidden',
+      },
+    },
+    cheat: {
+      background: 'none',
+      left: 0,
+      pointerEvents: 'none',
+      position: 'absolute',
+      top: -15,
+      width: '100%',
+      '& $cardTitle': {
+        visibility: 'hidden',
+      },
+    },
+    visible: {
+      visibility: 'visible',
+    },
+    clickable: {
+      pointerEvents: 'auto',
+    },
   })
 )
 @withAmp
 @inject(({ app }) => ({ app, links: app.links }))
 @observer
 export default class Misc extends Component {
-  descriptionize(x) {
+  descriptionize(x, linkVisible) {
     const { classes } = this.props
     return (
       <div className={classes.text}>
         {x.description !== 'N/A' ? x.description : ''}{" "}
-        {x.author_link !== 'N/A' ? (
+        {x.author_link !== 'N/A' && linkVisible ? (
             <div>
-              By <LinkBlank to={x.author_link}>{x.author_name}</LinkBlank>. Not by me.
+              By <LinkBlank className={classes.clickable} to={x.author_link}>{x.author_name}</LinkBlank>. Not by me.
+            </div>
+          )
+          : ''
+        }
+        {x.author_link !== 'N/A' && !linkVisible ? (
+            <div>
+              By {x.author_name}. Not by me.
             </div>
           )
           : ''
@@ -51,17 +90,36 @@ export default class Misc extends Component {
         </Row>
         <p>Links to other resources that don't fall under any of the other categories on this site. Some are not mine, but are just added here for my own personal reference.</p>
         <div>
-          {links.map(x => (
-            <LinkBlank className={classes.linkContainer} key={x.id} to={x.href}>
-              <Card
-                right
-                classes={{ cardTitle: classes.cardTitle }}
-                name={x.name}
-                src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 570 })}
-                description={this.descriptionize(x)}
-              />
-            </LinkBlank>
-          ))}
+          {links.map(x => {
+            const link = (
+              <LinkBlank className={classes.linkContainer} to={x.href} key={x.id}>
+                <Card
+                  right
+                  classes={{ cardTitle: classes.cardTitle, cardDescription: classes.cardDescription, cardImg: classes.visible }}
+                  name={x.name}
+                  src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 570 })}
+                  description={this.descriptionize(x, false)}
+                />
+              </LinkBlank>
+            )
+            if (x.author_link && x.author_link !== 'N/A') {
+              return (
+                <div className={classes.cardDupeContainer} key={x.id}>
+                  {link}
+                  <Card
+                    right
+                    className={classes.cheat}
+                    classes={{ cardTitle: classes.cardTitle, cardDescription: classes.visible, cardImg: classes.cardImg }}
+                    name={x.name}
+                    src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 570 })}
+                    description={this.descriptionize(x, true)}
+                  />
+                </div>
+              )
+            } else {
+              return link
+            }
+          })}
         </div>
       </Container>
     )

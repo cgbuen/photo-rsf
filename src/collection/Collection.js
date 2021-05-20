@@ -173,7 +173,6 @@ export default class Collection extends Component {
   buildLinks(x) {
     const { classes } = this.props
     const links = []
-    console.log(x, x.build_video, x.type_test, x.type_test && x.build_video && x.type_test.includes(x.build_video))
     if (x.build_video && !x.type_test) {
       links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}>Build video</LinkBlank>))
     } else if (x.build_video && x.type_test && x.type_test.includes(x.build_video)) {
@@ -192,7 +191,6 @@ export default class Collection extends Component {
     if (this.showable(x.instagram)) {
       links.push((<LinkBlank className={classes.descriptionLink} to={x.instagram}>Instagram post</LinkBlank>))
     }
-    console.log(links)
     return (
       <div>
         {links.reduce((acc, cv) => (<>{acc}{acc ? ', ' : ''}{cv}</>), '')}

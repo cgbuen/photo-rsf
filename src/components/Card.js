@@ -30,18 +30,22 @@ import classnames from 'classnames'
     cardFigure: {
       marginRight: 15,
       width: 250,
-      '&$right': {
-        marginLeft: 15,
-        marginRight: 0,
-      },
       '@media (max-width:568px)': {
         display: 'block',
         marginBottom: 15,
         width: '100%',
       },
     },
+    'right': {
+      marginLeft: 15,
+      marginRight: 0,
+    },
     cardImg: {
       display: 'block',
+      visibility: 'visible',
+    },
+    cardDescription: {
+      visibility: 'visible',
     },
   })
 )
