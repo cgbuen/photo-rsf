@@ -88,7 +88,7 @@ export default class Footer extends Component {
           </div>
         </Row>
         <Row className={classes.copyright}>
-          &copy; {(new Date()).getYear() + 1900} Christopher Buenaventura
+          &copy; {(new Date()).getYear() + 1900} cgbuen
         </Row>
       </Container>
     )
