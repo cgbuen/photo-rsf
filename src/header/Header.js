@@ -14,6 +14,7 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
   root: {
     height: '64px',
     position: 'relative',
+    zIndex: 0,
   },
   headerLogo: {
     textDecoration: 'none',
@@ -59,7 +60,6 @@ export default class Header extends Component {
     const { classes } = this.props
 
     return (
-      <div>
         <AppBar
           classes={{
             root: classes.root,
@@ -92,7 +92,6 @@ export default class Header extends Component {
           </Hidden>
           <div style={{ flex: 1 }} />
         </AppBar>
-      </div>
     )
   }
 }
