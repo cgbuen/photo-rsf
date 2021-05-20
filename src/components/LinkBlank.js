@@ -6,7 +6,8 @@ import classnames from 'classnames'
 @withStyles(
   theme => ({
     link: {
-      color: '#69c'
+      color: '#69c',
+      fontWeight: 'bold',
     },
   })
 )

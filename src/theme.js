@@ -89,10 +89,20 @@ const theme = createTheme({
       label: {
         position: 'relative',
         top: -1,
+        transition: 'color .2s ease-in-out',
+        '&:hover': {
+          color: 'rgba(102, 153, 204, 1)',
+        },
+        '&:active': {
+          color: 'white',
+        },
       },
       selected: {
-        backgroundColor: 'rgba(102, 153, 204, .3)'
-      }
+        backgroundColor: 'rgba(102, 153, 204, .5)',
+        '& $label': {
+          color: 'white',
+        },
+      },
     },
     MuiPaper: {
       root: {

@@ -26,13 +26,17 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     display: 'inline-block',
   },
   iconWrapper: {
-    color: 'white',
+    color: 'rgba(255, 255, 255, .65)',
     display: 'inline-block',
     height: 32,
     margin: '0 5px',
     padding: 5,
+    transition: 'color .2s ease-in-out',
     verticalAlign: 'middle',
     width: 32,
+    '&:hover': {
+      color: 'rgba(255, 255, 255, 1)',
+    },
     '@media (max-width:568px)': {
       height: 48,
       margin: '0 8px',

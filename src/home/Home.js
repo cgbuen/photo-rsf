@@ -141,7 +141,7 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
       display: 'block',
       height: 500,
       opacity: .5,
-      transition: 'opacity .2s linear',
+      transition: 'opacity .2s ease-in-out',
       '&:hover': {
         opacity: .8,
       },

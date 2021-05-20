@@ -21,6 +21,7 @@ import { createOptimizedSrc } from 'react-storefront/imageService'
       color: 'white',
     },
     cardDescription: {
+      fontWeight: 'normal',
       visibility: 'visible',
     },
     cardImg: {

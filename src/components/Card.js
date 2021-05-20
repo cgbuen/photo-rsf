@@ -10,7 +10,7 @@ import classnames from 'classnames'
       background: 'rgba(128, 128, 128, .15)',
       boxShadow: '1px 1px 7px 0 rgba(32, 32, 32, .3)',
       padding: 20,
-      transition: 'background .2s linear',
+      transition: 'background .2s ease-in-out',
       '&:hover': {
         background: 'rgba(128, 128, 128, .35)',
       },
