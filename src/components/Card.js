@@ -10,15 +10,19 @@ import classnames from 'classnames'
       background: 'rgba(128, 128, 128, .15)',
       boxShadow: '1px 1px 7px 0 rgba(32, 32, 32, .3)',
       padding: 20,
+      transition: 'background .2s linear',
+      '&:hover': {
+        background: 'rgba(128, 128, 128, .35)',
+      },
     },
     cardTitle: {
       fontSize: 18,
       fontWeight: 'bold',
-      marginBottom: 10
     },
     cardBody: {
-      display: 'flex',
       alignItems: 'center',
+      display: 'flex',
+      justifyContent: 'space-between',
       '@media (max-width:568px)': {
         display: 'block'
       },
@@ -26,6 +30,10 @@ import classnames from 'classnames'
     cardFigure: {
       marginRight: 15,
       width: 250,
+      '&$right': {
+        marginLeft: 15,
+        marginRight: 0,
+      },
       '@media (max-width:568px)': {
         display: 'block',
         marginBottom: 15,
@@ -41,13 +49,16 @@ import classnames from 'classnames'
 @observer
 export default class Card extends Component {
   render() {
-    const { classes, className, src, name, description, onClick } = this.props
+    const { classes, className, src, name, description, onClick, right } = this.props
     return (
-      <Row className={classnames(classes.card, className)}>
-        <div className={classes.cardTitle}>{name}</div>
+      <Row className={classnames(classes.card, className)} onClick={onClick}>
         <div className={classes.cardBody}>
-          <img className={classnames(classes.cardFigure, classes.cardImg)} src={src} alt={name} onClick={onClick} />
-          <div className={classes.cardDescription}>{description}</div>
+          {!right && <img className={classnames(classes.cardFigure, classes.cardImg)} src={src} alt={name} />}
+          <div>
+            <div className={classes.cardTitle}>{name}</div>
+            <div className={classes.cardDescription}>{description}</div>
+          </div>
+          {right && <img className={classnames(classes.cardFigure, classes.right, classes.cardImg)} src={src} alt={name} />}
         </div>
       </Row>
     )

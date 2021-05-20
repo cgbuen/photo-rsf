@@ -4,6 +4,7 @@ import SocialModel from './SocialModel'
 import ConfigModel from './config/ConfigModel'
 import ProjectModel from './projects/ProjectModel'
 import PhotoModel from './photography/PhotoModel'
+import LinkModel from './misc/LinkModel'
 import BuildModel from './collection/BuildModel'
 import BuildFilterModel from './collection/BuildFilterModel'
 
@@ -15,6 +16,7 @@ const AppModel = types.compose(
       social: types.optional(SocialModel, {}),
       projects: types.optional(types.array(ProjectModel), []),
       photos: types.optional(types.array(PhotoModel), []),
+      links: types.optional(types.array(LinkModel), []),
       builds: types.optional(types.array(BuildModel), []),
       buildFiltersActive: types.optional(BuildFilterModel, {}),
       openBuild: types.optional(BuildModel, {}),

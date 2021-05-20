@@ -54,9 +54,8 @@ export default () => {
     },
     projects: [],
     photos: [],
+    links: [],
     builds: [],
     buildFiltersActive: {},
-    openBuild: {},
-    openProject: {},
   }
 }

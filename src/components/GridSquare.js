@@ -12,6 +12,10 @@ import classnames from 'classnames'
       margin: '0 10px 10px',
       padding: 15,
       textAlign: 'center',
+      transition: 'background .2s linear',
+      '&:hover': {
+        background: 'rgba(128, 128, 128, .35)',
+      },
       '@media (max-width:630px)': {
         width: '100%',
       },
