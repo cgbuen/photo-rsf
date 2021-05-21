@@ -34,10 +34,10 @@ export default new Router()
     fromClient({ page: 'About' }),
     fromServer('./about/about-handler')
   )
-  .get('/misc',
+  .get('/resources',
     cacheHandler,
-    fromClient({ page: 'Miscellaneous' }),
-    fromServer('./misc/misc-handler')
+    fromClient({ page: 'Resources' }),
+    fromServer('./resources/resources-handler')
   )
   .fallback(
     // when no route matches, pull in content from the upstream site

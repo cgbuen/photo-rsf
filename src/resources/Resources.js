@@ -58,7 +58,7 @@ import { createOptimizedSrc } from 'react-storefront/imageService'
 @withAmp
 @inject(({ app }) => ({ app, links: app.links }))
 @observer
-export default class Misc extends Component {
+export default class Resources extends Component {
   descriptionize(x, linkVisible) {
     const { classes } = this.props
     return (
@@ -87,7 +87,7 @@ export default class Misc extends Component {
     return (
       <Container>
         <Row>
-          <Typography variant="h1">Miscellaneous</Typography>
+          <Typography variant="h1">Resources</Typography>
         </Row>
         <p>Links to other resources that don't fall under any of the other categories on this site. Some are not mine, but are just added here for my own personal reference.</p>
         <div>

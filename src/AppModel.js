@@ -5,7 +5,7 @@ import SocialModel from './SocialModel'
 import ConfigModel from './config/ConfigModel'
 import ProjectModel from './projects/ProjectModel'
 import PhotoModel from './photography/PhotoModel'
-import LinkModel from './misc/LinkModel'
+import LinkModel from './resources/LinkModel'
 import BuildModel from './collection/BuildModel'
 import BuildFilterModel from './collection/BuildFilterModel'
 
