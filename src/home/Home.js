@@ -152,7 +152,7 @@ const ASSET_DOMAIN = 'https://ph-1080.cgbuen.com'
     },
     projects: {
       backgroundImage: `url(${createOptimizedSrc(ASSET_DOMAIN + '/projects/moovweb-geico-01.jpg?2021051900', { quality: 80 })})`,
-      backgroundPosition: '-21px 70%',
+      backgroundPosition: '2% 72%',
       '@media (max-width:568px)': {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
