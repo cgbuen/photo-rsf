@@ -3,10 +3,21 @@ import Config from 'react-storefront/Config'
 export default () => {
   const menu = {
     root: true,
-    items: [{
-        text: 'Gallery',
+    items: [
+      {
+        text: 'Projects',
         prefetch: 'visible',
-        url: '/'
+        url: '/projects'
+      },
+      {
+        text: 'Photos',
+        prefetch: 'visible',
+        url: '/photography'
+      },
+      {
+        text: 'Collection',
+        prefetch: 'visible',
+        url: '/collection'
       },
       {
         text: 'About',
@@ -14,10 +25,15 @@ export default () => {
         url: '/about'
       },
       {
-        text: 'Inquiries',
+        text: 'Commissions',
+        url: 'https://forms.gle/tefHXyEh9WsAJjBs9',
+        blank: true,
+      },
+      {
+        text: 'Miscellaneous',
         prefetch: 'visible',
-        url: '/inquiries'
-      }
+        url: '/misc'
+      },
     ]
   }
 
@@ -26,17 +42,25 @@ export default () => {
       levels: [menu]
     },
     tabs: menu,
-    title: '– cgbuen Concert Photography',
+    title: '– cgbuen',
     config: Config.values,
     social: {
       instagram: 'https://www.instagram.com/cgbuen/',
-      email: 'christopherbuenaventura@gmail.com',
+      email: 'chris@cgbuen.io',
       linkedin: 'https://www.linkedin.com/in/christopherbuenaventura/',
       twitch: 'https://www.twitch.tv/cgbuen',
       twitter: 'https://twitter.com/cgbuen',
       github: 'https://github.com/cgbuen',
-      website: 'http://www.christopherbuenaventura.com/',
+      youtubeM: 'https://www.youtube.com/cgbuen',
+      youtubeV: 'https://www.youtube.com/channel/UC5TYwKPKxwWl4IY9We5U0OQ',
+      discordP: 'cgbuen#5518',
+      discordS: 'https://discord.gg/EayZKHK',
+      sffb: 'https://us-p2p.netdonor.net/1803/general/61375/cgbuen',
     },
-    photos: []
+    projects: [],
+    photos: [],
+    links: [],
+    builds: [],
+    buildFiltersActive: {},
   }
 }

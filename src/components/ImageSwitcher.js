@@ -126,15 +126,9 @@ export const styles = theme => ({
     top: '50%',
     marginTop: '-24px',
     '&, &:hover': {
-      background: 'rgba(224, 224, 224, .85)',
+      background: 'rgba(17, 17, 17, .5)',
       boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
     },
-    '@media (prefers-color-scheme: dark)': {
-      '&, &:hover': {
-        background: 'rgba(17, 17, 17, .5)',
-        boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
-      }
-    }
   },
 
   leftArrow: {
@@ -224,14 +218,13 @@ export const styles = theme => ({
   },
 
   tabScroller: {
-    marginBottom: '0 !important',
     [theme.breakpoints.down('xs')]: {
       padding: `0 ${theme.margins.container}px`
     }
   },
 
   indicator: {
-    display: 'none'
+    height: 3
   },
 
   mask: {
@@ -256,40 +249,31 @@ export const styles = theme => ({
   },
 
   zoomIcon: {
-    fill: '#222',
-    '@media (prefers-color-scheme: dark)': {
-      fill: 'white'
-    },
+    fill: 'white'
   },
 
   closeIcon: {
-    stroke: '#222',
-    '@media (prefers-color-scheme: dark)': {
-      stroke: 'white'
-    },
+    stroke: 'white'
   },
 
   description: {
     position: 'absolute',
-    bottom: 100,
+    bottom: 110,
     width: '100%',
     textAlign: 'center'
   },
 
   descriptionInner: {
-    background: 'white',
+    background: 'rgba(21, 21, 21, .5)',
     padding: 10,
     textAlign: 'center',
     display: 'inline-block',
     borderRadius: 5,
-    '@media (prefers-color-scheme: dark)': {
-      background: '#222'
-    },
   },
 
   descriptionLine: {
-    fontSize: 13,
-    lineHeight: 1,
+    fontSize: 16,
+    lineHeight: 1.2,
     textAlign: 'center',
   },
 
@@ -303,17 +287,13 @@ export const styles = theme => ({
   },
 
   snackbarContentRoot: {
-    background: 'rgba(224, 224, 224, .85)',
+    background: 'rgba(34, 34, 34, .85)',
     borderRadius: 5,
     boxShadow: '0 0 3px rgba(64, 64, 64, .3)',
-    color: 'black',
+    color: 'white',
     display: 'inline-block',
     minWidth: 0,
     whiteSpace: 'nowrap',
-    '@media (prefers-color-scheme: dark)': {
-      background: 'rgba(34, 34, 34, .85)',
-      color: 'white'
-    },
   },
 
   pinchIcon: {
@@ -341,12 +321,11 @@ export const styles = theme => ({
   itemBackgroundImage: {
     height: '100%',
     '& img': {
-      background: '#222',
       height: '120%',
       left: '50%',
       maxHeight: '120%',
       maxWidth: '120%',
-      objectFit: 'none !important',
+      objectFit: 'cover !important',
       opacity: .5,
       position: 'absolute',
       top: '50%',
@@ -563,6 +542,7 @@ export default class ImageSwitcher extends Component {
           </div>
           <TabsRow
             classes={{
+              indicator: classes.indicator,
               scroller: classes.tabScroller,
               root: classes.tabsRowRoot
             }}

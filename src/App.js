@@ -13,17 +13,13 @@ import targets from './analytics'
 @withStyles(theme => ({
   '@global': {
     body: {
-      background: 'white',
-      color: '#222',
+      backgroundColor: '#151515 !important',
+      color: 'white',
       margin: '0',
       padding: '0',
       fontFamily: theme.typography.fontFamily,
       fontSize: theme.typography.fontSize,
       width: '100%',
-      '@media (prefers-color-scheme: dark)': {
-        background: '#222',
-        color: 'white'
-      },
     },
     a: {
       textDecoration: 'underline'
@@ -53,10 +49,11 @@ export default class App extends Component {
                * tag can be removed.
                */}
               <link href="https://opt.moovweb.net" rel="preconnect" crossorigin />
-              <link rel="shortcut icon" href="/icons/favicon.ico" />
+              <link rel="stylesheet" href="https://use.typekit.net/kgo8rkq.css" />
+              <link rel="shortcut icon" href="/icons/favicon.ico?v=2021052000" />
               <meta
                 name="description"
-                content="Bay Area Concert Photography by cgbuen (Christopher Buenaventura)."
+                content="cgbuen - Software Engineer, Photographer, Builder, Content Creator."
               />
               <meta
                 name="viewport"
@@ -67,8 +64,11 @@ export default class App extends Component {
             <Pages
               components={universal => ({
                 Home: universal(import('./home/Home')),
+                Projects: universal(import('./projects/Projects')),
+                Photography: universal(import('./photography/Photography')),
+                Collection: universal(import('./collection/Collection')),
                 About: universal(import('./about/About')),
-                Inquiries: universal(import('./inquiries/Inquiries')),
+                Miscellaneous: universal(import('./misc/Misc')),
                 Error: universal(import('./ErrorPage')),
                 Offline
               })}

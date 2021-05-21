@@ -4,7 +4,8 @@ import red from '@material-ui/core/colors/red'
 const theme = createTheme({
   typography: {
     useNextVariants: true,
-    fontFamily: 'monospace'
+    fontFamily: 'ff-meta-web-pro',
+    fontSize: 16
   },
   palette: {
     secondary: {
@@ -26,9 +27,7 @@ const theme = createTheme({
   overrides: {
     RSFLoadMask: {
       root: {
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222'
-        },
+        background: '#151515'
       },
       fullscreen: {
         height: `calc(100vh - 181px)`
@@ -53,31 +52,27 @@ const theme = createTheme({
     },
     RSFAmpMenu: {
       root: {
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222',
-        },
+        background: '#151515',
       }
     },
     RSFMenuIcon: {
       root: {
         '& .rsf-hamburger-inner, & .rsf-hamburger-inner:before, & .rsf-hamburger-inner:after': {
-          '@media (prefers-color-scheme: dark)': {
-            background: 'white'
-          },
+          background: 'white'
         }
       }
     },
     RSFImageSwitcher: {
       viewerOverlay: {
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222'
-        },
+        background: '#151515'
       },
       activeThumbs: {
-        background: 'rgba(255, 255, 255, .85)',
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222'
-        },
+        background: '#151515'
+      },
+    },
+    MuiTabs: {
+      scroller: {
+        marginBottom: '0 !important',
       }
     },
     RSFNavTabs: {
@@ -90,14 +85,28 @@ const theme = createTheme({
     RSFNavTab: {
       root: {
         opacity: 1
-      }
+      },
+      label: {
+        position: 'relative',
+        top: -1,
+        transition: 'color .2s ease-in-out',
+        '&:hover': {
+          color: 'rgba(102, 153, 204, 1)',
+        },
+        '&:active': {
+          color: 'white',
+        },
+      },
+      selected: {
+        backgroundColor: 'rgba(102, 153, 204, .5)',
+        '& $label': {
+          color: 'white',
+        },
+      },
     },
     MuiPaper: {
       root: {
-        '@media (prefers-color-scheme: dark)': {
-          background: '#222',
-          color: 'white'
-        },
+        backgroundColor: '#151515',
       }
     },
     RSFAppBar: {
@@ -107,25 +116,18 @@ const theme = createTheme({
     },
     MuiTypography: {
       h1: {
+        color: 'white',
         fontSize: 24,
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white',
-        },
+        fontWeight: 'bold',
       },
       body1: {
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white',
-        },
+        color: 'white',
       },
       body2: {
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white',
-        },
+        color: 'white',
       },
       subtitle1: {
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white',
-        },
+        color: 'white',
       }
     },
     MuiPrivateTabIndicator: {
@@ -133,11 +135,14 @@ const theme = createTheme({
         backgroundColor: '#69c'
       }
     },
+    MuiPrivateTabScrollButton: {
+      root: {
+        width: 0
+      }
+    },
     MuiIconButton: {
       root: {
-        '@media (prefers-color-scheme: dark)': {
-          color: 'white'
-        },
+        color: 'white'
       }
     },
     MuiListItem: {
@@ -152,7 +157,29 @@ const theme = createTheme({
         '&:first-child': {
           paddingLeft: 15
         }
+      },
+      primary: {
+        fontWeight: 'bold',
+      },
+    },
+    RSFTabsRow: {
+      tab: {
+        fontWeight: 'bold',
+        textTransform: 'none'
+      },
+      indicator: {
+        height: 0
       }
+    },
+    MuiCircularProgress: {
+      colorSecondary: {
+        color: '#69c'
+      }
+    },
+    MuiModal: {
+      root: {
+        zIndex: 1311,
+      },
     },
   }
 })

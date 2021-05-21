@@ -13,9 +13,32 @@ export default new Router()
     cacheHandler,
     fromServer('./app-shell/app-shell-handler')
   )
-  .get('/', fromClient({ page: 'Home' }), fromServer('./home/home-handler'))
-  .get('/about', cacheHandler, fromClient({ page: 'About' }), fromServer('./about/about-handler'))
-  .get('/inquiries', cacheHandler, fromClient({ page: 'Inquiries' }), fromServer('./inquiries/inquiries-handler'))
+  .get('/',
+    fromClient({ page: 'Home' }),
+    fromServer('./home/home-handler')
+  )
+  .get('/projects',
+    fromClient({ page: 'Projects' }),
+    fromServer('./projects/projects-handler')
+  )
+  .get('/photography',
+    fromClient({ page: 'Photography' }),
+    fromServer('./photography/photography-handler')
+  )
+  .get('/collection',
+    fromClient({ page: 'Collection' }),
+    fromServer('./collection/collection-handler')
+  )
+  .get('/about',
+    cacheHandler,
+    fromClient({ page: 'About' }),
+    fromServer('./about/about-handler')
+  )
+  .get('/misc',
+    cacheHandler,
+    fromClient({ page: 'Miscellaneous' }),
+    fromServer('./misc/misc-handler')
+  )
   .fallback(
     // when no route matches, pull in content from the upstream site
     // for a working example, go to /help/home

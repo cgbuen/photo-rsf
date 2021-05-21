@@ -7,7 +7,11 @@ const SocialModel = types.model('SocialModel', {
   twitch: types.maybeNull(types.string),
   twitter: types.maybeNull(types.string),
   github: types.maybeNull(types.string),
-  website: types.maybeNull(types.string),
+  youtubeM: types.maybeNull(types.string),
+  youtubeV: types.maybeNull(types.string),
+  discordP: types.maybeNull(types.string),
+  discordS: types.maybeNull(types.string),
+  sffb: types.maybeNull(types.string),
 })
 
 export default SocialModel 

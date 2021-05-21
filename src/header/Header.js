@@ -4,28 +4,31 @@ import AppBar from 'react-storefront/AppBar'
 import { withStyles } from '@material-ui/core/styles'
 import HeaderLogo from 'react-storefront/HeaderLogo'
 import Hidden from '@material-ui/core/Hidden'
-import Typography from '@material-ui/core/Typography'
 import Menu from 'react-storefront/Menu'
 import ListItemText from '@material-ui/core/ListItemText'
-import NavTabs from 'react-storefront/NavTabs'
+import NavTabs from '../components/NavTabs'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
 
 @withAmp
 @withStyles(theme => ({
   root: {
     height: '64px',
-    position: 'relative',
   },
   headerLogo: {
     textDecoration: 'none',
   },
   headline: {
+    color: 'white',
     fontSize: 32,
+    fontWeight: 'bold',
     lineHeight: 1,
+    position: 'relative',
     textDecoration: 'underline',
     textDecorationColor: '#69c',
+    top: -4,
   },
   subtitle: {
+    color: 'white',
     fontSize: 10,
   },
   navTabsRoot: {
@@ -34,18 +37,10 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
   listItem: {
     padding: '10px 15px'
   },
-  '@media (prefers-color-scheme: dark)': {
-    wrap: {
-      background: '#222',
-      borderColor: 'rgba(255, 255, 255, .12)',
-      color: 'white'
-    },
-    headline: {
-      color: 'white'
-    },
-    subtitle: {
-      color: 'white'
-    },
+  wrap: {
+    background: '#151515',
+    borderColor: 'rgba(255, 255, 255, .12)',
+    color: 'white',
   },
 }))
 @inject('app')
@@ -55,40 +50,37 @@ export default class Header extends Component {
     const { classes } = this.props
 
     return (
-      <div>
-        <AppBar
-          classes={{
-            root: classes.root,
-            wrap: classes.wrap
-          }}
-          menuAlign="right"
-          menuIconProps={{ label: false }}
-        >
-          <Hidden mdUp implementation="css">
-            <Menu
-              align="right"
-              trackSelected
-              itemContentRenderer={(item, leaf) => {
-                return leaf ? <ListItemText className={classes.listItem} primary={item.text} /> : null
-              }}
-            />
-          </Hidden>
-          <HeaderLogo classes={{ logoWrap: classes.headerLogo }}>
-            <div>
-              <Typography variant="h1" className={classes.headline}>cgbuen</Typography>
-              <Typography className={classes.subtitle}>Concert Photography</Typography>
-            </div>
-          </HeaderLogo>
-          <Hidden smDown implementation="css">
-            <NavTabs
-              classes={{
-                root: classes.navTabsRoot
-              }}
-            />
-          </Hidden>
-          <div style={{ flex: 1 }} />
-        </AppBar>
-      </div>
+      <AppBar
+        classes={{
+          root: classes.root,
+          wrap: classes.wrap
+        }}
+        menuAlign="right"
+        menuIconProps={{ label: false }}
+      >
+        <Hidden mdUp implementation="css">
+          <Menu
+            align="right"
+            trackSelected
+            itemContentRenderer={(item, leaf) => {
+              return leaf ? <ListItemText className={classes.listItem} primary={item.text} /> : null
+            }}
+          />
+        </Hidden>
+        <HeaderLogo classes={{ logoWrap: classes.headerLogo }}>
+          <div>
+            <div className={classes.headline}>cgbuen</div>
+          </div>
+        </HeaderLogo>
+        <Hidden smDown implementation="css">
+          <NavTabs
+            classes={{
+              root: classes.navTabsRoot,
+            }}
+          />
+        </Hidden>
+        <div style={{ flex: 1 }} />
+      </AppBar>
     )
   }
 }
