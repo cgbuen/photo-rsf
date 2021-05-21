@@ -68,7 +68,7 @@ export default class App extends Component {
                 Photography: universal(import('./photography/Photography')),
                 Collection: universal(import('./collection/Collection')),
                 About: universal(import('./about/About')),
-                Miscellaneous: universal(import('./misc/Misc')),
+                Resources: universal(import('./resources/Resources')),
                 Error: universal(import('./ErrorPage')),
                 Offline
               })}
