@@ -7,7 +7,7 @@ const makeUsablePhotoArray = function(array, assetHost) {
   return array
     .filter(photo => photo.active)
     .map(photo => {
-      photo.src = `${assetHost}/${photo.roll}+${photo.number}.jpg?${photo.cacheBuster}`
+      photo.src = `${assetHost}/concerts/${photo.roll}+${photo.number}.jpg?${photo.cacheBuster}`
       photo.alt = `${photo.subject}, ${photo.venue}, ${photo.date}`
       return photo
     })
