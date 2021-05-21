@@ -249,7 +249,7 @@ export default class Collection extends Component {
         <Row>
           <Typography variant="h1">Keyboard Collection</Typography>
         </Row>
-        <p>I collect, build, and modify enthusiast "mechanical" (computer) keyboards. Builds (among other types of content) are streamed to <LinkBlank to={social.twitch}>Twitch</LinkBlank>, with proceeds going to the <LinkBlank to={social.sffb}>San Francisco-Marin Food Bank</LinkBlank>.</p>
+        <p>I collect, build, and modify enthusiast computer keyboards. (Builds, among other types of content, are streamed to <LinkBlank to={social.twitch}>Twitch</LinkBlank>, with proceeds going to the <LinkBlank to={social.sffb}>San Francisco-Marin Food Bank</LinkBlank>.) This is my personal collection.</p>
         <div className={classes.topSection}>
           <div className={classes.filtersWhole}>
             <div className={classes.filtersLabel}>Filters: </div>

@@ -75,7 +75,7 @@ export default class Photography extends Component {
         <Row>
           <Typography variant="h1">Concert Photography</Typography>
         </Row>
-        <p>I shoot film photos from the pit at live events, primarily around the San Francisco Bay Area.</p>
+        <p>I shoot film photos at live events primarily around the San Francisco Bay Area. Here are some moments I'm lucky to have been a part of.</p>
         <Row>
           <ImageSwitcher
             id="gallerySwitcher"

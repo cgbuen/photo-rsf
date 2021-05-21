@@ -89,7 +89,7 @@ export default class Resources extends Component {
         <Row>
           <Typography variant="h1">Resources</Typography>
         </Row>
-        <p>Links to other resources that don't fall under any of the other categories on this site. Some are not mine, but are just added here for my own personal reference.</p>
+        <p>Below is a list of other resources that don't fall under any of the other categories on this site. Some are not mine, but are just added here for my own personal reference.</p>
         <div>
           {links.map(x => {
             const link = (
