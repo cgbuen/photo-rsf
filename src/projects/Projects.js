@@ -49,7 +49,7 @@ export default class Software extends Component {
         <Row>
           <Typography variant="h1">Software & Design Projects</Typography>
         </Row>
-        <p>I work as a software engineer / architect for a living, solving fun problems on the web.</p>
+        <p>I work as a software engineer / architect for a living, solving fun problems on the web. These are the projects that I've worked on.</p>
         <div>
           {projects.map(x => (
             <Card
