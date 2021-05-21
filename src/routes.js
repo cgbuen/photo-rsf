@@ -14,18 +14,22 @@ export default new Router()
     fromServer('./app-shell/app-shell-handler')
   )
   .get('/',
+    cacheHandler,
     fromClient({ page: 'Home' }),
     fromServer('./home/home-handler')
   )
   .get('/projects',
+    cacheHandler,
     fromClient({ page: 'Projects' }),
     fromServer('./projects/projects-handler')
   )
   .get('/photography',
+    cacheHandler,
     fromClient({ page: 'Photography' }),
     fromServer('./photography/photography-handler')
   )
   .get('/collection',
+    cacheHandler,
     fromClient({ page: 'Collection' }),
     fromServer('./collection/collection-handler')
   )
