@@ -14,7 +14,7 @@ const commandGenerator = async function (assetHost) {
   }
 }
 
-export default async function softwareHandler(params, request, response) {
+export default async function commandsHandler(params, request, response) {
   return withGlobalState(request, globalState, {
     title: `Commands ${globalState().title}`,
     commands: await commandGenerator(Config.get('assetHost')),

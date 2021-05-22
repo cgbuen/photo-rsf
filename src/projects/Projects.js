@@ -29,10 +29,6 @@ import DialogClose from 'react-storefront/DialogClose'
 @inject(({ app }) => ({ app, projects: app.projects, openProject: app.openProject  }))
 @observer
 export default class Software extends Component {
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateWindowDimensions)
-  }
-
   openDialog(project) {
     this.props.app.setOpenProject(project)
   }
