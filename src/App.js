@@ -70,6 +70,7 @@ export default class App extends Component {
                 About: universal(import('./about/About')),
                 Resources: universal(import('./resources/Resources')),
                 Commands: universal(import('./resources/Commands')),
+                Gear: universal(import('./resources/Gear')),
                 Error: universal(import('./ErrorPage')),
                 Offline
               })}
