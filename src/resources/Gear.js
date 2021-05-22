@@ -73,7 +73,7 @@ export default class Gear extends Component {
         <Row>
           <Typography variant="h1">Gear</Typography>
         </Row>
-        <p>A list of recommended gear.</p>
+        <p>A list of gear that I recommend.</p>
         <div>
           {/*this.renderAccordion({ title: 'Primary PC', description: '', items: gear.filter(x => x.kind === 'PC (Gaming/Workhorse)') })*/}
           {/*this.renderAccordion({ title: 'Streaming PC', description: '', items: gear.filter(x => x.kind === 'Streaming PC') })*/}
