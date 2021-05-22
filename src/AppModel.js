@@ -1,5 +1,6 @@
 import { types } from 'mobx-state-tree'
 import AppModelBase from 'react-storefront/model/AppModelBase'
+import { MenuModel } from './MenuModel'
 import { TabsModel } from './components/NavTabs'
 import SocialModel from './SocialModel'
 import ConfigModel from './config/ConfigModel'
@@ -14,6 +15,7 @@ const AppModel = types.compose(
   AppModelBase,
   types
     .model('AppModel', {
+      menu: types.optional(MenuModel, {}),
       tabs: types.optional(TabsModel, {}),
       config: types.optional(ConfigModel, {}),
       social: types.optional(SocialModel, {}),
