@@ -69,6 +69,7 @@ export default class App extends Component {
                 Collection: universal(import('./collection/Collection')),
                 About: universal(import('./about/About')),
                 Resources: universal(import('./resources/Resources')),
+                Commands: universal(import('./resources/Commands')),
                 Error: universal(import('./ErrorPage')),
                 Offline
               })}
