@@ -11,7 +11,7 @@ export default class ErrorPage extends Component {
       return (
         <Container>
           <Row>
-            <Typography variant="h6">Error</Typography>
+            <Typography variant="h1">Error</Typography>
           </Row>
           <Row>
             <Typography>

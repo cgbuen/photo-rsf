@@ -181,6 +181,20 @@ const theme = createTheme({
         zIndex: 1311,
       },
     },
+    MuiTableCell: {
+      root: {
+        borderBottom: '1px solid rgba(128, 128, 128, .5)',
+      },
+      head: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
+      },
+      body: {
+        color: 'white',
+        fontSize: 16,
+      },
+    },
   }
 })
 

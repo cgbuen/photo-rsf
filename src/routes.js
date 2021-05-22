@@ -14,18 +14,22 @@ export default new Router()
     fromServer('./app-shell/app-shell-handler')
   )
   .get('/',
+    cacheHandler,
     fromClient({ page: 'Home' }),
     fromServer('./home/home-handler')
   )
   .get('/projects',
+    cacheHandler,
     fromClient({ page: 'Projects' }),
     fromServer('./projects/projects-handler')
   )
   .get('/photography',
+    cacheHandler,
     fromClient({ page: 'Photography' }),
     fromServer('./photography/photography-handler')
   )
   .get('/collection',
+    cacheHandler,
     fromClient({ page: 'Collection' }),
     fromServer('./collection/collection-handler')
   )
@@ -38,6 +42,11 @@ export default new Router()
     cacheHandler,
     fromClient({ page: 'Resources' }),
     fromServer('./resources/resources-handler')
+  )
+  .get('/resources/commands',
+    cacheHandler,
+    fromClient({ page: 'Commands' }),
+    fromServer('./resources/commands-handler')
   )
   .fallback(
     // when no route matches, pull in content from the upstream site

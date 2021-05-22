@@ -60,6 +60,7 @@ export default () => {
     projects: [],
     photos: [],
     links: [],
+    commands: [],
     builds: [],
     buildFiltersActive: {},
   }

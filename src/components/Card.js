@@ -28,17 +28,19 @@ import classnames from 'classnames'
       },
     },
     cardFigure: {
-      marginRight: 15,
+      margin: '0 15px 0 0',
       width: 250,
       '@media (max-width:568px)': {
         display: 'block',
-        marginBottom: 15,
+        margin: '0 0 15px 0',
         width: '100%',
       },
     },
     'right': {
-      marginLeft: 15,
-      marginRight: 0,
+      margin: '0 0 0 15px',
+      '@media (max-width:568px)': {
+        margin: '15px 0 0 0',
+      },
     },
     cardImg: {
       display: 'block',

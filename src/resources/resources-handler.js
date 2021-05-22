@@ -22,7 +22,7 @@ const linkGenerator = async function (assetHost) {
   }
 }
 
-export default async function softwareHandler(params, request, response) {
+export default async function resourcesHandler(params, request, response) {
   return withGlobalState(request, globalState, {
     title: `Resources ${globalState().title}`,
     links: await linkGenerator(Config.get('assetHost')),
