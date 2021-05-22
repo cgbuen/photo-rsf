@@ -195,8 +195,8 @@ export const TabsModel = types
   .views(self => ({
     get selected() {
       const { location } = getParent(self)
-      const url = location.pathname + location.search
-      const index = self.items.findIndex(item => item.url === url)
+      const url = location.pathname
+      const index = self.items.findIndex(item => url.includes(item.url))
       return index === -1 ? null : index
     }
   }))

@@ -43,7 +43,7 @@ export default new Router()
     fromClient({ page: 'Resources' }),
     fromServer('./resources/resources-handler')
   )
-  .get('/commands',
+  .get('/resources/commands',
     cacheHandler,
     fromClient({ page: 'Commands' }),
     fromServer('./resources/commands-handler')
