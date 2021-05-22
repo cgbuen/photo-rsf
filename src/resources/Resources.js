@@ -66,9 +66,9 @@ export default class Resources extends Component {
       <div className={classes.text}>
         {x.description !== 'N/A' ? x.description : ''}{" "}
         {x.author_link !== 'N/A' && linkVisible ? (
-            <div>
+            <>
               By <LinkBlank className={classes.clickable} to={x.author_link}>{x.author_name}</LinkBlank>. Not by me.
-            </div>
+            </>
           )
           : ''
         }
