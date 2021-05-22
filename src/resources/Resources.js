@@ -5,6 +5,7 @@ import Row from 'react-storefront/Row'
 import Typography from '@material-ui/core/Typography'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
 import withStyles from '@material-ui/core/styles/withStyles'
+import Link from 'react-storefront/Link'
 import LinkBlank from '../components/LinkBlank'
 import Card from '../components/Card'
 import { createOptimizedSrc } from 'react-storefront/imageService'
@@ -92,8 +93,9 @@ export default class Resources extends Component {
         <p>Below is a list of other resources that don't fall under any of the other categories on this site. Some are not mine, but are just added here for my own personal reference.</p>
         <div>
           {links.map(x => {
+            const LinkType = x.href.startsWith('https://') ? LinkBlank : Link
             const link = (
-              <LinkBlank className={classes.linkContainer} to={x.href} key={x.id}>
+              <LinkType className={classes.linkContainer} to={x.href} key={x.id}>
                 <Card
                   right
                   classes={{ cardTitle: classes.cardTitle, cardDescription: classes.cardDescription, cardImg: classes.visible }}
@@ -101,7 +103,7 @@ export default class Resources extends Component {
                   src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 570 })}
                   description={this.descriptionize(x, false)}
                 />
-              </LinkBlank>
+              </LinkType>
             )
             if (x.author_link && x.author_link !== 'N/A') {
               return (
