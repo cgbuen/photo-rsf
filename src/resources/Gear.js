@@ -30,16 +30,23 @@ import TableCell from '@material-ui/core/TableCell'
   })
 )
 @withAmp
-@inject(({ app }) => ({ app, gear: app.gear }))
+@inject(({ app }) => ({ app, gear: app.gear, gearDescriptions: app.gearDescriptions, }))
 @observer
 export default class Gear extends Component {
-  renderAccordion({ title, description, items }) {
-    const { classes } = this.props
+  renderAccordion(name, extras) {
+    const { classes, gear, gearDescriptions } = this.props
     return (
       <Accordion>
-        <AccordionSummary className={classes.accordionTitle} expandIcon={<ExpandMoreIcon />}>{title}</AccordionSummary>
+        <AccordionSummary className={classes.accordionTitle} expandIcon={<ExpandMoreIcon />}>{name}</AccordionSummary>
         <AccordionDetails>
-          <p>{description}</p>
+          <div>
+            {gearDescriptions
+              .find(x => x.name === name)
+              .description
+              .split('\n\n')
+              .map(x => (<p>{x}</p>))
+            }
+          </div>
           <Table>
             <TableHead>
               <TableRow>
@@ -48,10 +55,13 @@ export default class Gear extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-                {items
+                {gear
+                  .filter(x => {
+                    return x.kind === name || (extras && extras.includes(x.kind))
+                  })
                   .map(x => (
                     <TableRow key={x.id}>
-                      <TableCell className={classes.tableHeading} className={classes.item}>
+                      <TableCell className={classes.item}>
                         <LinkBlank to={x.url}>{x.name}</LinkBlank>
                       </TableCell>
                       <TableCell className={classes.description}>
@@ -67,7 +77,8 @@ export default class Gear extends Component {
     )
   }
   render() {
-    const { gear } = this.props
+    const { gear, gearDescriptions } = this.props
+    console.log(gearDescriptions.find(x => x.name === 'Stream Video').description1, gearDescriptions)
     return (
       <Container>
         <Row>
@@ -75,23 +86,23 @@ export default class Gear extends Component {
         </Row>
         <p>A list of gear that I recommend.</p>
         <div>
-          {/*this.renderAccordion({ title: 'Primary PC', description: '', items: gear.filter(x => x.kind === 'PC (Gaming/Workhorse)') })*/}
-          {/*this.renderAccordion({ title: 'Streaming PC', description: '', items: gear.filter(x => x.kind === 'Streaming PC') })*/}
-          {/*this.renderAccordion({ title: 'Development / Everyday Machine', description: '', items: gear.filter(x => x.kind === 'Development/Everyday Machine') })*/}
-          {/*this.renderAccordion({ title: 'Displays', description: '', items: gear.filter(x => x.kind === 'Displays') })*/}
-          {/*this.renderAccordion({ title: 'Mice', description: '', items: gear.filter(x => x.kind === 'Peripherals') })*/}
-          {/*this.renderAccordion({ title: 'Desktop Audio', description: '', items: gear.filter(x => x.kind === 'Desktop Audio') })*/}
-          {/*this.renderAccordion({ title: 'Home Theater Audio', description: '', items: gear.filter(x => x.kind === 'Home Theater Audio') })*/}
-          {this.renderAccordion({ title: 'Stream Video', description: '', items: gear.filter(x => x.kind === 'Stream Video/Digital Photography' || x.kind === 'Multi-Purpose Lenses') })}
-          {this.renderAccordion({ title: 'Stream Audio', description: '', items: gear.filter(x => x.kind === 'Stream Audio') })}
-          {this.renderAccordion({ title: 'Lighting', description: '', items: gear.filter(x => x.kind === 'Lighting') })}
-          {this.renderAccordion({ title: 'Film Photography', description: '', items: gear.filter(x => x.kind === 'Film Photography' || x.kind === 'Multi-Purpose Lenses') })}
-          {this.renderAccordion({ title: 'Film Development', description: '', items: gear.filter(x => x.kind === 'Film Development') })}
-          {this.renderAccordion({ title: 'Film Scanning', description: '', items: gear.filter(x => x.kind === 'Film Scanning') })}
-          {this.renderAccordion({ title: 'Soldering', description: '', items: gear.filter(x => x.kind === 'Electronics/Soldering') })}
-          {this.renderAccordion({ title: 'Nintendo Switch', description: '', items: gear.filter(x => x.kind === 'Nintendo Switch') })}
-          {/*this.renderAccordion({ title: 'Music', description: '', items: gear.filter(x => x.kind === 'Music') })*/}
-          {/*this.renderAccordion({ title: 'Other', description: '', items: gear.filter(x => x.kind === 'Other') })*/}
+          {/*this.renderAccordion({ title: 'Primary PC', description:, items: gear.filter(x => x.kind === 'PC (Primary)') })*/}
+          {/*this.renderAccordion({ title: 'Streaming PC', description:, items: gear.filter(x => x.kind === 'PC (Streaming)') })*/}
+          {/*this.renderAccordion({ title: 'Development / Everyday Machine', description:, items: gear.filter(x => x.kind === 'Everyday Machine') })*/}
+          {/*this.renderAccordion({ title: 'Displays', description:, items: gear.filter(x => x.kind === 'Displays') })*/}
+          {/*this.renderAccordion({ title: 'Mice', description:, items: gear.filter(x => x.kind === 'Mice') })*/}
+          {/*this.renderAccordion({ title: 'Desktop Audio', description:, items: gear.filter(x => x.kind === 'Desktop Audio') })*/}
+          {/*this.renderAccordion({ title: 'Home Theater Audio', description:, items: gear.filter(x => x.kind === 'Home Theater Audio') })*/}
+          {this.renderAccordion('Stream Video')}
+          {this.renderAccordion('Stream Audio')}
+          {this.renderAccordion('Lighting')}
+          {this.renderAccordion('Soldering')}
+          {/*this.renderAccordion('Film Photography')*/}
+          {this.renderAccordion('Film Development')}
+          {this.renderAccordion('Film Scanning')}
+          {this.renderAccordion('Nintendo Switch')}
+          {/*this.renderAccordion({ title: 'Music', description: gearDescriptions.find(x => x.name === 'Stream Video'), items: gear.filter(x => x.kind === 'Music') })*/}
+          {/*this.renderAccordion({ title: 'Other', description: gearDescriptions.find(x => x.name === 'Stream Video'), items: gear.filter(x => x.kind === 'Other') })*/}
         </div>
       </Container>
     )

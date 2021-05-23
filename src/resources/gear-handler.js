@@ -3,9 +3,9 @@ import Config from 'react-storefront/Config'
 import fetch from 'fetch'
 import globalState from '../globalState'
 
-const gearGenerator = async function (assetHost) {
+const gearGenerator = async function (file, assetHost) {
   try {
-    const gearResponse = await fetch(`${assetHost}/gear/gear.json?${Date.now()}`)
+    const gearResponse = await fetch(`${assetHost}/gear/${file}.json?${Date.now()}`)
     const gearResponseJson = await gearResponse.json()
     return gearResponseJson
   } catch (e) {
@@ -15,8 +15,15 @@ const gearGenerator = async function (assetHost) {
 }
 
 export default async function gearHandler(params, request, response) {
+  const contentResponses = await Promise.all([
+    gearGenerator('gear', Config.get('assetHost')),
+    gearGenerator('gear-desc', Config.get('assetHost')),
+  ])
+  const gear = contentResponses[0]
+  const gearDescriptions = contentResponses[1]
   return withGlobalState(request, globalState, {
     title: `Gear ${globalState().title}`,
-    gear: await gearGenerator(Config.get('assetHost')),
+    gear,
+    gearDescriptions,
   })
 }

@@ -212,6 +212,11 @@ const theme = createTheme({
         margin: '20px 0',
       },
     },
+    MuiExpansionPanelDetails: {
+      root: {
+        display: 'block',
+      },
+    },
   }
 })
 
