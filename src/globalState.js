@@ -61,6 +61,8 @@ export default () => {
     photos: [],
     links: [],
     commands: [],
+    gear: [],
+    gearDescriptions: [],
     builds: [],
     buildFiltersActive: {},
   }

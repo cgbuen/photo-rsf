@@ -195,6 +195,28 @@ const theme = createTheme({
         fontSize: 16,
       },
     },
+    MuiExpansionPanel: {
+      root: {
+        background: 'rgba(128, 128, 128, .2)',
+      },
+      expanded: {
+        margin: 0,
+      },
+    },
+    MuiExpansionPanelSummary: {
+      root: {
+        background: 'rgba(128, 128, 128, .2)',
+        marginTop: 1,
+      },
+      content: {
+        margin: '20px 0',
+      },
+    },
+    MuiExpansionPanelDetails: {
+      root: {
+        display: 'block',
+      },
+    },
   }
 })
 

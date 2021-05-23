@@ -48,6 +48,11 @@ export default new Router()
     fromClient({ page: 'Commands' }),
     fromServer('./resources/commands-handler')
   )
+  .get('/resources/gear',
+    cacheHandler,
+    fromClient({ page: 'Gear' }),
+    fromServer('./resources/gear-handler')
+  )
   .fallback(
     // when no route matches, pull in content from the upstream site
     // for a working example, go to /help/home

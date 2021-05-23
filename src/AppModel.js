@@ -8,6 +8,8 @@ import ProjectModel from './projects/ProjectModel'
 import PhotoModel from './photography/PhotoModel'
 import LinkModel from './resources/LinkModel'
 import CommandModel from './resources/CommandModel'
+import ItemModel from './resources/ItemModel'
+import DescriptionModel from './resources/DescriptionModel'
 import BuildModel from './collection/BuildModel'
 import BuildFilterModel from './collection/BuildFilterModel'
 
@@ -23,6 +25,8 @@ const AppModel = types.compose(
       photos: types.optional(types.array(PhotoModel), []),
       links: types.optional(types.array(LinkModel), []),
       commands: types.optional(types.array(CommandModel), []),
+      gear: types.optional(types.array(ItemModel), []),
+      gearDescriptions: types.optional(types.array(DescriptionModel), []),
       builds: types.optional(types.array(BuildModel), []),
       buildFiltersActive: types.optional(BuildFilterModel, {}),
       openBuild: types.optional(BuildModel, {}),
