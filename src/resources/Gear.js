@@ -35,7 +35,6 @@ import TableCell from '@material-ui/core/TableCell'
 export default class Gear extends Component {
   renderAccordion(name, extras) {
     const { classes, gear, gearDescriptions } = this.props
-    console.log(gearDescriptions)
     return (
       <Accordion>
         <AccordionSummary className={classes.accordionTitle} expandIcon={<ExpandMoreIcon />}>{name}</AccordionSummary>
