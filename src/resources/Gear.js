@@ -40,11 +40,10 @@ export default class Gear extends Component {
         <AccordionSummary className={classes.accordionTitle} expandIcon={<ExpandMoreIcon />}>{name}</AccordionSummary>
         <AccordionDetails>
           <div>
-            {gearDescriptions
-              .find(x => x.name === name)
+            {(gearDescriptions.find(x => x.name === name) || { description: '' })
               .description
               .split('\n\n')
-              .map(x => (<p>{x}</p>))
+              .map(x => (<p key={x.id}>{x}</p>))
             }
           </div>
           <Table>
@@ -78,7 +77,6 @@ export default class Gear extends Component {
   }
   render() {
     const { gear, gearDescriptions } = this.props
-    console.log(gearDescriptions.find(x => x.name === 'Stream Video').description1, gearDescriptions)
     return (
       <Container>
         <Row>
@@ -86,13 +84,13 @@ export default class Gear extends Component {
         </Row>
         <p>A list of gear that I recommend.</p>
         <div>
-          {/*this.renderAccordion({ title: 'Primary PC', description:, items: gear.filter(x => x.kind === 'PC (Primary)') })*/}
-          {/*this.renderAccordion({ title: 'Streaming PC', description:, items: gear.filter(x => x.kind === 'PC (Streaming)') })*/}
-          {/*this.renderAccordion({ title: 'Development / Everyday Machine', description:, items: gear.filter(x => x.kind === 'Everyday Machine') })*/}
-          {/*this.renderAccordion({ title: 'Displays', description:, items: gear.filter(x => x.kind === 'Displays') })*/}
-          {/*this.renderAccordion({ title: 'Mice', description:, items: gear.filter(x => x.kind === 'Mice') })*/}
-          {/*this.renderAccordion({ title: 'Desktop Audio', description:, items: gear.filter(x => x.kind === 'Desktop Audio') })*/}
-          {/*this.renderAccordion({ title: 'Home Theater Audio', description:, items: gear.filter(x => x.kind === 'Home Theater Audio') })*/}
+          {/*this.renderAccordion('Primary PC')*/}
+          {/*this.renderAccordion('Streaming PC')*/}
+          {/*this.renderAccordion('Development / Everyday Machine')*/}
+          {/*this.renderAccordion('Displays')*/}
+          {/*this.renderAccordion('Mice')*/}
+          {/*this.renderAccordion('Desktop Audio')*/}
+          {/*this.renderAccordion('Home Theater Audio')*/}
           {this.renderAccordion('Stream Video')}
           {this.renderAccordion('Stream Audio')}
           {this.renderAccordion('Lighting')}
@@ -101,8 +99,8 @@ export default class Gear extends Component {
           {this.renderAccordion('Film Development')}
           {this.renderAccordion('Film Scanning')}
           {this.renderAccordion('Nintendo Switch')}
-          {/*this.renderAccordion({ title: 'Music', description: gearDescriptions.find(x => x.name === 'Stream Video'), items: gear.filter(x => x.kind === 'Music') })*/}
-          {/*this.renderAccordion({ title: 'Other', description: gearDescriptions.find(x => x.name === 'Stream Video'), items: gear.filter(x => x.kind === 'Other') })*/}
+          {/*this.renderAccordion('Music')*/}
+          {/*this.renderAccordion('Other')*/}
         </div>
       </Container>
     )
