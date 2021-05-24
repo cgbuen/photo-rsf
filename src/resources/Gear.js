@@ -35,16 +35,16 @@ import TableCell from '@material-ui/core/TableCell'
 export default class Gear extends Component {
   renderAccordion(name, extras) {
     const { classes, gear, gearDescriptions } = this.props
+    console.log(gearDescriptions)
     return (
       <Accordion>
         <AccordionSummary className={classes.accordionTitle} expandIcon={<ExpandMoreIcon />}>{name}</AccordionSummary>
         <AccordionDetails>
           <div>
-            {gearDescriptions
-              .find(x => x.name === name)
+            {(gearDescriptions.find(x => x.name === name) || { description: '' })
               .description
               .split('\n\n')
-              .map(x => (<p>{x}</p>))
+              .map(x => (<p key={x.id}>{x}</p>))
             }
           </div>
           <Table>
