@@ -102,6 +102,13 @@ export default class GoogleAnalyticsTarget extends CommerceAnalyticsTarget {
     })
   }
 
+  sendClassic({ dimension1, dimension2, dimension3 }) {
+    setImmediate(() => {
+      const { ga } = this
+      ga('send', 'event', window.location.pathname, dimension1, dimension2, dimension3)
+    })
+  }
+
   getAmpAnalyticsType() {
     return 'googleanalytics'
   }
@@ -115,8 +122,7 @@ export default class GoogleAnalyticsTarget extends CommerceAnalyticsTarget {
   }
 
   filterClick({ name, filterStatus }) {
-    this.send({
-      event: 'event',
+    this.sendClassic({
       dimension1: 'filterClick',
       dimension2: name,
       dimension3: filterStatus,
@@ -124,19 +130,17 @@ export default class GoogleAnalyticsTarget extends CommerceAnalyticsTarget {
   }
 
   keyboardClick({ name }) {
-    this.send({
-      event: 'event',
+    this.sendClassic({
       dimension1: 'keyboardClick',
       dimension2: name,
     }) 
   }
 
   modalIconClick({ name, iconType }) {
-    this.send({
-      event: 'event',
+    this.sendClassic({
       dimension1: 'modalIconClick',
       dimension2: name,
-      dimension4: iconType,
+      dimension3: iconType,
     }) 
   }
 }
