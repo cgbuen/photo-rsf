@@ -113,4 +113,27 @@ export default class GoogleAnalyticsTarget extends CommerceAnalyticsTarget {
       }
     }
   }
+
+  filterClick({ name, filterStatus }) {
+    this.send({
+      event: 'filterClick',
+      dimension1: name,
+      dimension2: filterStatus,
+    }) 
+  }
+
+  keyboardClick({ name }) {
+    this.send({
+      event: 'keyboardClick',
+      dimension1: name,
+    }) 
+  }
+
+  modalIconClick({ name, iconType }) {
+    this.send({
+      event: 'modalIconClick',
+      dimension1: name,
+      dimension3: iconType,
+    }) 
+  }
 }

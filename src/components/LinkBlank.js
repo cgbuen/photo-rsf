@@ -15,9 +15,9 @@ import classnames from 'classnames'
 @observer
 export default class LinkBlank extends Component {
   render() {
-    const { classes, className, to, children } = this.props
+    const { classes, className, to, onClick, children } = this.props
     return (
-      <a className={classnames(classes.link, className)} href={to} target="_blank" rel="noopener noreferrer">{children}</a>
+      <a className={classnames(classes.link, className)} href={to} onClick={onClick} target="_blank" rel="noopener noreferrer">{children}</a>
     )
   }
 }
