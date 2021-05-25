@@ -167,6 +167,9 @@ import Sound from '@material-ui/icons/VolumeUp'
         color: '#69c',
       }
     },
+    descriptionDetail: {
+      textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
+    },
     linkContainerWrapper: {
       position: 'relative',
     },
@@ -179,21 +182,6 @@ import Sound from '@material-ui/icons/VolumeUp'
         textShadow: 'none',
        },
     },
-    linkContainerCheat: {
-      left: 0,
-      position: 'absolute',
-      textShadow: 'none',
-      top: 0,
-      '& $descriptionLink': {
-        color: 'transparent',
-        textDecoration: 'underline',
-        textDecorationColor: '#69c',
-        textDecorationThickness: '2px',
-        '@media (max-width:925px)': {
-          textDecorationThickness: '1px',
-        },
-      },
-    },
     featureIcon: {
       fill: '#69c',
       filter: 'drop-shadow(2px 1px 1px rgba(255, 255, 255, .3))',
@@ -204,6 +192,24 @@ import Sound from '@material-ui/icons/VolumeUp'
       width: 16,
       '@media (max-width:925px)': {
         filter: 'none',
+      },
+    },
+    linkContainerCheat: {
+      left: 0,
+      position: 'absolute',
+      textShadow: 'none',
+      top: 0,
+      '& $featureIcon': {
+        visibility: 'hidden',
+      },
+      '& $descriptionLink': {
+        color: 'transparent',
+        textDecoration: 'underline',
+        textDecorationColor: '#69c',
+        textDecorationThickness: '2px',
+        '@media (max-width:925px)': {
+          textDecorationThickness: '1px',
+        },
       },
     },
   })
