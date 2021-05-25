@@ -15,6 +15,9 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogClose from 'react-storefront/DialogClose'
+import Instagram from '../assets/instagram.svg'
+import Build from '@material-ui/icons/Build'
+import Sound from '@material-ui/icons/VolumeUp'
 
 @withStyles(
   theme => ({
@@ -115,7 +118,6 @@ import DialogClose from 'react-storefront/DialogClose'
       maxWidth: 250,
       position: 'absolute',
       right: 15,
-      textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
       '&.topLeft': {
         bottom: 'auto',
         left: 15,
@@ -135,6 +137,9 @@ import DialogClose from 'react-storefront/DialogClose'
         maxWidth: 'none',
         position: 'static',
       },
+    },
+    descriptionTitle: {
+      textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
     },
     descriptionColumnWrapper: {
       width: 'auto',
@@ -156,8 +161,56 @@ import DialogClose from 'react-storefront/DialogClose'
     },
     descriptionLink: {
       color: 'white',
+      display: 'block',
       fontWeight: 'bold',
-      textDecorationColor: '#69c',
+      '@media (max-width:925px)': {
+        color: '#69c',
+      }
+    },
+    descriptionDetail: {
+      textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
+    },
+    linkContainerWrapper: {
+      position: 'relative',
+    },
+    linkContainer: {
+      textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
+      '& $descriptionLink': {
+        textDecoration: 'none',
+      },
+      '@media (max-width:925px)': {
+        textShadow: 'none',
+       },
+    },
+    featureIcon: {
+      fill: '#69c',
+      filter: 'drop-shadow(2px 1px 1px rgba(255, 255, 255, .3))',
+      display: 'inline-block',
+      height: 16,
+      marginRight: 5,
+      verticalAlign: 'middle',
+      width: 16,
+      '@media (max-width:925px)': {
+        filter: 'none',
+      },
+    },
+    linkContainerCheat: {
+      left: 0,
+      position: 'absolute',
+      textShadow: 'none',
+      top: 0,
+      '& $featureIcon': {
+        visibility: 'hidden',
+      },
+      '& $descriptionLink': {
+        color: 'transparent',
+        textDecoration: 'underline',
+        textDecorationColor: '#69c',
+        textDecorationThickness: '2px',
+        '@media (max-width:925px)': {
+          textDecorationThickness: '1px',
+        },
+      },
     },
   })
 )
@@ -169,30 +222,26 @@ export default class Collection extends Component {
     return x && !x.includes('TBD') && !x.includes('?') && !x.includes('[planned]') && !x.includes('[prop]') && !x.includes('[stock]') && !x.includes('Stock') && !x.includes('N/A')
   }
 
-  buildLinks(x) {
+  buildLinks(x, cheat) {
     const { classes } = this.props
     const links = []
     if (x.build_video && !x.type_test) {
       links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}>Build video</LinkBlank>))
     } else if (x.build_video && x.type_test && x.type_test.includes(x.build_video)) {
-      links.push((
-        <span>
-          <LinkBlank className={classes.descriptionLink} to={x.build_video}>Build video</LinkBlank>{" "}
-          (<LinkBlank className={classes.descriptionLink} to={x.type_test}>type test timestamp</LinkBlank>)
-        </span>
-      ))
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}><Build className={classes.featureIcon} />Build video</LinkBlank>))
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}><Sound className={classes.featureIcon} />Type test (timestamped)</LinkBlank>))
     } else if (x.build_video && x.type_test && !x.type_test.includes(x.build_video)) {
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}>Build video</LinkBlank>))
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}>type test</LinkBlank>))
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}><Build className={classes.featureIcon} />Build video</LinkBlank>))
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}><Sound className={classes.featureIcon} />Type test</LinkBlank>))
     } else if (!x.build_video && x.type_test) {
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}>Type test</LinkBlank>))
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}><Sound className={classes.featureIcon} />Type test</LinkBlank>))
     }
     if (this.showable(x.instagram)) {
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.instagram}>Instagram post</LinkBlank>))
+      links.push((<LinkBlank className={classes.descriptionLink} to={x.instagram}><Instagram className={classes.featureIcon} />Instagram post</LinkBlank>))
     }
     return (
-      <div>
-        {links.reduce((acc, cv) => (<>{acc}{acc ? ', ' : ''}{cv}</>), '')}
+      <div className={classnames(classes.linkContainer, cheat && classes.linkContainerCheat)}>
+        {links}
       </div>
     )
   }
@@ -202,16 +251,19 @@ export default class Collection extends Component {
     return (
       <div className={classes.descriptionColumnWrapper}>
         <div className={classes.descriptionColumn}>
-          <div>Purchased: {x.date_bought}</div>
-          {this.showable(x.date_built) && <div>Built: {x.date_built}</div>}
-          <div>Color: {x.color}</div>
-          {this.showable(x.plate) && <div>Plate: {x.plate}</div>}
-          {this.showable(x.switches) && <div>Switches: {x.switches}</div>}
+          <div className={classes.descriptionDetail}>Purchased: {x.date_bought}</div>
+          {this.showable(x.date_built) && <div className={classes.descriptionDetail}>Built: {x.date_built}</div>}
+          <div className={classes.descriptionDetail}>Color: {x.color}</div>
+          {this.showable(x.plate) && <div className={classes.descriptionDetail}>Plate: {x.plate}</div>}
+          {this.showable(x.switches) && <div className={classes.descriptionDetail}>Switches: {x.switches}</div>}
         </div>
         <div className={classes.descriptionColumn}>
-          {this.showable(x.keycaps) && <div>Keycaps: {x.keycaps}</div>}
-          {x.notes && (<div>Notes: {x.notes}</div>)}
-          {this.buildLinks(x)}
+          {this.showable(x.keycaps) && <div className={classes.descriptionDetail}>Keycaps: {x.keycaps}</div>}
+          {x.notes && (<div className={classes.descriptionDetail}>Notes: {x.notes}</div>)}
+          <div className={classes.linkContainerWrapper}>
+            {this.buildLinks(x, false)}
+            {this.buildLinks(x, true)}
+          </div>
         </div>
       </div>
     )
@@ -271,6 +323,9 @@ export default class Collection extends Component {
                 key={x.id}
                 name={x.name}
                 description={x.date_bought}
+                instagram={x.instagram}
+                buildVideo={x.build_video}
+                typeTest={x.type_test}
                 src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 555 })}
                 onClick={() => this.openDialog(x)}
               />
@@ -290,7 +345,7 @@ export default class Collection extends Component {
             <div className={classes.dialogImgWrapper}>
               <img className={classes.modalImg} alt={classes.name} src={openBuild && openBuild.src && createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
               <div className={classnames(classes.descriptionBox, openBuild.blank_space || 'bottomRight')}>
-                <div><strong>{openBuild.name}</strong></div>
+                <div className={classes.descriptionTitle}><strong>{openBuild.name}.</strong></div>
                 {this.descriptionize(openBuild)}
               </div>
             </div>
