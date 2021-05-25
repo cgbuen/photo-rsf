@@ -58,7 +58,11 @@ import Sound from '@material-ui/icons/VolumeUp'
       filter: 'drop-shadow(2px 1px 1px rgba(255, 255, 255, .3))',
       display: 'inline-block',
       height: 20,
+      verticalAlign: 'middle',
       width: 20,
+    },
+    build: {
+      height: 17,
     },
   })
 )
