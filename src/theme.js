@@ -71,6 +71,9 @@ const theme = createTheme({
       },
     },
     MuiTabs: {
+      root: {
+        overflow: 'visible',
+      },
       scroller: {
         marginBottom: '0 !important',
       }
@@ -137,7 +140,9 @@ const theme = createTheme({
     },
     MuiPrivateTabScrollButton: {
       root: {
-        width: 0
+        margin: '0 20px',
+        width: 0,
+        zIndex: 1,
       }
     },
     MuiIconButton: {
