@@ -105,7 +105,7 @@ export default class GoogleAnalyticsTarget extends CommerceAnalyticsTarget {
   sendClassic({ dimension1, dimension2, dimension3 }) {
     setImmediate(() => {
       const { ga } = this
-      ga('send', 'event', window.location.pathname, dimension1, dimension2, dimension3)
+      ga('send', 'event', dimension1, dimension2, dimension3, 1)
     })
   }
 
