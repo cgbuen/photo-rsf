@@ -18,6 +18,8 @@ import DialogClose from 'react-storefront/DialogClose'
 import Instagram from '../assets/instagram.svg'
 import Build from '@material-ui/icons/Build'
 import Sound from '@material-ui/icons/VolumeUp'
+import Track from 'react-storefront/Track'
+import analytics from 'react-storefront/analytics'
 
 @withStyles(
   theme => ({
@@ -222,26 +224,61 @@ export default class Collection extends Component {
     return x && !x.includes('TBD') && !x.includes('?') && !x.includes('[planned]') && !x.includes('[prop]') && !x.includes('[stock]') && !x.includes('Stock') && !x.includes('N/A')
   }
 
+  modalIconClick(x) {
+    analytics.modalIconClick(x)
+  }
+
   buildLinks(x, cheat) {
     const { classes } = this.props
     const links = []
     if (x.build_video && !x.type_test) {
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}>Build video</LinkBlank>))
+      links.push(
+        <LinkBlank className={classes.descriptionLink} to={x.build_video} onClick={() => this.modalIconClick({name: x.name, iconType: 'build'})}>Build video</LinkBlank>
+      )
     } else if (x.build_video && x.type_test && x.type_test.includes(x.build_video)) {
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}><Build className={classes.featureIcon} />Build video</LinkBlank>))
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}><Sound className={classes.featureIcon} />Type test (timestamped)</LinkBlank>))
+      links.push(
+        <LinkBlank className={classes.descriptionLink} to={x.build_video} onClick={() => this.modalIconClick({name: x.name, iconType: 'build'})}>
+          <Build className={classes.featureIcon} />
+          Build video
+        </LinkBlank>
+      )
+      links.push(
+        <LinkBlank className={classes.descriptionLink} to={x.type_test} onClick={() => this.modalIconClick({name: x.name, iconType: 'type test'})}>
+          <Sound className={classes.featureIcon} />
+          Type test (timestamped)
+        </LinkBlank>)
     } else if (x.build_video && x.type_test && !x.type_test.includes(x.build_video)) {
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.build_video}><Build className={classes.featureIcon} />Build video</LinkBlank>))
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}><Sound className={classes.featureIcon} />Type test</LinkBlank>))
+      links.push(
+        <LinkBlank className={classes.descriptionLink} to={x.build_video} onClick={() => this.modalIconClick({name: x.name, iconType: 'build'})}>
+          <Build className={classes.featureIcon} />
+          Build video
+        </LinkBlank>
+      )
+      links.push(
+        <LinkBlank className={classes.descriptionLink} to={x.type_test} onClick={() => this.modalIconClick({name: x.name, iconType: 'type test'})}>
+          <Sound className={classes.featureIcon} />
+          Type test
+        </LinkBlank>
+      )
     } else if (!x.build_video && x.type_test) {
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.type_test}><Sound className={classes.featureIcon} />Type test</LinkBlank>))
+      links.push(
+        <LinkBlank className={classes.descriptionLink} to={x.type_test} onClick={() => this.modalIconClick({name: x.name, iconType: 'type test'})}>
+          <Sound className={classes.featureIcon} />
+          Type test
+        </LinkBlank>
+      )
     }
     if (this.showable(x.instagram)) {
-      links.push((<LinkBlank className={classes.descriptionLink} to={x.instagram}><Instagram className={classes.featureIcon} />Instagram post</LinkBlank>))
+      links.push(
+        <LinkBlank className={classes.descriptionLink} to={x.instagram} onClick={() => this.modalIconClick({name: x.name, iconType: 'instagram'})}>
+          <Instagram className={classes.featureIcon} />
+          Instagram post
+        </LinkBlank>
+      )
     }
     return (
       <div className={classnames(classes.linkContainer, cheat && classes.linkContainerCheat)}>
-        {links}
+        {links.map((y, i) => (<div key={i}>{y}</div>))}
       </div>
     )
   }
@@ -272,13 +309,15 @@ export default class Collection extends Component {
   renderFilter({ id, name }) {
     const { app, classes, builds, buildFiltersActive } = this.props
     return (
-      <div className={classnames(classes.filter, buildFiltersActive[id] && classes.filterActive)} onClick={() => app.toggleFilteredBuilds(id)}>
-        <div className={classes.icon}>
-          <CheckBoxOutlineBlankSharpIcon className={classes.iconUnchecked} />
-          <CheckBoxSharpIcon className={classes.iconChecked} />
+      <Track event="filterClick" name={name} filterStatus={`${!buildFiltersActive[id]}`}>
+        <div className={classnames(classes.filter, buildFiltersActive[id] && classes.filterActive)} onClick={() => app.toggleFilteredBuilds(id)}>
+          <div className={classes.icon}>
+            <CheckBoxOutlineBlankSharpIcon className={classes.iconUnchecked} />
+            <CheckBoxSharpIcon className={classes.iconChecked} />
+          </div>
+          <div className={classes.filterText}>{name} ({builds.filter(x => x.assembly_variant.includes('A') && x.build_status === id).length})</div>
         </div>
-        <div className={classes.filterText}>{name} ({builds.filter(x => x.assembly_variant.includes('A') && x.build_status === id).length})</div>
-      </div>
+      </Track>
     )
   }
 
@@ -318,17 +357,19 @@ export default class Collection extends Component {
           {builds
             .map(x => (
               x.loaded &&
-              <GridSquare
-                className={classnames(!x.active && classes.hide, !x.src.includes('unavailable') && classes.clickable)}
-                key={x.id}
-                name={x.name}
-                description={x.date_bought}
-                instagram={x.instagram}
-                buildVideo={x.build_video}
-                typeTest={x.type_test}
-                src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 555 })}
-                onClick={() => this.openDialog(x)}
-              />
+              <Track key={x.id} event="keyboardClick" name={x.name}>
+                <GridSquare
+                  className={classnames(!x.active && classes.hide, !x.src.includes('unavailable') && classes.clickable)}
+                  key={x.id}
+                  name={x.name}
+                  description={x.date_bought}
+                  instagram={x.instagram}
+                  buildVideo={x.build_video}
+                  typeTest={x.type_test}
+                  src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 555 })}
+                  onClick={() => this.openDialog(x)}
+                />
+              </Track>
             ))
           }
           {builds.filter(x => x.active).length % 3 === 2 && (<div className={classes.stubBox}></div>)}

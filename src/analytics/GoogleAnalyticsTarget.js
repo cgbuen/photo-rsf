@@ -102,6 +102,13 @@ export default class GoogleAnalyticsTarget extends CommerceAnalyticsTarget {
     })
   }
 
+  sendClassic({ dimension1, dimension2, dimension3 }) {
+    setImmediate(() => {
+      const { ga } = this
+      ga('send', 'event', dimension1, dimension2, dimension3, 1)
+    })
+  }
+
   getAmpAnalyticsType() {
     return 'googleanalytics'
   }
@@ -112,5 +119,28 @@ export default class GoogleAnalyticsTarget extends CommerceAnalyticsTarget {
         account: app.config.gaApiKey
       }
     }
+  }
+
+  filterClick({ name, filterStatus }) {
+    this.sendClassic({
+      dimension1: 'filterClick',
+      dimension2: name,
+      dimension3: filterStatus,
+    }) 
+  }
+
+  keyboardClick({ name }) {
+    this.sendClassic({
+      dimension1: 'keyboardClick',
+      dimension2: name,
+    }) 
+  }
+
+  modalIconClick({ name, iconType }) {
+    this.sendClassic({
+      dimension1: 'modalIconClick',
+      dimension2: name,
+      dimension3: iconType,
+    }) 
   }
 }

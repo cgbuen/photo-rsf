@@ -40,9 +40,7 @@ import Sound from '@material-ui/icons/VolumeUp'
       width: 250,
       '@media (max-width:630px)': {
         display: 'block',
-        marginBottom: '0 auto 15px',
-        padding: '0 48px',
-        width: '100%',
+        margin: '0 auto 5px',
       },
     },
     cardImg: {
