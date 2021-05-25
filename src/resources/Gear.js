@@ -76,7 +76,6 @@ export default class Gear extends Component {
     )
   }
   render() {
-    const { gear, gearDescriptions } = this.props
     return (
       <Container>
         <Row>

@@ -184,6 +184,7 @@ const theme = createTheme({
     MuiTableCell: {
       root: {
         borderBottom: '1px solid rgba(128, 128, 128, .5)',
+        paddingRight: 10,
       },
       head: {
         color: 'white',
@@ -193,6 +194,13 @@ const theme = createTheme({
       body: {
         color: 'white',
         fontSize: 16,
+      },
+    },
+    MuiTableRow: {
+      root: {
+        '&:last-child td': {
+          borderBottom: 0,
+        },
       },
     },
     MuiExpansionPanel: {

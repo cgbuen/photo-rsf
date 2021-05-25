@@ -3,6 +3,9 @@ import Row from 'react-storefront/Row'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { inject, observer } from 'mobx-react'
 import classnames from 'classnames'
+import Instagram from '../assets/instagram.svg'
+import Build from '@material-ui/icons/Build'
+import Sound from '@material-ui/icons/VolumeUp'
 
 @withStyles(
   theme => ({
@@ -33,6 +36,7 @@ import classnames from 'classnames'
     },
     cardFigure: {
       marginBottom: 5,
+      position: 'relative',
       width: 250,
       '@media (max-width:630px)': {
         display: 'block',
@@ -44,17 +48,36 @@ import classnames from 'classnames'
     cardImg: {
       display: 'block',
     },
+    iconContainer: {
+      position: 'absolute',
+      bottom: 5,
+      right: 5,
+    },
+    icon: {
+      fill: '#69c',
+      filter: 'drop-shadow(2px 1px 1px rgba(255, 255, 255, .3))',
+      display: 'inline-block',
+      height: 20,
+      width: 20,
+    },
   })
 )
 @inject('app')
 @observer
 export default class GridSquare extends Component {
   render() {
-    const { classes, className, src, name, description, onClick } = this.props
+    const { classes, className, src, name, description, instagram, buildVideo, typeTest, onClick } = this.props
     return (
       <Row className={classnames(classes.card, className)} onClick={onClick}>
         <div className={classes.cardBody}>
-          <img className={classnames(classes.cardFigure, classes.cardImg)} src={src} alt={name} width="250" />
+          <div className={classes.cardFigure}>
+            <img className={classes.cardImg} src={src} alt={name} width="250" />
+            <div className={classes.iconContainer}>
+              {buildVideo && <Build className={classnames(classes.icon, classes.build)} />}
+              {typeTest && <Sound className={classnames(classes.icon, classes.sound)} />}
+              {instagram && <Instagram className={classnames(classes.icon, classes.instagram)} />}
+            </div>
+          </div>
         </div>
         <div className={classes.cardTitle}>{name}</div>
         <div className={classes.cardDescription}>{description}</div>
