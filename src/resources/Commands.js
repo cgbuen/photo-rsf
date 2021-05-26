@@ -14,9 +14,36 @@ import TableCell from '@material-ui/core/TableCell'
 
 @withStyles(
   theme => ({
-    tableHeading: {
-      fontSize: 15,
+    command: {
+      width: '20%',
+      minWidth: 180,
+      '@media (max-width:430px)': {
+        minWidth: 0,
+        paddingLeft: 10,
+      },
+    },
+    description: {
+      width: '80%',
+      '@media (max-width:430px)': {
+        paddingLeft: 0,
+        wordBreak: 'break-word',
+      },
+    },
+    code: {
+      background: 'rgba(128, 128, 128, .5)',
+      fontSize: 14,
       fontWeight: 'bold',
+      padding: '3px 6px 3px 5px',
+    },
+    aliasesTitle: {
+      marginRight: 3,
+    },
+    aliases: {
+      '& code': {
+        background: 'rgba(128, 128, 128, .2)',
+        color: 'rgba(255, 255, 255, .8)',
+        fontSize: 13,
+      },
     }
   })
 )
@@ -24,32 +51,54 @@ import TableCell from '@material-ui/core/TableCell'
 @inject(({ app }) => ({ app, commands: app.commands }))
 @observer
 export default class Commands extends Component {
+  codifyCommands(str) {
+    const { classes } = this.props
+    return (
+      str.split(/(!.*?)(\W|$)/).map((x, i) => {
+        if (x.startsWith('!')) {
+          return <code key={i} className={classes.code}>{x}</code>
+        } else {
+          return x
+        }
+      })
+    )
+  }
+
   renderMainDescription(x) {
-    if (x.href && x.command !== 'commands') {
+    if (x.href && x.command === 'chrissucks') {
+      const separator = 'Many slight misspelling variants'
+      const arr = x.description.split(separator)
+      return (
+        <p>
+        {this.codifyCommands(arr[0])}{" "}
+        <LinkBlank to={x.href}>{separator}</LinkBlank>{" "}
+        {this.codifyCommands(arr[1])}
+        </p>
+      )
+    } else if (x.href && x.command !== 'commands') {
       const arr = x.description.split('ink to')
       return (
         <p>
-          <LinkBlank to={x.href}>{arr[0]}ink</LinkBlank> to {arr[1]}
+          <LinkBlank to={x.href}>{this.codifyCommands(arr[0])}ink</LinkBlank> to {this.codifyCommands(arr[1])}
         </p>
       )
     } else {
-      return (<p>{x.description}</p>)
+      return (<p>{this.codifyCommands(x.description)}</p>)
     }
   }
 
   renderAliases(x) {
+    const { classes } = this.props
+    const updatedAliases = x.aliases
+      .split(', ')
+      .map(y => {
+        return `${y.includes('many others') ? '' : '!'}${y}`
+      })
+      .join(', ')
     return x.aliases && (
-      <p>
-        <i>
-          Aliases:{" "}
-          {x.aliases
-            .split(', ')
-            .map(y => {
-              return `${y.includes('many others') ? '' : '!'}${y}`
-            })
-            .join(', ')
-          }
-      </i>
+      <p className={classes.aliases}>
+        <i className={classes.aliasesTitle}>Alias{x.aliases.split(',').length === 1 ? '' : 'es'}:</i>{""}
+        {this.codifyCommands(updatedAliases)}
       </p>
     )
   }
@@ -75,8 +124,10 @@ export default class Commands extends Component {
                   .sort((a, b) => a.command.localeCompare(b.command))
                   .map(x => (
                     <TableRow key={x.id}>
-                      <TableCell className={classes.tableHeading}>!{x.command}</TableCell>
-                      <TableCell>
+                      <TableCell className={classes.command}>
+                        <code className={classes.code}>!{x.command}</code>
+                      </TableCell>
+                      <TableCell className={classes.description}>
                         {this.renderMainDescription(x)}
                         {this.renderAliases(x)}
                       </TableCell>
