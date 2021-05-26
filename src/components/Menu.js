@@ -22,7 +22,9 @@ export const styles = theme => ({
     zIndex: theme.zIndex.modal + 20,
     display: 'flex',
     flexDirection: 'column',
-    borderTop: `${theme.headerHeight}px solid transparent`,
+    background: 'transparent',
+    pointerEvents: 'none',
+    boxShadow: 'none',
     'body.moov-safari &': {
       // Turning off momentum scrolling on iOS here to fix frozen body issue
       // Source: https://moovweb.atlassian.net/browse/PRPL-342
@@ -35,7 +37,7 @@ export const styles = theme => ({
     overflowY: 'auto',
     overflowX: 'hidden',
     maxHeight: '100%',
-    padding: 0
+    padding: 0,
   },
 
   ampList: {
@@ -90,10 +92,12 @@ export const styles = theme => ({
   },
 
   bodyWrap: {
+    background: '#151515',
     display: 'flex',
     flexDirection: 'row',
     transition: 'all ease-out .2s',
-    maxHeight: '100%'
+    marginTop: 65,
+    maxHeight: '100%',
   },
 
   hidden: {
@@ -112,7 +116,8 @@ export const styles = theme => ({
 
   link: {
     textDecoration: 'none',
-    color: 'inherit'
+    color: 'inherit',
+    pointerEvents: 'auto',
   },
 
   listItemImage: {
@@ -148,7 +153,20 @@ export const styles = theme => ({
     borderTop: 'none'
   },
 
-  modal: {},
+  modal: {
+    top: 64,
+    '& > div:first-child': {
+      top: 65,
+      '&:before': {
+        content: '""',
+        height: 64,
+        right: 0,
+        position: 'absolute',
+        top: -64,
+        width: 64,
+      }
+    }
+  },
 
   loadingIcon: {
     display: 'block'
@@ -321,6 +339,7 @@ export default class Menu extends Component {
       drawerWidth,
       persistent,
       simple,
+      rootHeader,
       ...others
     } = this.props
     const { amp, menu } = app
@@ -359,6 +378,7 @@ export default class Menu extends Component {
               modal: classes.modal
             }}
           >
+            {rootHeader}
             <MenuContext.Provider value={this.menuContext}>
               <Body drawerWidth={drawerWidth} simple={simple} {...others} />
             </MenuContext.Provider>

@@ -55,6 +55,11 @@ const theme = createTheme({
         background: '#151515',
       }
     },
+    RSFHeaderLogo: {
+      logoWrap: {
+        justifyContent: 'center',
+      },
+    },
     RSFMenuIcon: {
       root: {
         '& .rsf-hamburger-inner, & .rsf-hamburger-inner:before, & .rsf-hamburger-inner:after': {
