@@ -140,7 +140,6 @@ const theme = createTheme({
     },
     MuiPrivateTabScrollButton: {
       root: {
-        margin: '0 20px',
         width: 0,
         zIndex: 1,
       }
@@ -193,7 +192,7 @@ const theme = createTheme({
       },
       head: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
       },
       body: {
