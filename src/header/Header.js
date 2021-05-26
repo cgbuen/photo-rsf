@@ -46,6 +46,10 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 @inject('app')
 @observer
 export default class Header extends Component {
+  closeMenu() {
+    this.props.app.menu.close()
+  }
+
   render() {
     const { classes } = this.props
 
@@ -58,6 +62,11 @@ export default class Header extends Component {
         menuAlign="right"
         menuIconProps={{ label: false }}
       >
+        <HeaderLogo classes={{ logoWrap: classes.headerLogo }}>
+          <div>
+            <div className={classes.headline} onClick={() => this.closeMenu()}>cgbuen</div>
+          </div>
+        </HeaderLogo>
         <Hidden mdUp implementation="css">
           <Menu
             align="right"
@@ -67,11 +76,6 @@ export default class Header extends Component {
             }}
           />
         </Hidden>
-        <HeaderLogo classes={{ logoWrap: classes.headerLogo }}>
-          <div>
-            <div className={classes.headline}>cgbuen</div>
-          </div>
-        </HeaderLogo>
         <Hidden smDown implementation="css">
           <NavTabs
             classes={{

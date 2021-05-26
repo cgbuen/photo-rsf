@@ -4,7 +4,7 @@
  */
 import classnames from 'classnames'
 import Image from 'react-storefront/Image'
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { PropTypes as MobxPropTypes, inject, observer } from 'mobx-react'
 import Tabs from '@material-ui/core/Tabs'
