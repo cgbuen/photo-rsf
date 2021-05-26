@@ -155,7 +155,7 @@ export const styles = theme => ({
 
   modal: {
     top: 64,
-    '& div[class*="MuiBackdrop-root"]': {
+    '& > div:first-child': {
       top: 65,
       '&:before': {
         content: '""',
