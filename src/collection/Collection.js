@@ -291,10 +291,12 @@ export default class Collection extends Component {
           <div className={classes.descriptionDetail}>Purchased: {x.date_bought}</div>
           {this.showable(x.date_built) && <div className={classes.descriptionDetail}>Built: {x.date_built}</div>}
           <div className={classes.descriptionDetail}>Color: {x.color}</div>
+          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Layout: {x.layout}</div>}
+          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Mounting Style: {x.mount} mount</div>}
           {this.showable(x.plate) && <div className={classes.descriptionDetail}>Plate: {x.plate}</div>}
-          {this.showable(x.switches) && <div className={classes.descriptionDetail}>Switches: {x.switches}</div>}
         </div>
         <div className={classes.descriptionColumn}>
+          {this.showable(x.switches) && <div className={classes.descriptionDetail}>Switches: {x.switches}</div>}
           {this.showable(x.keycaps) && <div className={classes.descriptionDetail}>Keycaps: {x.keycaps}</div>}
           {x.notes && (<div className={classes.descriptionDetail}>Notes: {x.notes}</div>)}
           <div className={classes.linkContainerWrapper}>
@@ -362,7 +364,7 @@ export default class Collection extends Component {
                   className={classnames(!x.active && classes.hide, !x.src.includes('unavailable') && classes.clickable)}
                   key={x.id}
                   name={x.name}
-                  description={x.date_bought}
+                  description={['TBD', 'N/A'].includes(x.date_built) ? x.date_bought : x.date_built}
                   instagram={x.instagram}
                   buildVideo={x.build_video}
                   typeTest={x.type_test}

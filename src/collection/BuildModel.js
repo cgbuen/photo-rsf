@@ -13,6 +13,7 @@ const BuildModel = types
     notes: types.maybeNull(types.string),
     assembly_variant: types.maybeNull(types.string),
     color: types.maybeNull(types.string),
+    mount: types.maybeNull(types.string),
     layout: types.maybeNull(types.string),
     pcb: types.maybeNull(types.string),
     plate: types.maybeNull(types.string),
