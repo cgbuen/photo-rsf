@@ -16,6 +16,11 @@ const makeUsableBuildArray = function(array, assetHost) {
       }
       return build
     })
+    .sort((x, y) => {
+      const useDateX = ['TBD', 'N/A'].includes(x.date_built) ? x.date_bought: x.date_built
+      const useDateY = ['TBD', 'N/A'].includes(y.date_built) ? y.date_bought: y.date_built
+      return useDateX.localeCompare(useDateY)
+    })
     .reverse()
 }
 
