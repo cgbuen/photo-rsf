@@ -217,9 +217,16 @@ import analytics from 'react-storefront/analytics'
   })
 )
 @withAmp
-@inject(({ app }) => ({ app, social: app.social, builds: app.builds, buildFiltersActive: app.buildFiltersActive, openBuild: app.openBuild }))
+@inject(({ app, history }) => ({ app, history, location: app.location, social: app.social, builds: app.builds, buildFiltersActive: app.buildFiltersActive, openBuild: app.openBuild }))
 @observer
 export default class Collection extends Component {
+  componentDidMount() {
+    const { history, location } = this.props
+    if (location.pathname.match(/\/collection\/.+/)) {
+      history.replace('/collection')
+    }
+  }
+
   showable(x) {
     return x && !x.includes('TBD') && !x.includes('?') && !x.includes('[planned]') && !x.includes('[prop]') && !x.includes('[stock]') && !x.includes('Stock') && !x.includes('N/A')
   }
@@ -341,14 +348,14 @@ export default class Collection extends Component {
         <Row>
           <Typography variant="h1">Keyboard Collection</Typography>
         </Row>
-        <p className={classes.blurb}>I collect, build, and modify enthusiast computer keyboards. (Builds, among other types of content, are streamed to <LinkBlank to={social.twitch}>Twitch</LinkBlank>, with proceeds going to the <LinkBlank to={social.sffb}>San Francisco-Marin Food Bank</LinkBlank>.) This is my personal collection, which is primarily comprised of "Happy Hacking"-layout keyboards (60%, US ANSI, split backspace, split right shift, and corner blockers).</p>
+        <p className={classes.blurb}>I collect, build, and modify enthusiast computer keyboards. (Builds, among other types of content, are streamed to <LinkBlank to={social.twitch}>Twitch</LinkBlank>, with proceeds going to the <LinkBlank to={social.sffb}>San Francisco-Marin Food Bank</LinkBlank>.) This is my personal collection, which is primarily comprised of keyboards with "Happy Hacking"-inspired layouts (60%, US ANSI, split backspace, split right shift, and corner blockers).</p>
         <div className={classes.topSection}>
           <div className={classes.filtersWhole}>
             <div className={classes.filtersLabel}>Filters: </div>
             <div className={classes.filtersOnlyContiner}>
               {this.renderFilter({ id: 'Built', name: 'Built'})}
               {this.renderFilter({ id: 'Prebuilt', name: 'Prebuilt'})}
-              {this.renderFilter({ id: 'Vintage prebuilt', name: 'Vintage'})}
+              {this.renderFilter({ id: 'Vintage', name: 'Vintage'})}
               {this.renderFilter({ id: 'Unbuilt', name: 'Unbuilt'})}
               {this.renderFilter({ id: 'On the way', name: 'On the way'})}
             </div>

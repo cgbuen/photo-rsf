@@ -3,11 +3,11 @@ import Config from 'react-storefront/Config'
 import fetch from 'fetch'
 import globalState from '../globalState'
 
-const makeUsableBuildArray = function(array, assetHost) {
+const makeUsableBuildArray = function(array, assetHost, filter) {
   return array
     .map(build => {
       build.src = `${assetHost}/keyboards/${build.src}.jpg?${build.cache_buster}`
-      if (build.assembly_variant.includes('A') && build.build_status === 'Built') {
+      if (build.assembly_variant.includes('A') && build.build_status === filter) {
         build.loaded = true
         build.active = true
       }
@@ -24,11 +24,11 @@ const makeUsableBuildArray = function(array, assetHost) {
     .reverse()
 }
 
-const buildGenerator = async function (assetHost) {
+const buildGenerator = async function (assetHost, filter) {
   try {
     const buildsResponse = await fetch(`${assetHost}/keyboards/collection.json?${Date.now()}`)
     const buildsResponseJson = await buildsResponse.json()
-    return makeUsableBuildArray(buildsResponseJson, assetHost)
+    return makeUsableBuildArray(buildsResponseJson, assetHost, filter)
   } catch (e) {
     console.error('--> Couldn\'t parse JSON')
     return []
@@ -36,10 +36,17 @@ const buildGenerator = async function (assetHost) {
 }
 
 export default async function collectionHandler(params, request, response) {
+  function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  let filter = capitalize(params.filter || '')
+  if (!filter || !['Built', 'Prebuilt', 'Vintage', 'Unbuilt', 'On the way'].includes(decodeURIComponent(filter))) {
+    filter = 'Built'
+  }
   return withGlobalState(request, globalState, {
     title: `Collection ${globalState().title}`,
-    builds: await buildGenerator(Config.get('assetHost')),
-    buildFiltersActive: {'Built': true},
+    builds: await buildGenerator(Config.get('assetHost'), filter),
+    buildFiltersActive: {[filter]: true},
     openBuild: {},
   })
 }

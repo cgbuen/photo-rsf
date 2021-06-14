@@ -33,6 +33,11 @@ export default new Router()
     fromClient({ page: 'Collection' }),
     fromServer('./collection/collection-handler')
   )
+  .get('/collection/:filter',
+    cacheHandler,
+    fromClient({ page: 'Collection' }),
+    fromServer('./collection/collection-handler')
+  )
   .get('/about',
     cacheHandler,
     fromClient({ page: 'About' }),
