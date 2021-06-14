@@ -331,7 +331,7 @@ export default class Collection extends Component {
   }
 
   openDialog(build) {
-    if (!build.src.includes('unavailable')) {
+    if (!(build.src.includes('unavailable') || build.otw_link)) {
       this.props.app.setOpenBuild(build)
     }
   }
@@ -368,7 +368,7 @@ export default class Collection extends Component {
               x.loaded &&
               <Track key={x.id} event="keyboardClick" name={x.name}>
                 <GridSquare
-                  className={classnames(!x.active && classes.hide, !x.src.includes('unavailable') && classes.clickable)}
+                  className={classnames(!x.active && classes.hide, !(x.src.includes('unavailable') || x.otw_link) && classes.clickable)}
                   key={x.id}
                   name={x.name}
                   description={['TBD', 'N/A'].includes(x.date_built) ? x.date_bought : x.date_built}
