@@ -348,7 +348,7 @@ export default class Collection extends Component {
         <Row>
           <Typography variant="h1">Keyboard Collection</Typography>
         </Row>
-        <p className={classes.blurb}>I collect, build, and modify enthusiast computer keyboards. (Builds, among other types of content, are streamed to <LinkBlank to={social.twitch}>Twitch</LinkBlank>, with proceeds going to the <LinkBlank to={social.sffb}>San Francisco-Marin Food Bank</LinkBlank>.) This is my personal collection, which is primarily comprised of keyboards with "Happy Hacking"-inspired layouts (60%, US ANSI, split backspace, split right shift, and corner blockers).</p>
+        <p className={classes.blurb}>I collect, build, and modify enthusiast computer keyboards. (Builds, among other types of content, are streamed to <LinkBlank to={social.twitch}>Twitch</LinkBlank>, with proceeds going to the <LinkBlank to={social.sffb}>San Francisco-Marin Food Bank</LinkBlank>.) Below is my personal collection, which is primarily comprised of keyboards with HHKB-inspired layouts (60%, US ANSI, split backspace, split right shift, and bottom corner blockers).</p>
         <div className={classes.topSection}>
           <div className={classes.filtersWhole}>
             <div className={classes.filtersLabel}>Filters: </div>
