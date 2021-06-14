@@ -4,7 +4,7 @@ const BuildFilterModel = types
   .model('BuildFilterModel', {
     Built: types.maybeNull(types.boolean),
     Prebuilt: types.maybeNull(types.boolean),
-    'Vintage prebuilt': types.maybeNull(types.boolean),
+    Vintage: types.maybeNull(types.boolean),
     Unbuilt: types.maybeNull(types.boolean),
     'On the way': types.maybeNull(types.boolean),
   })
