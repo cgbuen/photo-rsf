@@ -75,7 +75,7 @@ export default class Photography extends Component {
         <Row>
           <Typography variant="h1">Concert Photography</Typography>
         </Row>
-        <p>Here are a few live music events I'm lucky to have shot. Click anywhere on the image for more info.</p>
+        <p>Here are a few live music events I'm lucky to have shot. Click anywhere on each image for more info.</p>
         <Row>
           <ImageSwitcher
             id="gallerySwitcher"
@@ -95,6 +95,7 @@ export default class Photography extends Component {
                 }),
               }
             }}
+            infinite
           />
         </Row>
       </Container>
