@@ -381,11 +381,6 @@ export default class ImageSwitcher extends Component {
      */
     thumbnailsTitle: PropTypes.string,
 
-    /*
-     * Option to show thumbnails only when zoomed view is active
-     */
-    viewerThumbnailsOnly: PropTypes.bool,
-
     /**
      * Props to apply to the Image component used to display the product thumbnail while
      * the product data is loading
@@ -432,7 +427,6 @@ export default class ImageSwitcher extends Component {
 
   static defaultProps = {
     images: [],
-    viewerThumbnailsOnly: false,
     arrows: true,
     indicators: false,
     loadingThumbnailProps: {},
@@ -613,7 +607,6 @@ export default class ImageSwitcher extends Component {
       style,
       loadingThumbnailProps,
       imageProps,
-      viewerThumbnailsOnly,
       notFoundSrc,
       id,
       images
@@ -740,7 +733,7 @@ export default class ImageSwitcher extends Component {
             )}
         </div>
 
-        {!viewerThumbnailsOnly && this.renderThumbnails()}
+        {this.renderThumbnails()}
       </div>
     )
   }

@@ -95,7 +95,6 @@ export default class Photography extends Component {
                 }),
               }
             }}
-            infinite
           />
         </Row>
       </Container>
