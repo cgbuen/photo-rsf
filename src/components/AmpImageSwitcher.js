@@ -8,7 +8,6 @@ import classnames from 'classnames'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { inject } from 'mobx-react'
 import PropTypes from 'prop-types'
-import Video from 'react-storefront/Video'
 
 export const styles = theme => ({
   root: {
@@ -230,12 +229,8 @@ export default class AmpImageSwitcher extends Component {
         />
         <div className={classes.carouselWrap}>
           <Carousel>
-            {images.map(({ src, alt, video, roll, number }) =>
-              video ? (
-                <Video src={src} alt={alt} key={src} />
-              ) : (
-                  <amp-img key={src} src={src} layout="fill" alt={alt} aria-describedby={`photo-${roll}-${number}`} />
-              )
+            {images.map(({ src, alt, roll, number }) =>
+              <amp-img key={src} src={src} layout="fill" alt={alt} aria-describedby={`photo-${roll}-${number}`} />
             )}
           </Carousel>
           {images.map(({ roll, number, subject, film, venue, city, date }) =>

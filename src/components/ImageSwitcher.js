@@ -8,8 +8,6 @@ import SwipeableViews from 'react-swipeable-views'
 import withStyles from '@material-ui/core/styles/withStyles'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
-import CompareArrows from '@material-ui/icons/CompareArrows'
-import Redo from '@material-ui/icons/Redo'
 import IconButton from '@material-ui/core/IconButton'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import classnames from 'classnames'
@@ -17,21 +15,15 @@ import TabsRow from './TabsRow'
 import analytics from 'react-storefront/analytics'
 import { inject, observer } from 'mobx-react'
 import AmpImageSwitcher from './AmpImageSwitcher'
-import LoadMask from 'react-storefront/LoadMask'
 import Image from 'react-storefront/Image'
-import Video from 'react-storefront/Video'
 import Typography from '@material-ui/core/Typography'
-import Snackbar from '@material-ui/core/Snackbar'
-import Fade from '@material-ui/core/Fade'
 import { createOptimizedSrc } from 'react-storefront/imageService'
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-const paletteIconTextColor = '#77726D'
 
 const mediaPropType = PropTypes.shape({
   src: PropTypes.string.isRequired,
   alt: PropTypes.string,
-  video: PropTypes.bool,
   subject: PropTypes.string.isRequired,
   film: PropTypes.string.isRequired,
   venue: PropTypes.string.isRequired,
@@ -49,9 +41,6 @@ export const styles = theme => ({
     '& img': {
       display: 'block'
     }
-  },
-  rootViewerActive: {
-    display: 'none'
   },
 
   swipeWrap: {
@@ -166,50 +155,6 @@ export const styles = theme => ({
     width: '100%'
   },
 
-  viewerToggle: {
-    transform: 'scale(0.4)',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    background: fade(theme.palette.text.icon || paletteIconTextColor, 0.4),
-    borderRadius: '50%',
-    width: '100px',
-    height: '100px',
-    transitionDuration: '0.5s',
-    '-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)'
-  },
-
-  viewerActive: {
-    transform: 'scale(0.4) rotateZ(45deg)'
-  },
-
-  viewerOverlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    background: theme.palette.background.paper,
-    zIndex: 9999,
-    transitionDuration: '0.5s',
-    transform: 'translateY(100%)',
-    visibility: 'hidden', // prevents lightbox from showing near the bottom of screen when browser controls hide on ios
-    '& img': {
-      margin: 'auto',
-      maxHeight: '100%',
-      maxWidth: '100%'
-    },
-    // Hack to fix root div height of pan/zoom/pinch container
-    '& > div:first-child': {
-      height: '100%'
-    }
-  },
-
-  viewerOverlayActive: {
-    transform: 'translateY(0%)',
-    visibility: 'visible'
-  },
-
   tabsRowRoot: {
     boxShadow: 'none'
   },
@@ -226,31 +171,6 @@ export const styles = theme => ({
 
   mask: {
     opacity: '0.8'
-  },
-
-  playButton: {
-    '&:after': {
-      color: 'white',
-      content: '"►"',
-      position: 'absolute',
-      left: 'calc(50% - 24px)',
-      top: 'calc(50% - 24px)',
-      fontSize: '48px'
-    }
-  },
-
-  playing: {
-    '&:after': {
-      display: 'none'
-    }
-  },
-
-  zoomIcon: {
-    fill: 'white'
-  },
-
-  closeIcon: {
-    stroke: 'white'
   },
 
   description: {
@@ -278,34 +198,6 @@ export const styles = theme => ({
     fontSize: 16,
     lineHeight: 1.2,
     textAlign: 'center',
-  },
-
-  anchorOriginCenter: {
-    bottom: 'auto',
-    display: 'inline-block',
-    left: '50%',
-    right: 'auto',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
-  },
-
-  snackbarContentRoot: {
-    background: 'rgba(34, 34, 34, .85)',
-    borderRadius: 5,
-    boxShadow: '0 0 3px rgba(64, 64, 64, .3)',
-    color: 'white',
-    display: 'inline-block',
-    minWidth: 0,
-    whiteSpace: 'nowrap',
-  },
-
-  pinchIcon: {
-    transform: 'rotate(-45deg)',
-    verticalAlign: 'middle'
-  },
-
-  slideIcon: {
-    verticalAlign: 'middle'
   },
 
   itemWrapper: {
@@ -382,12 +274,6 @@ export default class ImageSwitcher extends Component {
     thumbnailsTitle: PropTypes.string,
 
     /**
-     * Props to apply to the Image component used to display the product thumbnail while
-     * the product data is loading
-     */
-    loadingThumbnailProps: PropTypes.object,
-
-    /**
      * Props to apply to the thumbnail images
      */
     thumbnailImageProps: PropTypes.object,
@@ -410,13 +296,6 @@ export default class ImageSwitcher extends Component {
     /**
      * Config options for the image viewer
      */
-    reactPinchZoomPanOptions: PropTypes.shape({
-      onPinchStart: PropTypes.func,
-      onPinchStop: PropTypes.func,
-      initialScale: PropTypes.number,
-      maxScale: PropTypes.number
-    }),
-
     /**
      * Set to true to always revert back to the first image when image URLs
      * are changed.  This behavior is automatically adopted when the `product`
@@ -429,31 +308,19 @@ export default class ImageSwitcher extends Component {
     images: [],
     arrows: true,
     indicators: false,
-    loadingThumbnailProps: {},
     imageProps: {},
-    reactPinchZoomPanOptions: {
-      maxScale: 3
-    }
   }
 
-  state = {
-    fullSizeImagesLoaded: true,
-    viewerActive: false,
-    playingVideo: false,
-    shownSnackbar: false,
-  }
+  state = {}
 
   static getDerivedStateFromProps(nextProps, prevState) {
     const nextState = {
-      images: normalizeImages(nextProps, 'images'),
+      images: nextProps.images,
       selectedIndex:
         nextProps.selectedIndex != null ? nextProps.selectedIndex : prevState.selectedIndex || 0
     }
 
     if (!prevState.images) {
-      // new images are loading in, show the loadingProduct.thumbnail
-      nextState.fullSizeImagesLoaded = false
-
       // reset the selected index to the first image
       if (!nextProps.selectedIndex) {
         nextState.selectedIndex = 0
@@ -471,8 +338,8 @@ export default class ImageSwitcher extends Component {
     this.escFunction = this.escFunction.bind(this);
   }
   escFunction(event) {
-    if (event.keyCode === 27 && this.state.viewerActive) {
-      this.setState({ viewerActive: false })
+    if (event.keyCode === 27) {
+      console.log('esc')
     }
   }
   componentDidMount() {
@@ -493,14 +360,13 @@ export default class ImageSwitcher extends Component {
   }
 
   renderThumbnails({ inPortal=false }={}) {
-    const { classes, thumbnailsTitle, notFoundSrc, thumbnailImageProps } = this.props
-    const thumbnails = this.state.images
-    const modifiedThumbs = thumbnails && thumbnails.map(({ src, alt }) => ({ imageUrl: createOptimizedSrc(src, { quality: 35 }), alt }))
+    const { classes, thumbnailsTitle, notFoundSrc, thumbnailImageProps, images } = this.props
+    const modifiedThumbs = images && images.map(({ src, alt }) => ({ imageUrl: createOptimizedSrc(src, { quality: 35 }), alt }))
     const { selectedIndex } = this.state
 
     return (
-      thumbnails &&
-      thumbnails.length > 0 && (
+      images &&
+      images.length > 0 && (
         <div className={classnames(classes.thumbs, { [classes.activeThumbs]: inPortal })}>
           <div className="field">
             <label className={classes.thumbsTitle}>{thumbnailsTitle}</label>
@@ -520,7 +386,7 @@ export default class ImageSwitcher extends Component {
             centered
             initialSelectedIdx={selectedIndex}
             onTabChange={(e, selectedIndex) =>
-              this.setState({ selectedIndex, playingVideo: false })
+              this.setState({ selectedIndex })
             }
             items={modifiedThumbs}
           />
@@ -548,49 +414,13 @@ export default class ImageSwitcher extends Component {
     )
   }
 
-  renderSnackbar() {
-    const { classes } = this.props
-    const handleClose = e => {
-      this.setState({ shownSnackbar: true })
-    }
-    return (
-      <Snackbar
-        classes={{
-          anchorOriginTopCenter: classes.anchorOriginCenter
-        }}
-        ContentProps={{
-          classes: {
-            root: classes.snackbarContentRoot
-          }
-        }}
-        open={!this.state.shownSnackbar}
-        onClose={handleClose.bind(this)}
-        message={
-          <div>
-            <div>
-              <CompareArrows className={classes.pinchIcon} /> <span>Pinch to zoom, then</span>
-            </div>
-            <div>
-              <Redo className={classes.slideIcon} /> <span>Touch and slide to pan</span>
-            </div>
-          </div>
-        }
-        anchorOrigin={{ horizontal: 'center', vertical: 'top' }}
-        autoHideDuration={2250}
-        TransitionComponent={Fade}
-      />
-    )
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (
       prevState &&
       prevState.selectedIndex &&
-      prevState.selectedIndex !== this.state.selectedIndex &&
-      this.props.product
+      prevState.selectedIndex !== this.state.selectedIndex
     ) {
       analytics.fire('imageSwitched', {
-        product: this.props.product,
         imageUrl: this.props.images[this.state.selectedIndex]
       })
     }
@@ -599,20 +429,16 @@ export default class ImageSwitcher extends Component {
   render() {
     let {
       app,
-      product,
       classes,
       className,
       arrows,
       indicators,
       style,
-      loadingThumbnailProps,
       imageProps,
       notFoundSrc,
       id,
       images
     } = this.props
-
-    const { fullSizeImagesLoaded } = this.state
 
     if (app.amp) {
       const optImages = images.map(image => ({
@@ -660,34 +486,29 @@ export default class ImageSwitcher extends Component {
           >
             {images.map((photo, i) => (
               <div key={i} className={classes.imageWrap}>
-                {photo.video ? (
-                  <Video src={photo.src} alt={photo.alt} />
-                ) : (
-                  <div className={classes.itemWrapper}>
-                    <div className={classes.itemBackground}>
-                      <div className={classes.backdropFilter}></div>
-                      <Image
-                        key={photo.src}
-                        notFoundSrc={notFoundSrc}
-                        src={photo.src}
-                        alt={photo.alt}
-                        {...imageProps}
-                        classes={{
-                          root: classes.itemBackgroundImage
-                        }}
-                      />
-                    </div>
+                <div className={classes.itemWrapper}>
+                  <div className={classes.itemBackground}>
+                    <div className={classes.backdropFilter}></div>
                     <Image
                       key={photo.src}
-                      onClick={() => photo.toggleDescription()}
                       notFoundSrc={notFoundSrc}
                       src={photo.src}
                       alt={photo.alt}
-                      onLoad={i === 0 ? this.onFullSizeImagesLoaded : null}
                       {...imageProps}
+                      classes={{
+                        root: classes.itemBackgroundImage
+                      }}
                     />
                   </div>
-                )}
+                  <Image
+                    key={photo.src}
+                    onClick={() => photo.toggleDescription()}
+                    notFoundSrc={notFoundSrc}
+                    src={photo.src}
+                    alt={photo.alt}
+                    {...imageProps}
+                  />
+                </div>
                 {this.renderDescription(photo)}
               </div>
             ))}
@@ -718,55 +539,10 @@ export default class ImageSwitcher extends Component {
             <div className={classes.dots}>{images.map((_, index) => this.renderDot(index))}</div>
           )}
 
-          {product && <LoadMask show={product.loadingImages} className={classes.mask} />}
-
-          {product &&
-            app.loadingProduct &&
-            app.loadingProduct.thumbnail &&
-            !fullSizeImagesLoaded && (
-              <Image
-                src={app.loadingProduct.thumbnail}
-                className={classes.productThumb}
-                {...loadingThumbnailProps}
-                fill
-              />
-            )}
         </div>
 
         {this.renderThumbnails()}
       </div>
     )
   }
-
-  onFullSizeImagesLoaded = () => {
-    this.setState({ fullSizeImagesLoaded: true })
-    this.props.app.applyState({ loadingProduct: null })
-  }
-}
-
-/**
- * Converts an array that can contain strings or MediaTypeModel instances into
- * an array of objects with src, alt, and video
- * @private
- * @param {Object} props
- * @param {String} key "images" or "thumbnails"
- */
-function normalizeImages(props, key) {
-  const { product } = props
-  const productName = product && product.name
-  let images = props[key]
-
-  if (!images || !images.length) {
-    images = product && product[key]
-  }
-
-  return !images
-    ? []
-    : images.map(e => {
-        if (typeof e === 'string') {
-          return { src: e, alt: productName, video: false }
-        } else {
-          return { ...e, alt: e.alt || productName }
-        }
-      })
 }
