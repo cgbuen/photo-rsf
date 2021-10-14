@@ -75,7 +75,7 @@ export default class Photography extends Component {
         <Row>
           <Typography variant="h1">Concert Photography</Typography>
         </Row>
-        <p>I shoot film photos at live events primarily around the San Francisco Bay Area. Here are some moments I'm lucky to have been a part of.</p>
+        <p>Here are a few live music events I'm lucky to have shot. Click anywhere on the image for more info.</p>
         <Row>
           <ImageSwitcher
             id="gallerySwitcher"
@@ -84,7 +84,7 @@ export default class Photography extends Component {
               viewerToggle: classes.viewerToggle,
               viewerActive: classes.viewerActive,
             }}
-            images={photos.toJSON()}
+            images={photos}
             imageProps={{
               aspectRatio: isLandscape ? 66.66 : 125,
               quality: app.config.imageQuality,
