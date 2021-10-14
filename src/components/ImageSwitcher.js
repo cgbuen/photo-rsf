@@ -21,6 +21,11 @@ import { createOptimizedSrc } from 'react-storefront/imageService'
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+function mod(n, m) {
+  const q = n % m
+  return q < 0 ? q + m : q
+}
+
 const mediaPropType = PropTypes.shape({
   src: PropTypes.string.isRequired,
   alt: PropTypes.string,
@@ -235,7 +240,14 @@ export const styles = theme => ({
     position: 'absolute',
     width: '100%',
     zIndex: 1
-  }
+  },
+
+  viewerOverlay: {
+  },
+  viewerToggle: {
+  },
+  viewerActive: {
+  },
 })
 
 /**
@@ -255,8 +267,11 @@ export default class ImageSwitcher extends Component {
 
     /**
      * An array of (URL or image object) for the full size images
+     * Generalized to object with mediaPropTypes removed since actual (not
+     * observable) array breaks here, which is needed from mobx for state, and
+     * since mobx PropTypes did not work immediately.
      */
-    images: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, mediaPropType])).isRequired,
+    images: PropTypes.object.isRequired,
 
     /**
      * Display left/right arrows for navigating through images
@@ -301,7 +316,12 @@ export default class ImageSwitcher extends Component {
      * are changed.  This behavior is automatically adopted when the `product`
      * prop is specified.
      */
-    resetSelectionWhenImagesChange: PropTypes.bool
+    resetSelectionWhenImagesChange: PropTypes.bool,
+
+    /**
+     * If true, scrolling past the last slide will cycle back to the first
+     */
+    infinite: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -309,15 +329,17 @@ export default class ImageSwitcher extends Component {
     arrows: true,
     indicators: false,
     imageProps: {},
+    infinite: false,
   }
 
   state = {}
 
   static getDerivedStateFromProps(nextProps, prevState) {
+    const images = nextProps.images
     const nextState = {
-      images: nextProps.images,
-      selectedIndex:
-        nextProps.selectedIndex != null ? nextProps.selectedIndex : prevState.selectedIndex || 0
+      images,
+      selectedIndex: nextProps.selectedIndex != null ? nextProps.selectedIndex : prevState.selectedIndex || 0,
+      maxIndex: Math.ceil(images.length)
     }
 
     if (!prevState.images) {
@@ -352,9 +374,14 @@ export default class ImageSwitcher extends Component {
     }
   }
 
+  getSelectedIndex = () => {
+    const { selectedIndex, maxIndex } = this.state
+    return mod(selectedIndex, maxIndex)
+  }
+
   renderDot(index) {
     const classes = classnames(this.props.classes.dot, {
-      [this.props.classes.dotSelected]: index === this.state.selectedIndex
+      [this.props.classes.dotSelected]: index === this.getSelectedIndex()
     })
     return <div key={index} className={classes} />
   }
@@ -362,7 +389,6 @@ export default class ImageSwitcher extends Component {
   renderThumbnails({ inPortal=false }={}) {
     const { classes, thumbnailsTitle, notFoundSrc, thumbnailImageProps, images } = this.props
     const modifiedThumbs = images && images.map(({ src, alt }) => ({ imageUrl: createOptimizedSrc(src, { quality: 35 }), alt }))
-    const { selectedIndex } = this.state
 
     return (
       images &&
@@ -384,7 +410,7 @@ export default class ImageSwitcher extends Component {
               ...thumbnailImageProps
             }}
             centered
-            initialSelectedIdx={selectedIndex}
+            initialSelectedIdx={this.getSelectedIndex()}
             onTabChange={(e, selectedIndex) =>
               this.setState({ selectedIndex })
             }
@@ -426,6 +452,38 @@ export default class ImageSwitcher extends Component {
     }
   }
 
+  renderSlide = (photo, i) => {
+    const { notFoundSrc, imageProps, classes } = this.props
+    return (
+      <div key={i} className={classes.imageWrap}>
+        <div className={classes.itemWrapper}>
+          <div className={classes.itemBackground}>
+            <div className={classes.backdropFilter}></div>
+            <Image
+              key={photo.src}
+              notFoundSrc={notFoundSrc}
+              src={photo.src}
+              alt={photo.alt}
+              {...imageProps}
+              classes={{
+                root: classes.itemBackgroundImage
+              }}
+            />
+          </div>
+          <Image
+            key={photo.src}
+            onClick={() => photo.toggleDescription()}
+            notFoundSrc={notFoundSrc}
+            src={photo.src}
+            alt={photo.alt}
+            {...imageProps}
+          />
+        </div>
+        {this.renderDescription(photo)}
+      </div>
+    )
+  }
+
   render() {
     let {
       app,
@@ -434,10 +492,9 @@ export default class ImageSwitcher extends Component {
       arrows,
       indicators,
       style,
-      imageProps,
-      notFoundSrc,
       id,
-      images
+      images,
+      infinite,
     } = this.props
 
     if (app.amp) {
@@ -481,42 +538,15 @@ export default class ImageSwitcher extends Component {
         {/* Full Size Images */}
         <div className={classes.swipeWrap}>
           <SwipeableViews
-            index={selectedIndex}
-            onChangeIndex={i => this.setState({ selectedIndex: i })}
+            index={this.getSelectedIndex()}
+            onChangeIndex={i => this.setState({ selectedIndex: i})}
           >
-            {images.map((photo, i) => (
-              <div key={i} className={classes.imageWrap}>
-                <div className={classes.itemWrapper}>
-                  <div className={classes.itemBackground}>
-                    <div className={classes.backdropFilter}></div>
-                    <Image
-                      key={photo.src}
-                      notFoundSrc={notFoundSrc}
-                      src={photo.src}
-                      alt={photo.alt}
-                      {...imageProps}
-                      classes={{
-                        root: classes.itemBackgroundImage
-                      }}
-                    />
-                  </div>
-                  <Image
-                    key={photo.src}
-                    onClick={() => photo.toggleDescription()}
-                    notFoundSrc={notFoundSrc}
-                    src={photo.src}
-                    alt={photo.alt}
-                    {...imageProps}
-                  />
-                </div>
-                {this.renderDescription(photo)}
-              </div>
-            ))}
+            {images.map(this.renderSlide)}
           </SwipeableViews>
 
           {arrows && (
             <div className={classes.arrows}>
-              {selectedIndex !== 0 && (
+              {(selectedIndex !== 0 || infinite) && (
                 <IconButton
                   className={classnames(classes.arrow, classes.leftArrow)}
                   onClick={() => this.setState({ selectedIndex: selectedIndex - 1 })}
@@ -524,7 +554,7 @@ export default class ImageSwitcher extends Component {
                   <ChevronLeft classes={{ root: classes.icon }} />
                 </IconButton>
               )}
-              {selectedIndex !== images.length - 1 && (
+              {(selectedIndex !== images.length - 1 || infinite) && (
                 <IconButton
                   className={classnames(classes.arrow, classes.rightArrow)}
                   onClick={() => this.setState({ selectedIndex: selectedIndex + 1 })}
