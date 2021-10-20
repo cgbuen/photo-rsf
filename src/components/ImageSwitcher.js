@@ -8,6 +8,7 @@ import SwipeableViews from 'react-swipeable-views'
 import withStyles from '@material-ui/core/styles/withStyles'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ChevronRight from '@material-ui/icons/ChevronRight'
+import Person from '@material-ui/icons/Person'
 import IconButton from '@material-ui/core/IconButton'
 import { fade } from '@material-ui/core/styles/colorManipulator'
 import classnames from 'classnames'
@@ -25,17 +26,6 @@ function mod(n, m) {
   const q = n % m
   return q < 0 ? q + m : q
 }
-
-const mediaPropType = PropTypes.shape({
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string,
-  subject: PropTypes.string.isRequired,
-  film: PropTypes.string.isRequired,
-  venue: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  descriptionVisible: PropTypes.bool,
-})
 
 export const styles = theme => ({
   root: {
@@ -105,12 +95,6 @@ export const styles = theme => ({
     borderColor: '#D0D0D0'
   },
 
-  arrows: {
-    [theme.breakpoints.down('xs')]: {
-      display: 'none'
-    }
-  },
-
   arrow: {
     padding: 7,
     position: 'absolute',
@@ -133,6 +117,18 @@ export const styles = theme => ({
   icon: {
     height: '30px',
     width: '30px'
+  },
+
+  iconPerson: {
+    fill: 'white',
+    position: 'absolute',
+    left: 20,
+    bottom: 20,
+    background: 'rgba(17, 17, 17, .65)',
+    borderRadius: '50%',
+    padding: 5,
+    width: 30,
+    height: 30,
   },
 
   dot: {
@@ -186,7 +182,7 @@ export const styles = theme => ({
   },
 
   descriptionInner: {
-    background: 'rgba(21, 21, 21, .85)',
+    background: 'rgba(17, 17, 17, .85)',
     padding: 10,
     textAlign: 'center',
     display: 'inline-block',
@@ -207,7 +203,19 @@ export const styles = theme => ({
 
   itemWrapper: {
     display: 'flex',
-    width: '100%'
+    position: 'relative',
+    width: '100%',
+    '& img': {
+      userDrag: 'none',
+    },
+  },
+
+  itemForeground: {
+    height: '100%',
+    overflow: 'hidden',
+    position: 'absolute',
+    width: '100%',
+    zIndex: 1,
   },
 
   itemBackground: {
@@ -361,7 +369,11 @@ export default class ImageSwitcher extends Component {
   }
   escFunction(event) {
     if (event.keyCode === 27) {
-      console.log('esc')
+      const { images } = this.props
+      const { selectedIndex } = this.state
+      if (images[selectedIndex].descriptionVisible) {
+        this.props.images[this.state.selectedIndex].toggleDescription()
+      }
     }
   }
   componentDidMount() {
@@ -447,7 +459,8 @@ export default class ImageSwitcher extends Component {
       prevState.selectedIndex !== this.state.selectedIndex
     ) {
       analytics.fire('imageSwitched', {
-        imageUrl: this.props.images[this.state.selectedIndex]
+        product: { id: '0' },
+        imageUrl: this.props.images[this.state.selectedIndex].src
       })
     }
   }
@@ -457,6 +470,7 @@ export default class ImageSwitcher extends Component {
     return (
       <div key={i} className={classes.imageWrap}>
         <div className={classes.itemWrapper}>
+          <div className={classes.itemForeground} onClick={() => photo.toggleDescription()} />
           <div className={classes.itemBackground}>
             <div className={classes.backdropFilter}></div>
             <Image
@@ -472,12 +486,12 @@ export default class ImageSwitcher extends Component {
           </div>
           <Image
             key={photo.src}
-            onClick={() => photo.toggleDescription()}
             notFoundSrc={notFoundSrc}
             src={photo.src}
             alt={photo.alt}
             {...imageProps}
           />
+          <Person className={classes.iconPerson} />
         </div>
         {this.renderDescription(photo)}
       </div>
@@ -495,6 +509,7 @@ export default class ImageSwitcher extends Component {
       id,
       images,
       infinite,
+      enableMouseEvents,
     } = this.props
 
     if (app.amp) {
@@ -540,11 +555,12 @@ export default class ImageSwitcher extends Component {
           <SwipeableViews
             index={this.getSelectedIndex()}
             onChangeIndex={i => this.setState({ selectedIndex: i})}
+            enableMouseEvents={enableMouseEvents}
           >
             {images.map(this.renderSlide)}
           </SwipeableViews>
 
-          {arrows && (
+          {arrows && !enableMouseEvents && (
             <div className={classes.arrows}>
               {(selectedIndex !== 0 || infinite) && (
                 <IconButton
