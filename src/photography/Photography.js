@@ -77,8 +77,8 @@ export default class Photography extends Component {
           <Typography variant="h1">Concert Photography</Typography>
         </Row>
         {enableMouseEvents ?
-          (<p>Here are a few live music events I'm lucky to have shot. Swipe through and tap anywhere on each image for more info.</p>)
-          : (<p>Here are a few live music events I'm lucky to have shot. Click anywhere on each image for more info.</p>)
+          (<p>Here are a few live music events that I'm lucky to have shot. Swipe through and tap anywhere on each image for more info.</p>)
+          : (<p>Here are a few live music events that I'm lucky to have shot. Click anywhere on each image for more info.</p>)
         }
         <Row>
           <ImageSwitcher

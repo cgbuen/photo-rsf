@@ -128,6 +128,11 @@ const theme = createTheme({
         fontSize: 24,
         fontWeight: 'bold',
       },
+      h2: {
+        color: 'white',
+        fontSize: 18,
+        fontWeight: 'bold',
+      },
       body1: {
         color: 'white',
       },

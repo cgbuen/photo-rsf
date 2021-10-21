@@ -22,10 +22,12 @@ import classnames from 'classnames'
     cardBody: {
       alignItems: 'center',
       display: 'flex',
-      justifyContent: 'space-between',
       '@media (max-width:568px)': {
         display: 'block'
       },
+    },
+    'cardBodyRight': {
+      justifyContent: 'space-between',
     },
     cardFigure: {
       margin: '0 15px 0 0',
@@ -58,7 +60,10 @@ export default class Card extends Component {
     const { classes, className, src, name, description, onClick, right } = this.props
     return (
       <Row className={classnames(classes.card, className)} onClick={onClick}>
-        <div className={classes.cardBody}>
+        <div className={classnames({
+          [classes.cardBody]: true,
+          [classes.cardBodyRight]: right,
+        })}>
           {!right && <img className={classnames(classes.cardFigure, classes.cardImg)} src={src} alt={name} />}
           <div>
             <div className={classes.cardTitle}>{name}</div>
