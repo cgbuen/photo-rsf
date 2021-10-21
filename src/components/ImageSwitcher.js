@@ -124,7 +124,7 @@ export const styles = theme => ({
     position: 'absolute',
     left: 20,
     bottom: 20,
-    background: 'rgba(17, 17, 17, .65)',
+    background: 'rgba(17, 17, 17, .85)',
     borderRadius: '50%',
     padding: 5,
     width: 30,
