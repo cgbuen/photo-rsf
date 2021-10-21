@@ -347,7 +347,6 @@ export default class ImageSwitcher extends Component {
     const nextState = {
       images,
       selectedIndex: nextProps.selectedIndex != null ? nextProps.selectedIndex : prevState.selectedIndex || 0,
-      maxIndex: Math.ceil(images.length)
     }
 
     if (!prevState.images) {
@@ -386,20 +385,9 @@ export default class ImageSwitcher extends Component {
     }
   }
 
-  getSelectedIndex = () => {
-    const { selectedIndex, maxIndex } = this.state
-    return mod(selectedIndex, maxIndex)
-  }
-
-  renderDot(index) {
-    const classes = classnames(this.props.classes.dot, {
-      [this.props.classes.dotSelected]: index === this.getSelectedIndex()
-    })
-    return <div key={index} className={classes} />
-  }
-
   renderThumbnails({ inPortal=false }={}) {
     const { classes, thumbnailsTitle, notFoundSrc, thumbnailImageProps, images } = this.props
+    const { selectedIndex } = this.state
     const modifiedThumbs = images && images.map(({ src, alt }) => ({ imageUrl: createOptimizedSrc(src, { quality: 35 }), alt, width: 50, height: 50 }))
 
     return (
@@ -422,7 +410,7 @@ export default class ImageSwitcher extends Component {
               ...thumbnailImageProps
             }}
             centered
-            initialSelectedIdx={this.getSelectedIndex()}
+            initialSelectedIdx={selectedIndex}
             onTabChange={(e, selectedIndex) =>
               this.setState({ selectedIndex })
             }
@@ -553,7 +541,7 @@ export default class ImageSwitcher extends Component {
         {/* Full Size Images */}
         <div className={classes.swipeWrap}>
           <SwipeableViews
-            index={this.getSelectedIndex()}
+            index={selectedIndex}
             onChangeIndex={i => this.setState({ selectedIndex: i})}
             enableMouseEvents={enableMouseEvents}
           >
@@ -565,7 +553,7 @@ export default class ImageSwitcher extends Component {
               {(selectedIndex !== 0 || infinite) && (
                 <IconButton
                   className={classnames(classes.arrow, classes.leftArrow)}
-                  onClick={() => this.setState({ selectedIndex: selectedIndex - 1 })}
+                  onClick={() => this.setState({ selectedIndex: mod(selectedIndex - 1, images.length) })}
                 >
                   <ChevronLeft classes={{ root: classes.icon }} />
                 </IconButton>
@@ -573,16 +561,12 @@ export default class ImageSwitcher extends Component {
               {(selectedIndex !== images.length - 1 || infinite) && (
                 <IconButton
                   className={classnames(classes.arrow, classes.rightArrow)}
-                  onClick={() => this.setState({ selectedIndex: selectedIndex + 1 })}
+                  onClick={() => this.setState({ selectedIndex: mod(selectedIndex + 1, images.length) })}
                 >
                   <ChevronRight classes={{ root: classes.icon }} />
                 </IconButton>
               )}
             </div>
-          )}
-
-          {indicators && (
-            <div className={classes.dots}>{images.map((_, index) => this.renderDot(index))}</div>
           )}
 
         </div>
