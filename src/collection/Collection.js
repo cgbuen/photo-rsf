@@ -298,8 +298,8 @@ export default class Collection extends Component {
           <div className={classes.descriptionDetail}>Purchased: {x.date_bought}</div>
           {this.showable(x.date_built) && <div className={classes.descriptionDetail}>Built: {x.date_built}</div>}
           <div className={classes.descriptionDetail}>Color: {x.color}</div>
-          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Layout: {x.layout}</div>}
-          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Mounting Style: {x.mount} mount</div>}
+          {this.showable(x.layout) && !['60% HHKB 7u', '60% HHKB 6u'].includes(x.layout) && <div className={classes.descriptionDetail}>Layout: {x.layout}</div>}
+          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Mounting Style: {x.mount}</div>}
           {this.showable(x.plate) && <div className={classes.descriptionDetail}>Plate: {x.plate}</div>}
         </div>
         <div className={classes.descriptionColumn}>
@@ -395,7 +395,7 @@ export default class Collection extends Component {
             <div className={classes.dialogImgWrapper}>
               <img className={classes.modalImg} alt={classes.name} src={openBuild && openBuild.src && createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
               <div className={classnames(classes.descriptionBox, openBuild.blank_space || 'bottomRight')}>
-                <div className={classes.descriptionTitle}><strong>{openBuild.name}.</strong></div>
+                <div className={classes.descriptionTitle}><strong>{openBuild.name}</strong></div>
                 {this.descriptionize(openBuild)}
               </div>
             </div>
