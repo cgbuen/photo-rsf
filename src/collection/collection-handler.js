@@ -28,7 +28,7 @@ const buildGenerator = async function (assetHost, filter) {
   try {
     const buildsResponse = await fetch(`${assetHost}/keyboards/collection.json?${Date.now()}`)
     const buildsResponseJson = await buildsResponse.json()
-    return makeUsableBuildArray(buildsResponseJson, assetHost, filter)
+    return buildsResponseJson
   } catch (e) {
     console.error('--> Couldn\'t parse JSON')
     return []
@@ -39,13 +39,20 @@ export default async function collectionHandler(params, request, response) {
   function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
-  let filter = capitalize(params.filter || '')
-  if (!filter || !['Built', 'Prebuilt', 'Vintage', 'Unbuilt', 'On the way'].includes(decodeURIComponent(filter))) {
+  const assetHost = Config.get('assetHost')
+  let filter = capitalize(params.filter || 'Built')
+  if (!['Built', 'Prebuilt', 'Vintage', 'Unbuilt', 'On the way'].includes(decodeURIComponent(filter))) {
     filter = 'Built'
   }
+  const allBuilds = await buildGenerator(assetHost, filter)
+  const enough = allBuilds.filter(x => x.build_status === decodeURIComponent(filter) && x.assembly_variant.includes('A')).length > 0
+  if (!enough) {
+    filter = 'Built'
+  }
+  const builds = makeUsableBuildArray(allBuilds, assetHost, filter)
   return withGlobalState(request, globalState, {
     title: `Collection ${globalState().title}`,
-    builds: await buildGenerator(Config.get('assetHost'), filter),
+    builds,
     buildFiltersActive: {[filter]: true},
     openBuild: {},
   })

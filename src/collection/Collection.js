@@ -353,11 +353,11 @@ export default class Collection extends Component {
           <div className={classes.filtersWhole}>
             <div className={classes.filtersLabel}>Filters: </div>
             <div className={classes.filtersOnlyContiner}>
-              {this.renderFilter({ id: 'Built', name: 'Built'})}
-              {this.renderFilter({ id: 'Prebuilt', name: 'Prebuilt'})}
-              {this.renderFilter({ id: 'Vintage', name: 'Vintage'})}
-              {this.renderFilter({ id: 'Unbuilt', name: 'Unbuilt'})}
-              {this.renderFilter({ id: 'On the way', name: 'On the way'})}
+              {
+                ['Built', 'Prebuilt', 'Vintage', 'Unbuilt', 'On the way']
+                  .filter(x => builds.filter(y => y.build_status === x && y.assembly_variant.includes('A')).length > 0)
+                  .map(x => this.renderFilter({ id: x, name: x }))
+              }
             </div>
           </div>
           <div className={classes.results}>{builds.filter(x => x.active).length} Results</div>
