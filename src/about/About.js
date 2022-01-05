@@ -45,8 +45,8 @@ export default class About extends Component {
           </p>
           <ul>
             <li>Personal software projects</li>
-            <li>Film photography, development, and scanning</li>
-            <li>Custom / higher-end "mechanical" (computer) keyboard builds</li>
+            <li>Photo film shoots, development, and scans</li>
+            <li>Mechanical keyboard builds</li>
             <li>Splatoon 2 gameplay</li>
           </ul>
           <p>

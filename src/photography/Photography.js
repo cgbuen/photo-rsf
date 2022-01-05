@@ -47,7 +47,8 @@ export default class Photography extends Component {
     super(props);
     this.state = {
       isLandscape: false,
-      loaded: false
+      enableMouseEvents: false,
+      loaded: false,
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
   }
@@ -63,19 +64,22 @@ export default class Photography extends Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ isLandscape: window.innerWidth > window.innerHeight })
+    this.setState({ isLandscape: window.innerWidth > window.innerHeight, enableMouseEvents: window.innerWidth < 600 })
   }
 
   render() {
     const { classes, app, photos } = this.props
-    const { isLandscape, loaded } = this.state
+    const { isLandscape, loaded, enableMouseEvents } = this.state
 
     return (
       <Container>
         <Row>
           <Typography variant="h1">Concert Photography</Typography>
         </Row>
-        <p>I shoot film photos at live events primarily around the San Francisco Bay Area. Here are some moments I'm lucky to have been a part of.</p>
+        {enableMouseEvents ?
+          (<p>Here are a few live music events that I'm lucky to have shot. Swipe through and tap anywhere on each image for more info.</p>)
+          : (<p>Here are a few live music events that I'm lucky to have shot. Click anywhere on each image for more info.</p>)
+        }
         <Row>
           <ImageSwitcher
             id="gallerySwitcher"
@@ -84,7 +88,7 @@ export default class Photography extends Component {
               viewerToggle: classes.viewerToggle,
               viewerActive: classes.viewerActive,
             }}
-            images={photos.toJSON()}
+            images={photos}
             imageProps={{
               aspectRatio: isLandscape ? 66.66 : 125,
               quality: app.config.imageQuality,
@@ -95,6 +99,8 @@ export default class Photography extends Component {
                 }),
               }
             }}
+            infinite
+            enableMouseEvents={enableMouseEvents}
           />
         </Row>
       </Container>

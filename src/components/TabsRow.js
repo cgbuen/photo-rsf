@@ -211,7 +211,7 @@ export default class TabsRow extends Component {
         {items.map((item, i) => {
           let icon
           if (item.imageUrl) {
-            icon = <Image src={item.imageUrl} alt={item.alt} {...imageProps} />
+            icon = <Image src={item.imageUrl} alt={item.alt} height={item.height} width={item.width} {...imageProps} />
 
             if (app.amp && item.url) {
               icon = <Link to={item.url}>{icon}</Link>

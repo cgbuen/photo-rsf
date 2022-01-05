@@ -26,8 +26,8 @@ export default () => {
       },
       {
         text: 'Commissions',
-        url: 'https://forms.gle/tefHXyEh9WsAJjBs9',
-        blank: true,
+        prefetch: 'visible',
+        url: '/commissions',
       },
       {
         text: 'Resources',

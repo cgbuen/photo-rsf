@@ -43,6 +43,11 @@ export default new Router()
     fromClient({ page: 'About' }),
     fromServer('./about/about-handler')
   )
+  .get('/commissions',
+    cacheHandler,
+    fromClient({ page: 'Commissions' }),
+    fromServer('./commissions/commissions-handler')
+  )
   .get('/resources',
     cacheHandler,
     fromClient({ page: 'Resources' }),

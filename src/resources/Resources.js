@@ -97,7 +97,6 @@ export default class Resources extends Component {
             const link = (
               <LinkType className={classes.linkContainer} to={x.href} key={x.id}>
                 <Card
-                  right
                   classes={{ cardTitle: classes.cardTitle, cardDescription: classes.cardDescription, cardImg: classes.visible }}
                   name={x.name}
                   src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 570 })}
@@ -110,7 +109,6 @@ export default class Resources extends Component {
                 <div className={classes.cardDupeContainer} key={x.id}>
                   {link}
                   <Card
-                    right
                     className={classes.cheat}
                     classes={{ cardTitle: classes.cardTitle, cardDescription: classes.visible, cardImg: classes.cardImg }}
                     name={x.name}
