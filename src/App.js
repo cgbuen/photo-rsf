@@ -72,6 +72,7 @@ export default class App extends Component {
                 Resources: universal(import('./resources/Resources')),
                 Commands: universal(import('./resources/Commands')),
                 Gear: universal(import('./resources/Gear')),
+                Plates: universal(import('./resources/Plates')),
                 Error: universal(import('./ErrorPage')),
                 Offline
               })}
