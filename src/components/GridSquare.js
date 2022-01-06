@@ -46,6 +46,9 @@ import Sound from '@material-ui/icons/VolumeUp'
     cardImg: {
       display: 'block',
     },
+    cardDescription: {
+      fontSize: 16,
+    },
     iconContainer: {
       position: 'absolute',
       bottom: 5,

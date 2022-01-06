@@ -296,7 +296,7 @@ export default class Collection extends Component {
       <div className={classes.descriptionColumnWrapper}>
         <div className={classes.descriptionColumn}>
           <div className={classes.descriptionDetail}>Purchased: {x.date_bought}</div>
-          {this.showable(x.date_built) && <div className={classes.descriptionDetail}>Built: {x.date_built}</div>}
+          {this.showable(x.date_built) && <div className={classes.descriptionDetail}>{x.build_status === 'Built' ? 'Built' : 'Modified'}: {x.date_built}</div>}
           <div className={classes.descriptionDetail}>Color: {x.color}</div>
           {this.showable(x.layout) && !['60% HHKB 7u', '60% HHKB 6u'].includes(x.layout) && <div className={classes.descriptionDetail}>Layout: {x.layout}</div>}
           {this.showable(x.mount) && <div className={classes.descriptionDetail}>Mounting Style: {x.mount}</div>}
@@ -340,6 +340,17 @@ export default class Collection extends Component {
     this.props.app.setOpenBuild({})
   }
 
+  determineDate(x) {
+    if (['TBD', 'N/A'].includes(x.date_built)) {
+      return `Purchased ${x.date_bought}`
+    } else if (x.build_status === 'Built') {
+      return `Built ${x.date_built}`
+    } else {
+      return `Modified ${x.date_built}`
+    }
+    return ['TBD', 'N/A'].includes(x.date_built) ? x.date_bought : x.date_built
+  }
+
   render() {
     const { app, social, classes, builds, openBuild } = this.props
 
@@ -371,7 +382,7 @@ export default class Collection extends Component {
                   className={classnames(!x.active && classes.hide, !(x.src.includes('unavailable') || x.otw_link) && classes.clickable)}
                   key={x.id}
                   name={x.name}
-                  description={['TBD', 'N/A'].includes(x.date_built) ? x.date_bought : x.date_built}
+                  description={this.determineDate(x)}
                   instagram={x.instagram}
                   buildVideo={x.build_video}
                   typeTest={x.type_test}
