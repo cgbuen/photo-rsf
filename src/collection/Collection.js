@@ -238,36 +238,15 @@ export default class Collection extends Component {
   buildLinks(x, cheat) {
     const { classes } = this.props
     const links = []
-    if (x.build_video && !x.type_test) {
-      links.push(
-        <LinkBlank className={classes.descriptionLink} to={x.build_video} onClick={() => this.modalIconClick({name: x.name, iconType: 'build'})}>Build video</LinkBlank>
-      )
-    } else if (x.build_video && x.type_test && x.type_test.includes(x.build_video)) {
+    if (x.build_video) {
       links.push(
         <LinkBlank className={classes.descriptionLink} to={x.build_video} onClick={() => this.modalIconClick({name: x.name, iconType: 'build'})}>
           <Build className={classes.featureIcon} />
           Build video
         </LinkBlank>
       )
-      links.push(
-        <LinkBlank className={classes.descriptionLink} to={x.type_test} onClick={() => this.modalIconClick({name: x.name, iconType: 'type test'})}>
-          <Sound className={classes.featureIcon} />
-          Type test (timestamped)
-        </LinkBlank>)
-    } else if (x.build_video && x.type_test && !x.type_test.includes(x.build_video)) {
-      links.push(
-        <LinkBlank className={classes.descriptionLink} to={x.build_video} onClick={() => this.modalIconClick({name: x.name, iconType: 'build'})}>
-          <Build className={classes.featureIcon} />
-          Build video
-        </LinkBlank>
-      )
-      links.push(
-        <LinkBlank className={classes.descriptionLink} to={x.type_test} onClick={() => this.modalIconClick({name: x.name, iconType: 'type test'})}>
-          <Sound className={classes.featureIcon} />
-          Type test
-        </LinkBlank>
-      )
-    } else if (!x.build_video && x.type_test) {
+    }
+    if (x.type_test) {
       links.push(
         <LinkBlank className={classes.descriptionLink} to={x.type_test} onClick={() => this.modalIconClick({name: x.name, iconType: 'type test'})}>
           <Sound className={classes.featureIcon} />
