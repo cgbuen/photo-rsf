@@ -63,6 +63,11 @@ export default new Router()
     fromClient({ page: 'Gear' }),
     fromServer('./resources/gear-handler')
   )
+  .get('/resources/plates',
+    cacheHandler,
+    fromClient({ page: 'Plates' }),
+    fromServer('./resources/plates-handler')
+  )
   .fallback(
     // when no route matches, pull in content from the upstream site
     // for a working example, go to /help/home

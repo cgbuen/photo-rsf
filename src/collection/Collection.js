@@ -238,36 +238,15 @@ export default class Collection extends Component {
   buildLinks(x, cheat) {
     const { classes } = this.props
     const links = []
-    if (x.build_video && !x.type_test) {
-      links.push(
-        <LinkBlank className={classes.descriptionLink} to={x.build_video} onClick={() => this.modalIconClick({name: x.name, iconType: 'build'})}>Build video</LinkBlank>
-      )
-    } else if (x.build_video && x.type_test && x.type_test.includes(x.build_video)) {
+    if (x.build_video) {
       links.push(
         <LinkBlank className={classes.descriptionLink} to={x.build_video} onClick={() => this.modalIconClick({name: x.name, iconType: 'build'})}>
           <Build className={classes.featureIcon} />
           Build video
         </LinkBlank>
       )
-      links.push(
-        <LinkBlank className={classes.descriptionLink} to={x.type_test} onClick={() => this.modalIconClick({name: x.name, iconType: 'type test'})}>
-          <Sound className={classes.featureIcon} />
-          Type test (timestamped)
-        </LinkBlank>)
-    } else if (x.build_video && x.type_test && !x.type_test.includes(x.build_video)) {
-      links.push(
-        <LinkBlank className={classes.descriptionLink} to={x.build_video} onClick={() => this.modalIconClick({name: x.name, iconType: 'build'})}>
-          <Build className={classes.featureIcon} />
-          Build video
-        </LinkBlank>
-      )
-      links.push(
-        <LinkBlank className={classes.descriptionLink} to={x.type_test} onClick={() => this.modalIconClick({name: x.name, iconType: 'type test'})}>
-          <Sound className={classes.featureIcon} />
-          Type test
-        </LinkBlank>
-      )
-    } else if (!x.build_video && x.type_test) {
+    }
+    if (x.type_test) {
       links.push(
         <LinkBlank className={classes.descriptionLink} to={x.type_test} onClick={() => this.modalIconClick({name: x.name, iconType: 'type test'})}>
           <Sound className={classes.featureIcon} />
@@ -296,10 +275,10 @@ export default class Collection extends Component {
       <div className={classes.descriptionColumnWrapper}>
         <div className={classes.descriptionColumn}>
           <div className={classes.descriptionDetail}>Purchased: {x.date_bought}</div>
-          {this.showable(x.date_built) && <div className={classes.descriptionDetail}>Built: {x.date_built}</div>}
+          {this.showable(x.date_built) && <div className={classes.descriptionDetail}>{x.build_status === 'Built' ? 'Built' : 'Modified'}: {x.date_built}</div>}
           <div className={classes.descriptionDetail}>Color: {x.color}</div>
-          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Layout: {x.layout}</div>}
-          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Mounting Style: {x.mount} mount</div>}
+          {this.showable(x.layout) && !['60% HHKB 7u', '60% HHKB 6u'].includes(x.layout) && <div className={classes.descriptionDetail}>Layout: {x.layout}</div>}
+          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Mounting Style: {x.mount}</div>}
           {this.showable(x.plate) && <div className={classes.descriptionDetail}>Plate: {x.plate}</div>}
         </div>
         <div className={classes.descriptionColumn}>
@@ -340,6 +319,17 @@ export default class Collection extends Component {
     this.props.app.setOpenBuild({})
   }
 
+  determineDate(x) {
+    if (['TBD', 'N/A'].includes(x.date_built)) {
+      return `Purchased ${x.date_bought}`
+    } else if (x.build_status === 'Built') {
+      return `Built ${x.date_built}`
+    } else {
+      return `Modified ${x.date_built}`
+    }
+    return ['TBD', 'N/A'].includes(x.date_built) ? x.date_bought : x.date_built
+  }
+
   render() {
     const { app, social, classes, builds, openBuild } = this.props
 
@@ -353,11 +343,11 @@ export default class Collection extends Component {
           <div className={classes.filtersWhole}>
             <div className={classes.filtersLabel}>Filters: </div>
             <div className={classes.filtersOnlyContiner}>
-              {this.renderFilter({ id: 'Built', name: 'Built'})}
-              {this.renderFilter({ id: 'Prebuilt', name: 'Prebuilt'})}
-              {this.renderFilter({ id: 'Vintage', name: 'Vintage'})}
-              {this.renderFilter({ id: 'Unbuilt', name: 'Unbuilt'})}
-              {this.renderFilter({ id: 'On the way', name: 'On the way'})}
+              {
+                ['Built', 'Prebuilt', 'Vintage', 'Unbuilt', 'On the way']
+                  .filter(x => builds.filter(y => y.build_status === x && y.assembly_variant.includes('A')).length > 0)
+                  .map(x => this.renderFilter({ id: x, name: x }))
+              }
             </div>
           </div>
           <div className={classes.results}>{builds.filter(x => x.active).length} Results</div>
@@ -371,7 +361,7 @@ export default class Collection extends Component {
                   className={classnames(!x.active && classes.hide, !(x.src.includes('unavailable') || x.otw_link) && classes.clickable)}
                   key={x.id}
                   name={x.name}
-                  description={['TBD', 'N/A'].includes(x.date_built) ? x.date_bought : x.date_built}
+                  description={this.determineDate(x)}
                   instagram={x.instagram}
                   buildVideo={x.build_video}
                   typeTest={x.type_test}
@@ -395,7 +385,7 @@ export default class Collection extends Component {
             <div className={classes.dialogImgWrapper}>
               <img className={classes.modalImg} alt={classes.name} src={openBuild && openBuild.src && createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
               <div className={classnames(classes.descriptionBox, openBuild.blank_space || 'bottomRight')}>
-                <div className={classes.descriptionTitle}><strong>{openBuild.name}.</strong></div>
+                <div className={classes.descriptionTitle}><strong>{openBuild.name}</strong></div>
                 {this.descriptionize(openBuild)}
               </div>
             </div>

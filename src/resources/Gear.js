@@ -56,7 +56,7 @@ export default class Gear extends Component {
             <TableBody>
                 {gear
                   .filter(x => {
-                    return x.kind === name || (extras && extras.includes(x.kind))
+                    return x.active && (x.kind === name || (extras && extras.includes(x.kind)))
                   })
                   .map(x => (
                     <TableRow key={x.id}>
