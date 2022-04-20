@@ -327,7 +327,6 @@ export default class Collection extends Component {
     } else {
       return `Modified ${x.date_built}`
     }
-    return ['TBD', 'N/A'].includes(x.date_built) ? x.date_bought : x.date_built
   }
 
   render() {
