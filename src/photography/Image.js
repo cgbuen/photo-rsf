@@ -96,6 +96,7 @@ const Image = styled(({
       <div className={classes.itemWrapper}>
         <img
           key={index}
+          alt={""}
           {...cleanPhoto}
         />
         {isMobile ? <Person className={classes.iconPerson} /> : ''}
