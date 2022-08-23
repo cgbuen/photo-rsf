@@ -2,15 +2,17 @@ import { withGlobalState } from 'react-storefront/router'
 import Config from 'react-storefront/Config'
 import fetch from 'fetch'
 import globalState from '../globalState'
+import { createOptimizedSrc } from 'react-storefront/imageService'
 
 const makeUsablePhotoArray = function(array, assetHost) {
-  return array
+  const newArray = array
     .filter(photo => photo.active)
     .map(photo => {
-      photo.src = `${assetHost}/concerts/${photo.roll}+${photo.number}.jpg?${photo.cacheBuster}`
+      photo.src = createOptimizedSrc(`${assetHost}/concerts/${photo.roll}+${photo.number}.jpg?${photo.cacheBuster}`, { quality: Config.get('imageQuality') })
       photo.alt = `${photo.subject}, ${photo.venue}, ${photo.date}`
       return photo
     })
+  return newArray
 }
 
 const photoGenerator = async function(assetHost) {

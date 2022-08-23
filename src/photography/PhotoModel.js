@@ -10,6 +10,8 @@ const PhotoModel = types
     date: types.maybeNull(types.string),
     subject: types.maybeNull(types.string),
     active: types.maybeNull(types.number),
+    width: types.maybeNull(types.number),
+    height: types.maybeNull(types.number),
     venue: types.maybeNull(types.string),
     city: types.maybeNull(types.string),
     format: types.maybeNull(types.string),
@@ -17,11 +19,13 @@ const PhotoModel = types
     camera: types.maybeNull(types.string),
     cacheBuster: types.maybeNull(types.number),
     comment: types.maybeNull(types.string),
-    descriptionVisible: types.maybeNull(types.boolean),
   })
   .actions(self => ({
-    toggleDescription() {
-      self.descriptionVisible = !self.descriptionVisible
+    setHeight(val) {
+      self.height = val
+    },
+    setWidth(val) {
+      self.width = val
     },
   }))
 

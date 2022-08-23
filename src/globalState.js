@@ -5,17 +5,17 @@ export default () => {
     root: true,
     items: [
       {
-        text: 'Projects',
+        text: 'Software',
         prefetch: 'visible',
         url: '/projects'
       },
       {
-        text: 'Photos',
+        text: 'Concerts',
         prefetch: 'visible',
         url: '/photography'
       },
       {
-        text: 'Collection',
+        text: 'Keyboards',
         prefetch: 'visible',
         url: '/collection'
       },

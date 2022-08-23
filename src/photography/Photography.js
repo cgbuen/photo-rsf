@@ -2,44 +2,12 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'
-import { withStyles } from '@material-ui/core'
-import ImageSwitcher from '../components/ImageSwitcher'
+import Gallery from '../components/react-photo-gallery/Gallery'
+import Image from './Image'
 import Typography from '@material-ui/core/Typography'
-import classnames from 'classnames'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
 
 @withAmp
-@withStyles(
-  theme => ({
-    imageSwitcher: {
-      marginBottom: 40,
-    },
-    viewerToggle: {
-      background: 'rgba(17, 17, 17, .5)',
-      boxShadow: '0 0 2px 2px rgba(64, 64, 64, .3)',
-      color: 'white',
-      height: 'auto',
-      padding: 10,
-      right: 25,
-      top: 25,
-      transform: 'none',
-      width: 'auto',
-      zIndex: 1,
-    },
-    viewerActive: {
-      borderRadius: '50%',
-      right: 0,
-      top: -40,
-      transform: 'scale(0.4) rotateZ(45deg) translateX(75px)',
-    },
-    image: {
-      width: '100%'
-    },
-    maxHeight: {
-      maxHeight: 620
-    },
-  })
-)
 @inject(({ app }) => ({ app, photos: app.photos }))
 @observer
 export default class Photography extends Component {
@@ -48,14 +16,12 @@ export default class Photography extends Component {
     this.state = {
       isLandscape: false,
       enableMouseEvents: false,
-      loaded: false,
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
   }
 
   componentDidMount() {
     this.updateWindowDimensions();
-    this.setState({ loaded: true })
     window.addEventListener('resize', this.updateWindowDimensions)
   }
 
@@ -64,45 +30,71 @@ export default class Photography extends Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ isLandscape: window.innerWidth > window.innerHeight, enableMouseEvents: window.innerWidth < 600 })
+    this.setState({ isLandscape: window.innerWidth > window.innerHeight, enableMouseEvents: window.innerWidth < 645 })
+  }
+
+  columnsATF(containerWidth) {
+    let columns = 1;
+    if (containerWidth >= 645) columns = 2;
+    if (containerWidth >= 900) columns = 3;
+    if (containerWidth >= 1500) columns = 4;
+    return columns;
+  }
+
+  columnsBTF(containerWidth) {
+    let columns = 1;
+    if (containerWidth >= 600) columns = 2;
+    if (containerWidth >= 900) columns = 3;
+    if (containerWidth >= 1500) columns = 4;
+    return columns;
+  }
+
+  imageRenderer({ index, photo, direction, top, left, key }) {
+    return (
+      <Image
+        key={key}
+        index={index}
+        photo={photo}
+        direction={direction}
+        top={top}
+        left={left}
+        margin={2}
+        descriptionVisible={false}
+      />
+    )
   }
 
   render() {
-    const { classes, app, photos } = this.props
-    const { isLandscape, loaded, enableMouseEvents } = this.state
+    const { photos } = this.props
+    const { enableMouseEvents } = this.state
 
     return (
       <Container>
         <Row>
           <Typography variant="h1">Concert Photography</Typography>
         </Row>
-        {enableMouseEvents ?
-          (<p>Here are a few live music events that I'm lucky to have shot. Swipe through and tap anywhere on each image for more info.</p>)
-          : (<p>Here are a few live music events that I'm lucky to have shot. Click anywhere on each image for more info.</p>)
-        }
-        <Row>
-          <ImageSwitcher
-            id="gallerySwitcher"
-            classes={{
-              root: classes.imageSwitcher,
-              viewerToggle: classes.viewerToggle,
-              viewerActive: classes.viewerActive,
-            }}
-            images={photos}
-            imageProps={{
-              aspectRatio: isLandscape ? 66.66 : 125,
-              quality: app.config.imageQuality,
-              classes: {
-                root: classnames({
-                  [classes.image]: true,
-                  [classes.maxHeight]: !loaded
-                }),
-              }
-            }}
-            infinite
-            enableMouseEvents={enableMouseEvents}
-          />
-        </Row>
+        <p>Here are a few live music events that I'm lucky to have shot. {enableMouseEvents ? "Tap" : "Click"} each image for more info.</p>
+        <Gallery
+          photos={photos.slice(0, 2)}
+          direction={enableMouseEvents ? "column" : "row"}
+          columns={this.columnsATF}
+          renderImage={this.imageRenderer}
+          onClick={this.showInfo}
+        />
+        <Gallery
+          photos={photos.slice(2, 7)}
+          direction={enableMouseEvents ? "column" : "row"}
+          columns={this.columnsATF}
+          renderImage={this.imageRenderer}
+          onClick={this.showInfo}
+        />
+        <Gallery
+          photos={photos.slice(7)}
+          direction={"column"}
+          columns={this.columnsBTF}
+          renderImage={this.imageRenderer}
+          onClick={this.showInfo}
+        />
       </Container>
     )
   }
