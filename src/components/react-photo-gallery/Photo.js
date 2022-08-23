@@ -33,7 +33,6 @@ export const photoPropType = PropTypes.shape({
   height: PropTypes.number.isRequired,
   setWidth: PropTypes.func.isRequired,
   setHeight: PropTypes.func.isRequired,
-  toggleDescription: PropTypes.func.isRequired,
   alt: PropTypes.string,
   title: PropTypes.string,
   srcSet: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),

@@ -4,12 +4,16 @@ import fetch from 'fetch'
 import globalState from '../globalState'
 import { createOptimizedSrc } from 'react-storefront/imageService'
 
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
 const makeUsablePhotoArray = function(array, assetHost) {
   const newArray = array
     .filter(photo => photo.active)
     .map(photo => {
       photo.src = createOptimizedSrc(`${assetHost}/concerts/${photo.roll}+${photo.number}.jpg?${photo.cacheBuster}`, { quality: Config.get('imageQuality') })
-      photo.alt = `${photo.subject}, ${photo.venue}, ${photo.date}`
+      photo.alt1 = `${photo.subject}${(photo.venue && photo.venue.includes('n/a')) ? '' : ` @ ${photo.venue}`}`
+      photo.alt2 = photo.city === 'Coachella' ? `${photo.city} ${photo.date.substring(0, 4)}` : `${photo.city}, ${MONTHS[parseInt(photo.date.substring(5, 7)) - 1]} ${photo.date.substring(0, 4)}`
+      photo.alt = `${photo.alt1}, ${photo.alt2}`
       return photo
     })
   return newArray

@@ -7,6 +7,8 @@ const PhotoModel = types
     number: types.maybeNull(types.union(types.string, types.number)),
     src: types.maybeNull(types.string),
     alt: types.maybeNull(types.string),
+    alt1: types.maybeNull(types.string),
+    alt2: types.maybeNull(types.string),
     date: types.maybeNull(types.string),
     subject: types.maybeNull(types.string),
     active: types.maybeNull(types.number),

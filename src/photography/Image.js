@@ -4,8 +4,6 @@ import Person from '@material-ui/icons/Person'
 import classnames from 'classnames'
 import Typography from '@material-ui/core/Typography'
 
-const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-
 const styled = withStyles(
   theme => ({
     imageWrap: {
@@ -31,7 +29,8 @@ const styled = withStyles(
       height: 24,
     },
     description: {
-      bottom: 5,
+      bottom: 10,
+      pointerEvents: 'none',
       position: 'absolute',
       textAlign: 'center',
       width: '100%',
@@ -64,6 +63,7 @@ const Image = styled(({
   margin,
   direction,
   descriptionVisible,
+  isMobile,
   classes,
 }) => {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
@@ -92,13 +92,13 @@ const Image = styled(({
     left,
   }
   return (
-    <div key={index} className={classes.imageWrap} onClick={handleOnClick} style={style}>
+    <div key={index} className={classes.imageWrap} onClick={isMobile ? handleOnClick : undefined} style={style}>
       <div className={classes.itemWrapper}>
         <img
           key={index}
           {...cleanPhoto}
         />
-        <Person className={classes.iconPerson} />
+        {isMobile ? <Person className={classes.iconPerson} /> : ''}
       </div>
       <div className={classes.description}>
         <div className={classnames({
@@ -106,10 +106,10 @@ const Image = styled(({
           [classes.descriptionVisible]: isDescriptionVisible,
         })}>
           <Typography className={classes.descriptionLine} variant="subtitle1">
-            {photo.subject}{(photo.venue && photo.venue.includes('n/a')) ? '' : ` @ ${photo.venue}`}
+            {photo.alt1}
           </Typography>
           <Typography className={classes.descriptionLine} variant="subtitle1">
-            {photo.city === 'Coachella' ? `${photo.city} ${photo.date.substring(0, 4)}` : `${photo.city}, ${MONTHS[parseInt(photo.date.substring(5, 7)) - 1]} ${photo.date.substring(0, 4)}`}
+            {photo.alt2}
           </Typography>
         </div>
       </div>

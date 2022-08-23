@@ -1,11 +1,37 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { inject, observer } from 'mobx-react'
 import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'
+import { SRLWrapper } from "simple-react-lightbox"
 import Gallery from '../components/react-photo-gallery/Gallery'
 import Image from './Image'
 import Typography from '@material-ui/core/Typography'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
+
+const srlOptions = {
+  settings: {
+    disableWheelControls: true,
+    disablePanzoom: true,
+    lightboxTransitionSpeed: .2,
+    lightboxTransitionTimingFunction: 'easeIn',
+    transitionSpeed: .2,
+    transitionTimingFunction: 'easeIn',
+    slideTransitionSpeed: .2,
+    slideTransitionTimingFunction: 'easeIn',
+  },
+  buttons: {
+    backgroundColor: 'rgba(0, 0, 0, .55)',
+    showDownloadButton: false,
+    showAutoplayButton: false,
+    showFullscreenButton: false,
+  },
+  caption: {
+    captionContainerPadding: '0 0 50px',
+  },
+  thumbnails: {
+    showThumbnails: false,
+  }
+}
 
 @withAmp
 @inject(({ app }) => ({ app, photos: app.photos }))
@@ -15,7 +41,7 @@ export default class Photography extends Component {
     super(props);
     this.state = {
       isLandscape: false,
-      enableMouseEvents: false,
+      isMobile: false,
     };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this)
   }
@@ -30,7 +56,7 @@ export default class Photography extends Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ isLandscape: window.innerWidth > window.innerHeight, enableMouseEvents: window.innerWidth < 645 })
+    this.setState({ isLandscape: window.innerWidth > window.innerHeight, isMobile: window.innerWidth < 645 })
   }
 
   columnsATF(containerWidth) {
@@ -49,52 +75,58 @@ export default class Photography extends Component {
     return columns;
   }
 
-  imageRenderer({ index, photo, direction, top, left, key }) {
-    return (
-      <Image
-        key={key}
-        index={index}
-        photo={photo}
-        direction={direction}
-        top={top}
-        left={left}
-        margin={2}
-        descriptionVisible={false}
-      />
-    )
+  imageRenderer(isMobile) {
+    return ({ index, photo, direction, top, left, key }) => {
+      return (
+        <Image
+          key={key}
+          index={index}
+          photo={photo}
+          direction={direction}
+          top={top}
+          left={left}
+          margin={2}
+          descriptionVisible={false}
+          isMobile={isMobile}
+        />
+      )
+    }
   }
 
   render() {
     const { photos } = this.props
-    const { enableMouseEvents } = this.state
+    const { isMobile } = this.state
 
-    return (
-      <Container>
+    const Page = (
+      <>
         <Row>
           <Typography variant="h1">Concert Photography</Typography>
         </Row>
-        <p>Here are a few live music events that I'm lucky to have shot. {enableMouseEvents ? "Tap" : "Click"} each image for more info.</p>
+        <p>Here are a few live music events that I'm lucky to have shot. {isMobile ? "Tap" : "Click"} each image for more info.</p>
         <Gallery
           photos={photos.slice(0, 2)}
-          direction={enableMouseEvents ? "column" : "row"}
+          direction={isMobile ? "column" : "row"}
           columns={this.columnsATF}
-          renderImage={this.imageRenderer}
-          onClick={this.showInfo}
+          renderImage={this.imageRenderer(isMobile)}
         />
         <Gallery
           photos={photos.slice(2, 7)}
-          direction={enableMouseEvents ? "column" : "row"}
+          direction={isMobile ? "column" : "row"}
           columns={this.columnsATF}
-          renderImage={this.imageRenderer}
-          onClick={this.showInfo}
+          renderImage={this.imageRenderer(isMobile)}
         />
         <Gallery
           photos={photos.slice(7)}
           direction={"column"}
           columns={this.columnsBTF}
-          renderImage={this.imageRenderer}
-          onClick={this.showInfo}
+          renderImage={this.imageRenderer(isMobile)}
         />
+      </>
+    )
+
+    return (
+      <Container>
+        {isMobile ? Page : <SRLWrapper options={srlOptions}>{Page}</SRLWrapper>}
       </Container>
     )
   }
