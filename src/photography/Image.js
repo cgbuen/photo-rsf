@@ -9,6 +9,7 @@ const styled = withStyles(
     imageWrap: {
       cursor: 'pointer',
       position: 'relative',
+      tapHighlightColor: 'rgba(255, 255, 255, 0)',
       '& img': {
         display: 'block',
         userDrag: 'none',
@@ -97,6 +98,7 @@ const Image = styled(({
         <img
           key={index}
           alt={""}
+          loading={"lazy"}
           {...cleanPhoto}
         />
         {isMobile ? <Person className={classes.iconPerson} /> : ''}
