@@ -297,7 +297,7 @@ export default class Collection extends Component {
   renderFilter({ id, name }) {
     const { app, classes, builds, buildFiltersActive } = this.props
     return (
-      <Track event="filterClick" name={name} filterStatus={`${!buildFiltersActive[id]}`}>
+      <Track key={id} event="filterClick" name={name} filterStatus={`${!buildFiltersActive[id]}`}>
         <div className={classnames(classes.filter, buildFiltersActive[id] && classes.filterActive)} onClick={() => app.toggleFilteredBuilds(id)}>
           <div className={classes.icon}>
             <CheckBoxOutlineBlankSharpIcon className={classes.iconUnchecked} />

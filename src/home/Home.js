@@ -229,7 +229,7 @@ export default class Home extends Component {
             <div className={classes.heroSubTextContainer}>
               <Link to="/projects" className={classes.heroLink}>Software Engineering.</Link>
               <Link to="/photography" className={classes.heroLink}>Concert Photography.</Link>
-              <Link to="/collection" className={classes.heroLink}>Content Creation.</Link>
+              <Link to="/collection" className={classes.heroLink}>Keyboard Collecting.</Link>
             </div>
             {this.renderIconRow(classes.heroBox)}
           </div>
