@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'

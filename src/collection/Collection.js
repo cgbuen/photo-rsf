@@ -117,7 +117,6 @@ import analytics from 'react-storefront/analytics'
       background: 'rgba(128, 128, 128, 0.5)',
       bottom: 15,
       padding: 10,
-      maxWidth: 250,
       position: 'absolute',
       right: 15,
       '&.topLeft': {
@@ -275,13 +274,14 @@ export default class Collection extends Component {
       <div className={classes.descriptionColumnWrapper}>
         <div className={classes.descriptionColumn}>
           <div className={classes.descriptionDetail}>Purchased: {x.date_bought}</div>
-          {this.showable(x.date_built) && <div className={classes.descriptionDetail}>{x.build_status === 'Built' ? 'Built' : 'Modified'}: {x.date_built}</div>}
+          {this.showable(x.date_built) && <div className={classes.descriptionDetail}>{x.build_status === 'Built' ? 'Built' : 'Modified'}: {x.date_built} {this.showable(x.date_built_init) && x.date_built !== x.date_built_init ? `(initially ${x.date_built_init})` : ''}</div>}
           <div className={classes.descriptionDetail}>Color: {x.color}</div>
           {this.showable(x.layout) && !['60% HHKB 7u', '60% HHKB 6u'].includes(x.layout) && <div className={classes.descriptionDetail}>Layout: {x.layout}</div>}
-          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Mounting Style: {x.mount}</div>}
-          {this.showable(x.plate) && <div className={classes.descriptionDetail}>Plate: {x.plate}</div>}
+          {this.showable(x.mount) && <div className={classes.descriptionDetail}>Mounting Style: {x.mount} {this.showable(x.pcb_thickness) && x.pcb_thickness !== '1.6mm' ? `(${x.pcb_thickness} PCB)` : ''}</div>}
         </div>
         <div className={classes.descriptionColumn}>
+          {this.showable(x.plate) && <div className={classes.descriptionDetail}>Plate: {x.plate}</div>}
+          {this.showable(x.stabilizers) && <div className={classes.descriptionDetail}>Stabilizers: {x.stabilizers}</div>}
           {this.showable(x.switches) && <div className={classes.descriptionDetail}>Switches: {x.switches}</div>}
           {this.showable(x.keycaps) && <div className={classes.descriptionDetail}>Keycaps: {x.keycaps}</div>}
           {x.notes && (<div className={classes.descriptionDetail}>Notes: {x.notes}</div>)}
