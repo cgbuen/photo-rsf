@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Container from 'react-storefront/Container'
 import Row from 'react-storefront/Row'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 import withAmp from 'react-storefront-extensions/amp/withAmp'
 import GridSquare from '../components/GridSquare'
@@ -113,6 +115,36 @@ import analytics from 'react-storefront/analytics'
       display: 'block',
       width: '100%',
     },
+    buildTabsRoot: {
+      minHeight: 0,
+    },
+    buildTabsFlexContainer: {
+      display: 'block',
+    },
+    buildTabRoot: {
+      marginRight: 10,
+      minHeight: 0,
+      minWidth: 0,
+    },
+    buildTabRootActive: {
+      '& $buildTabLabel': {
+        textDecorationColor: '#69c',
+      },
+    },
+    buildTabTextColorInherit: {
+      opacity: 1,
+    },
+    buildTabLabelContainer: {
+      padding: 0,
+    },
+    buildTabLabel: {
+      textDecoration: 'underline',
+      textDecorationColor: 'transparent',
+      textDecorationThickness: '2px',
+      textTransform: 'none',
+      fontWeight: 'bold',
+      fontSize: 12,
+    },
     descriptionBox: {
       background: 'rgba(128, 128, 128, 0.5)',
       bottom: 15,
@@ -219,12 +251,22 @@ import analytics from 'react-storefront/analytics'
 @inject(({ app, history }) => ({ app, history, location: app.location, social: app.social, builds: app.builds, buildFiltersActive: app.buildFiltersActive, openBuild: app.openBuild }))
 @observer
 export default class Collection extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      variantVal: 0,
+    };
+  }
   componentDidMount() {
     const { history, location } = this.props
     if (location.pathname.match(/\/collection\/.+/)) {
       history.replace('/collection')
     }
     window.addEventListener('keyup', e => { e.keyCode === 27 && this.closeDialog() })
+  }
+
+  handleVariantChange = (e, v) => {
+    this.setState({ variantVal: v })
   }
 
   showable(x) {
@@ -270,10 +312,52 @@ export default class Collection extends Component {
   }
 
   descriptionize(x) {
+    if (!x === 'Built' || x.assembly_variant === 'A0') {
+      return this.descriptionizeIndividual(x)
+    } else {
+      const { builds, classes } = this.props
+      const { variantVal } = this.state
+      const variants = builds.filter(y => y.board_id === x.board_id)
+      return (
+        <>
+          <Tabs
+            classes={{
+              root: classes.buildTabsRoot,
+              flexContainer: classes.buildTabsFlexContainer,
+            }}
+            fullWidth
+            onChange={this.handleVariantChange}
+          >
+            {variants.map((y, i) => (
+              <Tab
+                classes={{
+                  root: classnames({
+                    [classes.buildTabRoot]: true,
+                    [classes.buildTabRootActive]: i === variantVal,
+                  }),
+                  textColorInherit: classes.buildTabTextColorInherit,
+                  labelContainer: classes.buildTabLabelContainer,
+                  label: classes.buildTabLabel,
+                }}
+                key={i}
+                label={`Build ${i+1}`}
+              />
+            ))}
+          </Tabs>
+          <div>
+            {variants.map((y, i) => i === variantVal && <div key={i}>{this.descriptionizeIndividual(y, { variant: true })}</div>)}
+          </div>
+        </>
+      )
+    }
+  }
+
+  descriptionizeIndividual(x, options={}) {
     const { classes } = this.props
     return (
       <div className={classes.descriptionColumnWrapper}>
         <div className={classes.descriptionColumn}>
+          {options.variant && x.build_status !== 'Built' && <div className={classes.descriptionDetail}>(Unbuilt)</div>}
           <div className={classes.descriptionDetail}>Purchased: {x.date_bought}</div>
           {this.showable(x.date_built) && <div className={classes.descriptionDetail}>{x.build_status === 'Built' ? 'Built' : 'Modified'}: {x.date_built} {this.showable(x.date_built_init) && x.date_built !== x.date_built_init ? `(initially ${x.date_built_init})` : ''}</div>}
           <div className={classes.descriptionDetail}>Color: {x.color}</div>
@@ -318,6 +402,7 @@ export default class Collection extends Component {
 
   closeDialog() {
     this.props.app.setOpenBuild({})
+    this.setState({ variantVal: 0 })
   }
 
   determineDate(x) {

@@ -3,6 +3,7 @@ import { types } from 'mobx-state-tree'
 const BuildModel = types
   .model('BuildModel', {
     id: types.maybeNull(types.number),
+    board_id: types.maybeNull(types.number),
     name: types.maybeNull(types.string),
     src: types.maybeNull(types.string),
     otw_link: types.maybeNull(types.string),
