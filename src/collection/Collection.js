@@ -224,6 +224,7 @@ export default class Collection extends Component {
     if (location.pathname.match(/\/collection\/.+/)) {
       history.replace('/collection')
     }
+    window.addEventListener('keyup', e => { e.keyCode === 27 && this.closeDialog() })
   }
 
   showable(x) {
