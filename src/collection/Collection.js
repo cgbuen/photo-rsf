@@ -24,29 +24,28 @@ import Keysets from './Keysets'
     collectionTabsFlexContainer: {
       display: 'block',
     },
+    collectionTabsScroller: {
+      borderBottom: '3px solid #69c',
+    },
     collectionTabRoot: {
       marginRight: 10,
       minHeight: 0,
       minWidth: 0,
     },
     collectionTabRootActive: {
-      '& $collectionTabLabel': {
-        textDecorationColor: '#69c',
-      },
+      background: '#69c',
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
     },
     collectionTabTextColorInherit: {
       opacity: 1,
     },
     collectionTabLabelContainer: {
-      padding: 0,
     },
     collectionTabLabel: {
-      textDecoration: 'underline',
-      textDecorationColor: 'transparent',
-      textDecorationThickness: '2px',
       textTransform: 'none',
       fontWeight: 'bold',
-      fontSize: 20,
+      fontSize: 18,
     },
   })
 )
@@ -85,8 +84,9 @@ export default class Collection extends Component {
           classes={{
             root: classes.collectionTabsRoot,
             flexContainer: classes.collectionTabsFlexContainer,
+            scroller: classes.collectionTabsScroller,
           }}
-          fullWidth
+          variant="fullWidth"
           onChange={this.handleSectionChange}
         >
           {['Keyboards', 'Keysets'].map((y, i) => (

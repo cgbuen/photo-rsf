@@ -12,7 +12,6 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import DialogClose from 'react-storefront/DialogClose'
-import CheckBoxOutlineBlankSharpIcon from '@material-ui/icons/CheckBoxOutlineBlankSharp';
 import CheckBoxSharpIcon from '@material-ui/icons/CheckBoxSharp';
 import Instagram from '../assets/instagram.svg'
 import Build from '@material-ui/icons/Build'
@@ -59,15 +58,21 @@ import analytics from 'react-storefront/analytics'
       margin: '0 15px 10px 0',
       padding: '5px 10px',
     },
-    'icon': {
+    icon: {
+      borderRadius: 2,
       display: 'inline-block',
-      marginRight: 3,
+      marginRight: 5,
+      overflow: 'hidden',
+      position: 'relative',
       verticalAlign: 'middle',
     },
-    'iconUnchecked': {
+    iconUnchecked: {
+      border: '3px solid white',
       display: 'block',
+      height: 24,
+      width: 24,
     },
-    'iconChecked': {
+    iconChecked: {
       display: 'none',
     },
     filterText: {
@@ -75,13 +80,14 @@ import analytics from 'react-storefront/analytics'
       verticalAlign: 'middle',
     },
     filterActive: {
-      background: '#69c',
       '& $iconUnchecked': {
         display: 'none'
       },
       '& $iconChecked': {
+        background: 'white',
+        fill: '#69c',
         display: 'block;'
-      }
+      },
     },
     cardContainer: {
       display: 'flex',
@@ -101,6 +107,19 @@ import analytics from 'react-storefront/analytics'
     noResultsMessage: {
       fontStyle: 'italic',
       margin: 10,
+    },
+    dialogInnerTitle: {
+      verticalAlign: 'middle',
+    },
+    expand: {
+      cursor: 'pointer',
+      fontSize: 14,
+      marginLeft: 10,
+      userSelect: 'none',
+      verticalAlign: 'middle',
+    },
+    highlight: {
+      color: '#69c',
     },
     dialogImgWrapper: {
       position: 'relative',
@@ -137,36 +156,20 @@ import analytics from 'react-storefront/analytics'
       textDecorationThickness: '2px',
       textTransform: 'none',
       fontWeight: 'bold',
-      fontSize: 12,
     },
     descriptionBox: {
-      background: 'rgba(128, 128, 128, 0.5)',
-      bottom: 15,
+      background: 'rgba(64, 64, 64, 0.4)',
+      left: 15,
       padding: 10,
       position: 'absolute',
-      right: 15,
-      '&.topLeft': {
-        bottom: 'auto',
-        left: 15,
-        right: 'auto',
-        top: 15,
-      },
-      '&.topRight': {
-        bottom: 'auto',
-        top: 15,
-      },
-      '&.bottomLeft': {
-        left: 15,
-        right: 'auto',
-      },
+      textShadow: '1px 1px 1px rgba(64, 64, 64, 0.4)',
+      top: 15,
       '@media (max-width:925px)': {
         background: 'none',
         maxWidth: 'none',
+        padding: '10px 0 0',
         position: 'static',
       },
-    },
-    descriptionTitle: {
-      textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
     },
     descriptionColumnWrapper: {
       width: 'auto',
@@ -195,13 +198,13 @@ import analytics from 'react-storefront/analytics'
       }
     },
     descriptionDetail: {
-      textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
+      textShadow: '1px 1px 1px rgba(64, 64, 64, 0.4)',
     },
     linkContainerWrapper: {
       position: 'relative',
     },
     linkContainer: {
-      textShadow: '1px 1px 1px rgba(128, 128, 128, 0.5)',
+      textShadow: '1px 1px 1px rgba(64, 64, 64, 0.4)',
       '& $descriptionLink': {
         textDecoration: 'none',
       },
@@ -248,6 +251,7 @@ export default class Builds extends Component {
     super(props);
     this.state = {
       variantVal: 0,
+      buildDetailsOpen: false,
     };
   }
   componentDidMount() {
@@ -256,6 +260,12 @@ export default class Builds extends Component {
 
   handleVariantChange = (e, v) => {
     this.setState({ variantVal: v })
+  }
+
+  handleBuildDetailsOpen = (val) => {
+    return () => {
+      this.setState({ buildDetailsOpen: val })
+    }
   }
 
   showable(x) {
@@ -314,7 +324,7 @@ export default class Builds extends Component {
               root: classes.buildTabsRoot,
               flexContainer: classes.buildTabsFlexContainer,
             }}
-            fullWidth
+            variant="fullWidth"
             onChange={this.handleVariantChange}
           >
             {variants.map((y, i) => (
@@ -374,7 +384,7 @@ export default class Builds extends Component {
       <Track key={id} event="filterClick" name={name} filterStatus={`${!buildFiltersActive[id]}`}>
         <div className={classnames(classes.filter, buildFiltersActive[id] && classes.filterActive)} onClick={() => app.toggleFilteredBuilds(id)}>
           <div className={classes.icon}>
-            <CheckBoxOutlineBlankSharpIcon className={classes.iconUnchecked} />
+            <div className={classes.iconUnchecked}></div>
             <CheckBoxSharpIcon className={classes.iconChecked} />
           </div>
           <div className={classes.filterText}>{name} ({builds.filter(x => x.assembly_variant.includes('A') && x.build_status === id).length})</div>
@@ -391,7 +401,7 @@ export default class Builds extends Component {
 
   closeDialog() {
     this.props.app.setOpenBuild({})
-    this.setState({ variantVal: 0 })
+    this.setState({ variantVal: 0, buildDetailsOpen: false })
   }
 
   determineDate(x) {
@@ -406,6 +416,7 @@ export default class Builds extends Component {
 
   render() {
     const { app, classes, builds, openBuild } = this.props
+    const { buildDetailsOpen } = this.state
 
     return (
       <>
@@ -447,17 +458,29 @@ export default class Builds extends Component {
         <Dialog maxWidth="xl" open={!!openBuild.name}>
           <DialogTitle disableTypography classes={{ root: classes.dialogTitle }}>
             <Typography variant="h1" component="h6" className={classes.title}>
-              {openBuild && openBuild.name}
+              {openBuild &&
+                <>
+                  <span className={classes.dialogInnerTitle}>{openBuild.name}</span>
+                  <span className={classes.expand} onClick={this.handleBuildDetailsOpen(!buildDetailsOpen)}>
+                    <span className={classes.highlight}>[</span>
+                      {buildDetailsOpen ? <>&ndash; hide</> : '+ show'} build details
+                    <span className={classes.highlight}>]</span>
+                  </span>
+                </>
+              }
             </Typography>
             <DialogClose onClick={() => this.closeDialog()} />
           </DialogTitle>
           <DialogContent>
             <div className={classes.dialogImgWrapper}>
               <img className={classes.modalImg} alt={classes.name} src={openBuild && openBuild.src && createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
-              <div className={classnames(classes.descriptionBox, openBuild.blank_space || 'bottomRight')}>
-                <div className={classes.descriptionTitle}><strong>{openBuild.name}</strong></div>
-                {this.descriptionize(openBuild)}
-              </div>
+              {
+                buildDetailsOpen && (
+                  <div className={classes.descriptionBox}>
+                    {this.descriptionize(openBuild)}
+                  </div>
+                )
+              }
             </div>
           </DialogContent>
         </Dialog>
