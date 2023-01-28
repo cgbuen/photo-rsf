@@ -36,6 +36,7 @@ const AppModel = types.compose(
       keysetSort: 'purchase_date',
       keysetDesc: true,
       openBuild: types.optional(BuildModel, {}),
+      openKeyset: types.optional(KeysetModel, {}),
       openProject: types.optional(ProjectModel, {}),
     })
     .actions(self => ({
@@ -51,6 +52,9 @@ const AppModel = types.compose(
       },
       setOpenBuild(build) {
         self.openBuild = {...build}
+      },
+      setOpenKeyset(keyset) {
+        self.openKeyset = {...keyset}
       },
       setOpenProject(project) {
         self.openProject = {...project}

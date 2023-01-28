@@ -9,10 +9,12 @@ const KeysetModel = types
     purchase_status: types.maybeNull(types.string),
     src: types.maybeNull(types.string),
     keyboard: types.maybeNull(types.string),
+    plan: types.maybeNull(types.string),
     tkl_only: types.maybeNull(types.number),
     category: types.maybeNull(types.string),
     color: types.maybeNull(types.string),
     mount_status: types.maybeNull(types.string),
+    notes: types.maybeNull(types.string),
   })
   .actions(self => ({
   }))
