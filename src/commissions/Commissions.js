@@ -63,7 +63,7 @@ export default class Commissions extends Component {
               src={createOptimizedSrc("https://ph-1080.cgbuen.com/resources/film.jpg", { quality: app.config.imageQualityAmp, width: 570 })}
               description={(
                 <div className={classes.text}>
-                  I'll develop and scan your photo film, ready for print or social media, starting at $2 per roll.{" "}
+                  I'll develop and scan your photo film, ready for print or social media, starting at $3 per roll.{" "}
                   For the fastest response, fill out <span className={classes.fakeLink}>this form</span>.
                 </div>
               )}
@@ -75,11 +75,7 @@ export default class Commissions extends Component {
             src={createOptimizedSrc("https://ph-1080.cgbuen.com/resources/keyboards.jpg", { quality: app.config.imageQualityAmp, width: 570 })}
             description={(
               <div className={classes.text}>
-                I currently have a large backlog, so lead times may not be reasonable at the moment.{" "}
-                I instead encourage reaching out to any other keyboard content creator on{" "}
-                <LinkBlank to="https://www.twitch.tv/directory/game/Makers%20%26%20Crafting">Twitch</LinkBlank>,{" "}
-                but if you still prefer me to build your keyboard, feel free to contact me through{" "}
-                Discord ({social.discordP}),{" "}
+                Send me a message on Discord ({social.discordP}),{" "}
                 <LinkBlank to={social.instagram}>Instagram</LinkBlank>, or {" "}
                 <LinkBlank to={`mailto:${social.email}`}>email</LinkBlank>.
               </div>

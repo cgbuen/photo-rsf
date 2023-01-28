@@ -12,10 +12,13 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 @withAmp
 @withStyles(theme => ({
   root: {
-    height: '64px',
+    height: 64,
   },
   headerLogo: {
+    justifyContent: 'left',
     textDecoration: 'none',
+    marginLeft: 0,
+    marginRight: 10,
   },
   headline: {
     color: 'white',
@@ -42,6 +45,12 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     borderColor: 'rgba(255, 255, 255, .12)',
     color: 'white',
   },
+  toolBar: {
+    boxSizing: 'border-box',
+    justifyContent: 'space-between',
+    maxWidth: 960,
+    padding: '0 15px',
+  },
 }))
 @inject('app')
 @observer
@@ -57,7 +66,8 @@ export default class Header extends Component {
       <AppBar
         classes={{
           root: classes.root,
-          wrap: classes.wrap
+          wrap: classes.wrap,
+          toolBar: classes.toolBar,
         }}
         menuAlign="right"
         menuIconProps={{ label: false }}
@@ -83,7 +93,6 @@ export default class Header extends Component {
             }}
           />
         </Hidden>
-        <div style={{ flex: 1 }} />
       </AppBar>
     )
   }

@@ -15,7 +15,7 @@ export const styles = theme => ({
   root: {
     height: '56px',
     [theme.breakpoints.up('md')]: {
-      minWidth: '130px'
+      minWidth: '135px'
     }
   },
   clickEl: {
