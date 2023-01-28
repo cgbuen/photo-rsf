@@ -351,6 +351,21 @@ export default class Builds extends Component {
     }
   }
 
+  renderDetailKeycaps(x) {
+    const { classes } = this.props
+    if (this.showable(x.keycaps)) {
+      let val = `Current keyset: ${x.keycaps}`
+      if (['(back)', '(none)'].includes(x.pictured)) {
+        val += ` (not pictured)`
+      } else if (this.showable(x.pictured) && x.keycaps !== x.pictured) {
+        val += ` (pictured here with ${x.pictured})`
+      }
+      return <div className={classes.descriptionDetail}>{val}</div>
+    } else if (this.showable(x.pictured)) {
+      return <div className={classes.descriptionDetail}>Pictured keyset: {x.pictured}</div>
+    }
+  }
+
   descriptionizeIndividual(x, options={}) {
     const { classes } = this.props
     return (
@@ -367,7 +382,7 @@ export default class Builds extends Component {
           {this.showable(x.plate) && <div className={classes.descriptionDetail}>Plate: {x.plate}</div>}
           {this.showable(x.stabilizers) && <div className={classes.descriptionDetail}>Stabilizers: {x.stabilizers}</div>}
           {this.showable(x.switches) && <div className={classes.descriptionDetail}>Switches: {x.switches}</div>}
-          {this.showable(x.keycaps) && <div className={classes.descriptionDetail}>Keycaps: {x.keycaps}</div>}
+          {this.renderDetailKeycaps(x)}
           {x.notes && (<div className={classes.descriptionDetail}>Notes: {x.notes}</div>)}
           <div className={classes.linkContainerWrapper}>
             {this.buildLinks(x, false)}

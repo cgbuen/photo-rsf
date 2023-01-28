@@ -148,9 +148,13 @@ export default class Keysets extends Component {
   renderDetailKeyboard(x) {
     const { classes } = this.props
     if (x.keyboard) {
-      return <div className={classes.descriptionDetail}>Keyboard: {x.keyboard}</div>
-    } else if (x.plan) {
-      return <div className={classes.descriptionDetail}>Keyboard: {x.plan.replace(/[\[\]]+/g, '')} (planned)</div>
+      let val = `Current keyboard: ${x.keyboard}`
+      if (x.pictured && x.keyboard !== x.pictured) {
+        val += ` (pictured here on: ${x.pictured})`
+      }
+      return <div className={classes.descriptionDetail}>{val}</div>
+    } else if (x.pictured) {
+      return <div className={classes.descriptionDetail}>Pictured on: {x.pictured}</div>
     }
   }
 

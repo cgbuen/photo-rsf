@@ -24,6 +24,7 @@ const BuildModel = types
     plate: types.maybeNull(types.string),
     switches: types.maybeNull(types.string),
     keycaps: types.maybeNull(types.string),
+    pictured: types.maybeNull(types.string),
     build_video: types.maybeNull(types.string),
     type_test: types.maybeNull(types.string),
     instagram: types.maybeNull(types.string),

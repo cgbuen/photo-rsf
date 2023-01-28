@@ -10,6 +10,7 @@ const KeysetModel = types
     src: types.maybeNull(types.string),
     keyboard: types.maybeNull(types.string),
     plan: types.maybeNull(types.string),
+    pictured: types.maybeNull(types.string),
     tkl_only: types.maybeNull(types.number),
     category: types.maybeNull(types.string),
     color: types.maybeNull(types.string),
