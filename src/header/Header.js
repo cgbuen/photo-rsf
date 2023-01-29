@@ -12,10 +12,15 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
 @withAmp
 @withStyles(theme => ({
   root: {
-    height: '64px',
+    height: 64,
   },
   headerLogo: {
     textDecoration: 'none',
+    '@media (min-width:960px)': {
+      justifyContent: 'left',
+      marginLeft: 0,
+      marginRight: 10,
+    },
   },
   headline: {
     color: 'white',
@@ -42,6 +47,14 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     borderColor: 'rgba(255, 255, 255, .12)',
     color: 'white',
   },
+  toolBar: {
+    boxSizing: 'border-box',
+    maxWidth: 960,
+    padding: '0 15px',
+    '@media (min-width:960px)': {
+      justifyContent: 'space-between',
+    },
+  },
 }))
 @inject('app')
 @observer
@@ -57,7 +70,8 @@ export default class Header extends Component {
       <AppBar
         classes={{
           root: classes.root,
-          wrap: classes.wrap
+          wrap: classes.wrap,
+          toolBar: classes.toolBar,
         }}
         menuAlign="right"
         menuIconProps={{ label: false }}
@@ -69,7 +83,7 @@ export default class Header extends Component {
         </HeaderLogo>
         <Hidden mdUp implementation="css">
           <Menu
-            align="right"
+            align="left"
             trackSelected
             itemContentRenderer={(item, leaf) => {
               return leaf ? <ListItemText className={classes.listItem} primary={item.text} /> : null
@@ -83,7 +97,6 @@ export default class Header extends Component {
             }}
           />
         </Hidden>
-        <div style={{ flex: 1 }} />
       </AppBar>
     )
   }

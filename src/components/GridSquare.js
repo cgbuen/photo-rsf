@@ -3,9 +3,6 @@ import Row from 'react-storefront/Row'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { inject, observer } from 'mobx-react'
 import classnames from 'classnames'
-import Instagram from '../assets/instagram.svg'
-import Build from '@material-ui/icons/Build'
-import Sound from '@material-ui/icons/VolumeUp'
 
 @withStyles(
   theme => ({
@@ -71,16 +68,13 @@ import Sound from '@material-ui/icons/VolumeUp'
 @observer
 export default class GridSquare extends Component {
   render() {
-    const { classes, className, src, name, description, instagram, buildVideo, typeTest, onClick } = this.props
+    const { classes, className, src, name, description, onClick } = this.props
     return (
       <Row className={classnames(classes.card, className)} onClick={onClick}>
         <div className={classes.cardBody}>
           <div className={classes.cardFigure}>
             <img className={classes.cardImg} src={src} alt={name} width="250" />
             <div className={classes.iconContainer}>
-              {buildVideo && <Build className={classnames(classes.icon, classes.build)} />}
-              {typeTest && <Sound className={classnames(classes.icon, classes.sound)} />}
-              {instagram && <Instagram className={classnames(classes.icon, classes.instagram)} />}
             </div>
           </div>
         </div>

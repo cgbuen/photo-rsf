@@ -65,5 +65,6 @@ export default () => {
     gearDescriptions: [],
     builds: [],
     buildFiltersActive: {},
+    keysets: [],
   }
 }

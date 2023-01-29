@@ -13,6 +13,7 @@ import PlateModel from './resources/PlateModel'
 import DescriptionModel from './resources/DescriptionModel'
 import BuildModel from './collection/BuildModel'
 import BuildFilterModel from './collection/BuildFilterModel'
+import KeysetModel from './collection/KeysetModel'
 
 const AppModel = types.compose(
   AppModelBase,
@@ -31,7 +32,11 @@ const AppModel = types.compose(
       plates: types.optional(types.array(PlateModel), []),
       builds: types.optional(types.array(BuildModel), []),
       buildFiltersActive: types.optional(BuildFilterModel, {}),
+      keysets: types.optional(types.array(KeysetModel), []),
+      keysetSort: 'purchase_date',
+      keysetDesc: true,
       openBuild: types.optional(BuildModel, {}),
+      openKeyset: types.optional(KeysetModel, {}),
       openProject: types.optional(ProjectModel, {}),
     })
     .actions(self => ({
@@ -39,7 +44,7 @@ const AppModel = types.compose(
         self.builds = self.builds.map(x => {
           if (x.assembly_variant.includes('A') && x.build_status === val) {
             x.setLoaded(true)
-            x.setActive(!x.active)
+            x.setDisplayed(!x.displayed)
           }
           return x
         })
@@ -48,8 +53,30 @@ const AppModel = types.compose(
       setOpenBuild(build) {
         self.openBuild = {...build}
       },
+      setOpenKeyset(keyset) {
+        self.openKeyset = {...keyset}
+      },
       setOpenProject(project) {
         self.openProject = {...project}
+      },
+      sortKeysets(sort) {
+        if (self.keysetSort === sort) {
+          self.keysets = self.keysets.reverse()
+          self.keysetDesc = !self.keysetDesc
+        } else {
+          const sorted = self.keysets.sort((x, y) => {
+            if (x[sort] === '') {
+              return 1
+            }
+            if (y[sort] === '') {
+              return -1
+            }
+            return x[sort].localeCompare(y[sort])
+          })
+          self.keysets = sorted
+          self.keysetSort = sort
+          self.keysetDesc = true
+        }
       },
     }))
 )

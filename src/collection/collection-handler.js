@@ -7,9 +7,10 @@ const makeUsableBuildArray = function(array, assetHost, filter) {
   return array
     .map(build => {
       build.src = `${assetHost}/keyboards/${build.src}.jpg?${build.cache_buster}`
+      build.active = !!build.active
       if (build.assembly_variant.includes('A') && build.build_status === filter) {
         build.loaded = true
-        build.active = true
+        build.displayed = true
       }
       if (!build.cache_buster) {
         build.cache_buster = null
@@ -35,6 +36,23 @@ const buildGenerator = async function (assetHost, filter) {
   }
 }
 
+const keysetGenerator = async function (assetHost) {
+  try {
+    const keysetsResponse = await fetch(`${assetHost}/keyboards/keysets.json?${Date.now()}`)
+    const keysetsResponseJson = await keysetsResponse.json()
+    return keysetsResponseJson
+      .filter(keyset => ['Mounted', 'Unused'].includes(keyset.mount_status))
+      .map(keyset => {
+        keyset.src = `${assetHost}/keyboards/${keyset.src}.jpg`
+        return keyset
+      })
+      .reverse()
+  } catch (e) {
+    console.error('--> Couldn\'t parse JSON')
+    return []
+  }
+}
+
 export default async function collectionHandler(params, request, response) {
   function capitalize(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -45,6 +63,7 @@ export default async function collectionHandler(params, request, response) {
     filter = 'Built'
   }
   const allBuilds = await buildGenerator(assetHost, filter)
+  const keysets = await keysetGenerator(assetHost)
   const enough = allBuilds.filter(x => x.build_status === decodeURIComponent(filter) && x.assembly_variant.includes('A')).length > 0
   if (!enough) {
     filter = 'Built'
@@ -55,5 +74,6 @@ export default async function collectionHandler(params, request, response) {
     builds,
     buildFiltersActive: {[filter]: true},
     openBuild: {},
+    keysets,
   })
 }
