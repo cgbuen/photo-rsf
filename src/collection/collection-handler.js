@@ -7,9 +7,10 @@ const makeUsableBuildArray = function(array, assetHost, filter) {
   return array
     .map(build => {
       build.src = `${assetHost}/keyboards/${build.src}.jpg?${build.cache_buster}`
+      build.active = !!build.active
       if (build.assembly_variant.includes('A') && build.build_status === filter) {
         build.loaded = true
-        build.active = true
+        build.displayed = true
       }
       if (!build.cache_buster) {
         build.cache_buster = null

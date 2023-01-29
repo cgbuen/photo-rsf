@@ -446,29 +446,35 @@ export default class Builds extends Component {
               }
             </div>
           </div>
-          <div className={classes.results}>{builds.filter(x => x.active).length} Results</div>
+          <div className={classes.results}>{builds.filter(x => x.displayed).length} Results</div>
         </div>
         <div className={classes.cardContainer}>
           {builds
-            .map(x => (
-              x.loaded &&
-              <Track key={x.id} event="keyboardClick" name={x.name}>
-                <GridSquare
-                  className={classnames(!x.active && classes.hide, !(x.src.includes('unavailable') || x.otw_link) && classes.clickable)}
-                  key={x.id}
-                  name={x.name}
-                  description={this.determineDate(x)}
-                  instagram={x.instagram}
-                  buildVideo={x.build_video}
-                  typeTest={x.type_test}
-                  src={createOptimizedSrc(x.src, { quality: app.config.imageQualityAmp, width: 555 })}
-                  onClick={() => this.openDialog(x)}
-                />
-              </Track>
-            ))
+            .map(x => {
+              let src = x.src
+              if (!x.active && x.assembly_variant === 'A') {
+                const active = builds.filter(y => y.board_id === x.board_id && y.active)
+                src = active[0].src
+              }
+              return x.loaded && (
+                <Track key={x.id} event="keyboardClick" name={x.name}>
+                  <GridSquare
+                    className={classnames(!x.displayed && classes.hide, !(x.src.includes('unavailable') || x.otw_link) && classes.clickable)}
+                    key={x.id}
+                    name={x.name}
+                    description={this.determineDate(x)}
+                    instagram={x.instagram}
+                    buildVideo={x.build_video}
+                    typeTest={x.type_test}
+                    src={createOptimizedSrc(src, { quality: app.config.imageQualityAmp, width: 555 })}
+                    onClick={() => this.openDialog(x)}
+                  />
+                </Track>
+              )
+            })
           }
-          {builds.filter(x => x.active).length % 3 === 2 && (<div className={classes.stubBox}></div>)}
-          {builds.filter(x => x.active).length === 0 && <div className={classes.noResultsMessage}>Select a filter above to see results.</div>}
+          {builds.filter(x => x.displayed).length % 3 === 2 && (<div className={classes.stubBox}></div>)}
+          {builds.filter(x => x.displayed).length === 0 && <div className={classes.noResultsMessage}>Select a filter above to see results.</div>}
         </div>
         <Dialog maxWidth="xl" open={!!openBuild.name}>
           <DialogTitle disableTypography classes={{ root: classes.dialogTitle }}>

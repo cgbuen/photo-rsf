@@ -44,7 +44,7 @@ const AppModel = types.compose(
         self.builds = self.builds.map(x => {
           if (x.assembly_variant.includes('A') && x.build_status === val) {
             x.setLoaded(true)
-            x.setActive(!x.active)
+            x.setDisplayed(!x.displayed)
           }
           return x
         })

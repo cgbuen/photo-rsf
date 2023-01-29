@@ -28,12 +28,13 @@ const BuildModel = types
     build_video: types.maybeNull(types.string),
     type_test: types.maybeNull(types.string),
     instagram: types.maybeNull(types.string),
+    displayed: types.maybeNull(types.boolean),
     active: types.maybeNull(types.boolean),
     loaded: types.maybeNull(types.boolean),
   })
   .actions(self => ({
-    setActive(val) {
-      self.active = val
+    setDisplayed(val) {
+      self.displayed = val
     },
     setLoaded(val) {
       self.loaded = val
