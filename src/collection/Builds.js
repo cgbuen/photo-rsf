@@ -41,6 +41,7 @@ import analytics from 'react-storefront/analytics'
     },
     filtersWhole: {
       display: 'flex',
+      marginBottom: 10,
     },
     filtersLabel: {
       display: 'inline-block',
@@ -474,9 +475,6 @@ export default class Builds extends Component {
                     key={x.id}
                     name={x.name}
                     description={this.determineDate(x)}
-                    instagram={x.instagram}
-                    buildVideo={x.build_video}
-                    typeTest={x.type_test}
                     src={createOptimizedSrc(src, { quality: app.config.imageQualityAmp, width: 555 })}
                     onClick={() => this.openDialog(x)}
                   />

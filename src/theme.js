@@ -106,7 +106,7 @@ const theme = createTheme({
         },
       },
       selected: {
-        backgroundColor: 'rgba(102, 153, 204, .5)',
+        backgroundColor: '#69c',
         '& $label': {
           color: 'white',
         },
