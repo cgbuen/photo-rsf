@@ -15,10 +15,12 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
     height: 64,
   },
   headerLogo: {
-    justifyContent: 'left',
     textDecoration: 'none',
-    marginLeft: 0,
-    marginRight: 10,
+    '@media (min-width:960px)': {
+      justifyContent: 'left',
+      marginLeft: 0,
+      marginRight: 10,
+    },
   },
   headline: {
     color: 'white',
@@ -47,9 +49,11 @@ import withAmp from 'react-storefront-extensions/amp/withAmp'
   },
   toolBar: {
     boxSizing: 'border-box',
-    justifyContent: 'space-between',
     maxWidth: 960,
     padding: '0 15px',
+    '@media (min-width:960px)': {
+      justifyContent: 'space-between',
+    },
   },
 }))
 @inject('app')
