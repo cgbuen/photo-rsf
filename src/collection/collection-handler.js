@@ -46,6 +46,7 @@ const keysetGenerator = async function (assetHost) {
         keyset.src = `${assetHost}/keyboards/${keyset.src}.jpg`
         return keyset
       })
+      .reverse()
   } catch (e) {
     console.error('--> Couldn\'t parse JSON')
     return []
