@@ -25,7 +25,7 @@ import Keysets from './Keysets'
       display: 'block',
     },
     collectionTabsScroller: {
-      borderBottom: '3px solid #69c',
+      borderBottom: '2px solid #69c',
     },
     collectionTabRoot: {
       marginRight: 10,
@@ -34,8 +34,6 @@ import Keysets from './Keysets'
     },
     collectionTabRootActive: {
       background: '#69c',
-      borderTopLeftRadius: 5,
-      borderTopRightRadius: 5,
     },
     collectionTabTextColorInherit: {
       opacity: 1,
