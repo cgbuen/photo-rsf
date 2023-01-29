@@ -252,14 +252,20 @@ export default class Builds extends Component {
     this.state = {
       variantVal: 0,
       buildDetailsOpen: false,
+      dialogImg: ''
     };
   }
   componentDidMount() {
     window.addEventListener('keyup', e => { e.keyCode === 27 && this.closeDialog() })
   }
 
-  handleVariantChange = (e, v) => {
-    this.setState({ variantVal: v })
+  handleVariantChange = variants => {
+    return (e, v) => {
+      this.setState({
+        variantVal: v,
+        dialogImg: variants[v].src
+      })
+    }
   }
 
   handleBuildDetailsOpen = (val) => {
@@ -325,7 +331,7 @@ export default class Builds extends Component {
               flexContainer: classes.buildTabsFlexContainer,
             }}
             variant="fullWidth"
-            onChange={this.handleVariantChange}
+            onChange={this.handleVariantChange(variants)}
           >
             {variants.map((y, i) => (
               <Tab
@@ -411,12 +417,17 @@ export default class Builds extends Component {
   openDialog(build) {
     if (!(build.src.includes('unavailable') || build.otw_link)) {
       this.props.app.setOpenBuild(build)
+      this.setState({ dialogImg: build.src })
     }
   }
 
   closeDialog() {
     this.props.app.setOpenBuild({})
-    this.setState({ variantVal: 0, buildDetailsOpen: false })
+    this.setState({
+      variantVal: 0,
+      buildDetailsOpen: false,
+      dialogImg: '',
+    })
   }
 
   determineDate(x) {
@@ -494,7 +505,7 @@ export default class Builds extends Component {
           </DialogTitle>
           <DialogContent>
             <div className={classes.dialogImgWrapper}>
-              <img className={classes.modalImg} alt={classes.name} src={openBuild && openBuild.src && createOptimizedSrc(openBuild.src, { quality: app.config.imageQuality })} width="1080" />
+              <img className={classes.modalImg} alt={classes.name} src={createOptimizedSrc(this.state.dialogImg, { quality: app.config.imageQuality })} width="1080" />
               {
                 buildDetailsOpen && (
                   <div className={classes.descriptionBox}>
