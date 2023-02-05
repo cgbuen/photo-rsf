@@ -257,7 +257,36 @@ export default class Builds extends Component {
     };
   }
   componentDidMount() {
-    window.addEventListener('keyup', e => { e.keyCode === 27 && this.closeDialog() })
+    window.addEventListener('keyup', e => {
+      const { openBuild } = this.props
+      if (e.keyCode === 27) {
+        return this.closeDialog()
+      }
+      if (openBuild.id) {
+        if (e.keyCode === 37) { // newer
+          this.openDialog(this.determineNewerBuild())
+        }
+        if (e.keyCode === 39) { // older
+          this.openDialog(this.determineOlderBuild())
+        }
+      }
+    })
+  }
+
+  determineNewerBuild = () => {
+    const { builds, openBuild } = this.props
+    const activeBuilds = builds.filter(x => x.displayed && !x.src.includes('unavailable'))
+    const currentBuildIndex = activeBuilds.findIndex(x => x.id === openBuild.id)
+    const toOpenIndex = (activeBuilds.length + currentBuildIndex - 1) % activeBuilds.length
+    return activeBuilds[toOpenIndex]
+  }
+
+  determineOlderBuild = () => {
+    const { builds, openBuild } = this.props
+    const activeBuilds = builds.filter(x => x.displayed && !x.src.includes('unavailable'))
+    const currentBuildIndex = activeBuilds.findIndex(x => x.id === openBuild.id)
+    const toOpenIndex = (activeBuilds.length + currentBuildIndex + 1) % activeBuilds.length
+    return activeBuilds[toOpenIndex]
   }
 
   handleVariantChange = variants => {
@@ -418,7 +447,11 @@ export default class Builds extends Component {
   openDialog(build) {
     if (!(build.src.includes('unavailable') || build.otw_link)) {
       this.props.app.setOpenBuild(build)
-      this.setState({ dialogImg: build.src })
+      this.setState({
+        variantVal: 0,
+        buildDetailsOpen: false,
+        dialogImg: build.src
+      })
     }
   }
 
@@ -450,7 +483,7 @@ export default class Builds extends Component {
         <div className={classes.topSection}>
           <div className={classes.filtersWhole}>
             <div className={classes.filtersLabel}>Filters: </div>
-            <div className={classes.filtersOnlyContiner}>
+            <div className={classes.filtersOnlyContainer}>
               {
                 ['Built', 'Prebuilt', 'Vintage', 'Unbuilt', 'On the way']
                   .filter(x => builds.filter(y => y.build_status === x && y.assembly_variant.includes('A')).length > 0)
