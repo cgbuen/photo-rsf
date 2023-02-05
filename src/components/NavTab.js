@@ -13,7 +13,7 @@ import { lazyState } from 'react-storefront/utils/state'
 
 export const styles = theme => ({
   root: {
-    height: '56px',
+    height: 64,
     [theme.breakpoints.up('md')]: {
       minWidth: '135px'
     }
@@ -31,7 +31,7 @@ export const styles = theme => ({
   },
   link: {
     display: 'block',
-    height: '100%',
+    height: 64,
     fontSize: theme.typography.body1.fontSize
   },
   menu: {
